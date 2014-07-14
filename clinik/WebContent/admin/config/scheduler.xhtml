@@ -1,0 +1,181 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	
+	
+	<ui:param name="mostrarBarraEsquerda" value="true" />
+		
+		<ui:define name="left">
+		<h:form id="menus">
+
+
+
+			<ul>
+  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.criarWorkflow}">
+				<li class="menu-trigger active"><a href="/chamados/workflow/"
+					class="elements-16" id="c-elements">#{msg['chamados.menu.workflow.label']}</a></li>
+		</h:panelGroup>			
+				  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.verCockpit}">
+				
+				<li class="menu-trigger"><a href="/chamados/role/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.permicao.label']}</a></li>
+					
+				</h:panelGroup>
+				
+				 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}">
+				<li class="menu-trigger"><a href="/chamados/usuario/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.usuario.label']}</a></li>
+				</h:panelGroup>	
+				
+				<h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addFornecedor}">
+					<li class="menu-trigger"><a href="/chamados/fornecedor/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.fornecedor.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addCentroDeCusto}">
+					<li class="menu-trigger"><a href="/chamados/centrodecusto/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.centro.de.custo.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addEquipamento}">
+					<li class="menu-trigger"><a href="/chamados/equipamento/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.equipamento.label']}</a></li>
+					</h:panelGroup>
+						 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addLocal}">
+					<li class="menu-trigger"><a href="/chamados/local/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.local.label']}</a></li>
+					</h:panelGroup>
+			</ul>
+			<div class="clearfix"></div>
+
+
+		</h:form>
+</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+		
+		
+		<table  class="menuBar" >
+				<tr>
+					<td><h:outputText value="#{msg['chamados.titulo.pagina.usuario']}"
+						styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+					<table>
+						<tr>		
+						<td>
+						<div class="figura"><p:commandLink
+						action="#{usuarioController.novo}">
+						<p><img class="escala"
+							src="#{pastaImagens}#{msg['chamados.ic.novo']}"
+							title="#{msg['chamados.label.novo']}" border="0" /></p>
+						<p><h:outputText /></p>
+					</p:commandLink></div>			
+						</td>
+						
+						
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xls" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xls']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="pdf" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.pdf']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xml" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xml']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							
+							
+							
+							
+							<td><h:outputLink id="lnk" value="#">
+								<p:printer target="usuarioData" />
+								<p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.printer']}" />
+							</h:outputLink></td>
+						</tr>
+					</table>
+
+					</td>
+
+				</tr>
+			</table>
+		
+		 
+		
+			
+			
+			<p:messages id="growl"/>
+
+			
+				<h1>All Quartz Jobs</h1>
+	
+	
+		<p:dataTable id="usuarioData" value="#{schedulerController.quartzJobList}"
+				var="quartz" rows="20" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="20,25,50" paginatorPosition="bottom" emptyMessage="#{msg['chamados.msg.nenhum.usuario.encontrado']}"
+			rowIndexVar="index"
+				>
+				<p:column>
+				<!-- column header -->
+				<f:facet name="header">Job Name</f:facet>
+				<!-- row record -->
+    				#{quartz.jobName}
+    			</p:column>
+    			
+    			
+    			<p:column>
+				<f:facet name="header">Job Group</f:facet>
+    				#{quartz.jobGroup}
+    			</p:column>
+
+			<p:column>
+				<f:facet name="header">Next Fire Time</f:facet>
+				<h:outputText value="#{quartz.nextFireTime}">
+					<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+				</h:outputText>
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="Fire Now"
+					actionListener="#{schedulerController.fireNow(quartz.jobName, quartz.jobGroup)}" />
+			</p:column>
+			
+			
+			
+			<p:column>
+				<f:facet name="header">Action</f:facet>
+				<h:commandLink value="parar"
+					actionListener="#{schedulerController.parar(quartz.jobName, quartz.jobGroup)}" />
+			</p:column>
+				
+	</p:dataTable>
+		
+	
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

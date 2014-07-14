@@ -1,0 +1,107 @@
+/*
+	Este arquivo controla todos os portlets (Box) do sistema
+	
+  */
+
+.box-element {
+	border-radius: 5px;
+	clear: both;
+	margin-top: 0px;
+	margin-bottom: 25px;
+	padding: 0px;
+	margin-bottom: 20px;
+	background-color: #FFF;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
+	
+	border-top: 2px solid #dfdfdf;
+}
+/*
+	inicio do css do cabecalho	
+ */
+.box-element .box-head {
+	font-family: 'Oswald';
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom: 0px none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.box-head {
+	padding: 10px 15px;
+	border-bottom: 1px solid transparent;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+
+.box-head h3 {
+	padding-left: 0.75em;
+}
+
+
+.forms-16 {
+	background-image:
+		url("/chamados/template/flat/css/imagens/24x24/Auto-Archive-24.png");
+	margin-right: 5px !important;
+	background-repeat: no-repeat;
+	padding: 6px 9px 6px 9px;
+}
+
+/*
+	Fim cabecalho
+*/
+
+.box-element .box-content {
+	padding: 15px;
+	background-color: #F8F9FA;
+}
+
+.box-element .ui-widget-header {
+    background:none;
+    font-family: 'Oswald';	
+	text-transform: uppercase;
+	font-weight: bold;
+	border: 0px none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+
+.box-element .box-content .ui-widget-header {
+	padding: 15px;
+	background-color: #F8F9FA;
+}
+
+
+
+
+
+
+
+/*
+	header para a agenda
+*/
+
+.box-element .box-head-agenda {
+	font-family: 'Oswald';
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom: 0px none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.box-head-agenda {
+	padding: 10px 10px 28px 5px;
+	border-bottom: 1px solid transparent;
+	border-top-right-radius: 3px;
+	border-top-left-radius: 3px;
+}
+
+
+
+

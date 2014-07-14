@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relExameRealizadosPorMedicos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="40fb3a84-40be-42c2-b853-73e029084948">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoEmpresa" class="java.lang.Object">
+		<defaultValueExpression><![CDATA["C:\\CursoJavaCesarAugusto\\Exercicio\\admlaboratorial\\src\\imagens\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="exameId" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataDe" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="dataAte" class="java.util.Date"/>
+	<parameter name="medicoId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="usuario" class="java.lang.String">
+		<defaultValueExpression><![CDATA[""]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT data_lancamento, paciente, ms.nome medico, ms.nome solicitante, e.nome exame, c.nome convenio, w.valor, (select sum(w.valor) from wof_atendimento w where  data_lancamento between $P{dataDe} and $P{dataAte} and (( w.solicitante_id=38) or (0=38)) and w.exame_id in(2,3,4,5,6,7,9,10,11,12,13,14,15,16)) total
+FROM wof_atendimento w
+join wof_medicos m on w.medico_id=m.medico_id
+join wof_medicos ms on w.solicitante_id=ms.medico_id
+join wof_exames e on w.exame_id=e.exame_id
+join wof_convenios c on w.convenio_id=c.convenio_id
+where  data_lancamento between $P{dataDe} and $P{dataAte} and (( w.solicitante_id=$P{medicoId}) or (0=$P{medicoId})) and w.exame_id in(2,3,4,5,6,7,9,10,11,12,13,14,15,16)
+order by paciente]]>
+	</queryString>
+	<field name="data_lancamento" class="java.sql.Date"/>
+	<field name="paciente" class="java.lang.String"/>
+	<field name="medico" class="java.lang.String"/>
+	<field name="solicitante" class="java.lang.String"/>
+	<field name="exame" class="java.lang.String"/>
+	<field name="convenio" class="java.lang.String"/>
+	<field name="valor" class="java.lang.Double"/>
+	<field name="total" class="java.lang.Double"/>
+	<variable name="CONTAGEM_PAGINA" class="java.lang.Integer" incrementType="Page" calculation="Count">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[(($F{valor}.doubleValue())*0.3)]]></variableExpression>
+	</variable>
+	<variable name="VALOR_TOTAL" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor}.doubleValue()]]></variableExpression>
+		<initialValueExpression><![CDATA[0]]></initialValueExpression>
+	</variable>
+	<group name="Medico">
+		<groupExpression><![CDATA[$F{medico}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="123" y="1" width="163" height="25" uuid="f2d3adb5-6b82-408b-ba9a-0ef24a066f24"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[QTD. Procedimentos Dr.]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="41" uuid="54505fe8-f3b6-4ce4-aac3-e9af12161c66"/>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="ad956c81-9f07-449b-a928-94a9c4e34e5e"/>
+			</line>
+			<staticText>
+				<reportElement x="404" y="26" width="47" height="11" uuid="391e3cac-7bd1-434c-98d2-ff98b0ff3c00"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Período de:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="453" y="26" width="46" height="11" uuid="44ab0ff5-9f43-49b7-9714-64e5884c8d51"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataDe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="499" y="26" width="15" height="11" uuid="440ed610-54ae-4a03-870c-d90f9c102541"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Até]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="514" y="26" width="41" height="11" uuid="ec417159-c162-4940-90cb-d22d6fb32025"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataAte}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="286" y="1" width="175" height="25" uuid="2897c5f4-2c46-43ce-a13b-868b042e0b66"/>
+				<textElement verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement x="404" y="24" width="149" height="11" uuid="fb573c97-1309-4e29-8828-e221805a5ed9"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Valor]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1" y="24" width="62" height="11" uuid="af987735-df02-44f4-9eff-5e934f638a96"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="24" width="188" height="11" uuid="709c8747-15b3-45de-afa0-5a86fdb13a28"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Exame]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="62" y="24" width="154" height="11" uuid="2a0b569b-1568-4d77-b72b-ebc18e6ab77f"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.75"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.75"/>
+					<rightPen lineWidth="0.0"/>
+				</box>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Paciente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="63" y="4" width="100" height="13" uuid="f4cdc0be-5aa0-4952-b884-913bc0d33c4f"/>
+				<textElement verticalAlignment="Middle">
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="4" width="62" height="13" uuid="7848f5cd-0ecf-4b8d-a094-432779cab193"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Médico:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="12" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#B7C28D" uuid="50bb5a48-1bfa-4670-9669-8bcb1de8d5c3">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) != 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField pattern="¤ #,##0.00" isBlankWhenNull="true">
+				<reportElement x="403" y="1" width="149" height="11" uuid="26f34982-2e57-402b-ba50-e21a46dfe7db"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="1" width="62" height="11" uuid="8f2df778-eadf-4232-848d-54ba24f0416c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="297" y="1" width="106" height="11" uuid="1088d9f9-6e33-48f0-95e8-d5c9b6951754"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="62" y="1" width="235" height="11" uuid="bd43e576-8148-480f-a661-bdc072d714b4"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{paciente}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="24" splitType="Stretch">
+			<staticText>
+				<reportElement x="403" y="0" width="48" height="11" uuid="d03e364d-fb73-46e9-ad4d-9c0cfdc6b4d7"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Valor Total:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="453" y="11" width="101" height="12" uuid="ab8cc229-016e-431c-a366-a22725eda7ce"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="403" y="11" width="48" height="11" uuid="895f29ce-5c5b-4913-8a3b-0ef248ee024c"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[30%:]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="453" y="0" width="101" height="12" uuid="5e6ec218-1f04-43dc-9874-f9d0001d2c3a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{VALOR_TOTAL}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="500" y="0" width="17" height="11" uuid="72bba44d-a149-470d-bb81-bb3fb120264d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="461" y="0" width="39" height="11" uuid="4cbda75b-f978-4b68-b450-8f0f4ded64e4"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Página :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="514" y="0" width="15" height="11" uuid="87d8eed6-0d22-4fa7-a934-235a4331cfae"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="62" height="11" uuid="5f339134-7efd-40e4-89cc-a18922b5d593"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data e Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="62" y="0" width="100" height="11" uuid="2cbe007d-e629-43e3-91da-b58c7cd5b565"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="529" y="0" width="26" height="11" uuid="e45c5efd-7ca2-4345-a972-7d5aa9dbad66"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CONTAGEM_PAGINA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="205" y="0" width="38" height="11" uuid="09029c9b-873a-4faa-a2aa-20bb3d0ccebc"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Usuário:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="244" y="0" width="100" height="11" uuid="67588651-a439-470f-90b4-18dfb447f194"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{usuario}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="11" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+	<h:form id="dialogFormQtdProcedimentoJuan">
+		<p:dialog id="janelaQtdProcedimentoJuan"
+			header="#{msg['system.titulo.relatorio.qtd.procedimetno.juan']}"
+			widgetVar="janelaQtdProcedimentoJuan" modal="true" height="300" width="600">
+
+
+
+
+			<div class="box-element">
+
+				<div class="box-content">
+					<ul class="actions">
+
+
+
+
+
+
+
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_imprimir"
+									actionListener="#{relatorioController.imprimeRelatorioTotalProcedimentoJuan}"
+									>
+
+									
+
+										<h:outputText value="Imprimir" />
+
+									</h:commandLink>
+
+									<span>Imprimir</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+
+
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="#{msg['systemlabel.data.de']}" for="dataDe" />
+
+
+				<h:outputLabel value="#{msg['systemlabel.data.ate']}" for="dataDAte" />
+				<p:calendar value="#{relatorioController.dataDe}" id="dataDe"
+					showOn="button" />
+
+				<p:calendar value="#{relatorioController.dataAte}" id="dataAte"
+					showOn="button" />
+
+
+
+				<h:outputLabel value="#{msg['systemlabel.mostrar.medico']}" />
+			
+				<p:selectBooleanCheckbox
+					value="#{relatorioController.mostrarMedico}">
+					<p:ajax update="medicoGroup medicoGroupLabel" />
+				</p:selectBooleanCheckbox>
+				
+					
+				
+				
+
+
+				<h:panelGroup id="medicoGroupLabel">
+					<h:outputText value="#{msg['system.label.medico']}"
+						rendered="#{relatorioController.mostrarMedico}" />
+				</h:panelGroup>
+				<h:column/>
+				<h:panelGroup id="medicoGroup">
+					<h:selectOneListbox value="#{relatorioController.medicoSolicitante}"
+						converter="#{medicoConverter}" size="1"
+						rendered="#{relatorioController.mostrarMedico}">
+						<f:selectItems value="#{relatorioController.medicosSolicitante}"
+							var="medico" itemLabel="#{medico.nome}" itemValue="#{medico}" />
+					</h:selectOneListbox>
+				</h:panelGroup>
+
+			<h:column/>
+
+				
+
+			</h:panelGrid>
+
+		</p:dialog>
+	</h:form>
+</ui:component>
+</html>

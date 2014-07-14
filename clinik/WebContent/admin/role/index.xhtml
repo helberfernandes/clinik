@@ -1,0 +1,174 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	
+	
+	<ui:param name="mostrarBarraEsquerda" value="true" />
+		
+		<ui:define name="left">
+		<h:form id="menus">
+
+
+
+			<ul>
+  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.criarWorkflow}">
+				<li class="menu-trigger active"><a href="/chamados/workflow/"
+					class="elements-16" id="c-elements">#{msg['chamados.menu.workflow.label']}</a></li>
+		</h:panelGroup>			
+				  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.verCockpit}">
+				
+				<li class="menu-trigger"><a href="/chamados/role/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.permicao.label']}</a></li>
+					
+				</h:panelGroup>
+				
+				 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}">
+				<li class="menu-trigger"><a href="/chamados/usuario/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.usuario.label']}</a></li>
+				</h:panelGroup>	
+				
+				<h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addFornecedor}">
+					<li class="menu-trigger"><a href="/chamados/fornecedor/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.fornecedor.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addCentroDeCusto}">
+					<li class="menu-trigger"><a href="/chamados/centrodecusto/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.centro.de.custo.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addEquipamento}">
+					<li class="menu-trigger"><a href="/chamados/equipamento/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.equipamento.label']}</a></li>
+					</h:panelGroup>
+						 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addLocal}">
+					<li class="menu-trigger"><a href="/chamados/local/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.local.label']}</a></li>
+					</h:panelGroup>
+			</ul>
+			<div class="clearfix"></div>
+
+
+		</h:form>
+</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+	
+			
+			
+			
+				<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>Administrar Permissoes</h3>
+				</div>
+				<div class="box-content">
+					<ul class="actions">
+					
+										
+										
+										
+										 <li><div>
+                            
+                      			<p:commandLink 
+										
+                      			
+                      			
+                      			styleClass="btn_novo"
+                      			
+												action="#{usuarioController.novaRole}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.novo']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.novo']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            
+                            
+                             
+                     
+                   
+					
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+	
+		<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>Administrar Permissoes</h3>
+				</div>
+				<div class="box-content">
+			
+			<p:dataTable id="roleData" value="#{usuarioController.roles}"
+				var="role" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom" emptyMessage="Nenhuma role encontrada"
+			
+				>
+			
+				<p:column headerText="Nome"
+					filterBy="#{role.descricao}" sortBy="#{role.descricao}" styleClass="colunaDefault">
+					<h:outputText value="#{role.descricao}" />
+				</p:column>
+				
+				
+						<p:column headerText="Editar"
+					styleClass="coluna1">
+					<p:commandLink 
+						action="#{usuarioController.editarRole}">
+						<p:graphicImage
+							url="#{pastaImagens}16x16/Write2.png"
+							style="border:0;" />
+						<f:param name="roleId" value="#{role.roleId}" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="Excluir"
+					styleClass="coluna1">
+					<p:commandLink 
+						oncomplete="confirmation.show()">
+						<p:graphicImage
+							url="#{pastaImagens}16x16/Trash.png"
+							style="border:0;" />
+					</p:commandLink>
+				</p:column>
+		
+			</p:dataTable>
+		
+		</div>
+		</div>
+
+			
+	<p:confirmDialog modal="true"
+				message="Deseja realmente excluir este registro?" showEffect="bounce"
+				hideEffect="explode" header="Excluir"
+				severity="alert" widgetVar="confirmation">
+
+				<p:commandButton id="excluir" value="Sim"
+					update="roleData" oncomplete="confirmation.hide()"
+					actionListener="#{usuarioController.excluir}" />
+				<p:commandButton value="Não"
+					onclick="confirmation.hide()" type="button" />
+
+			</p:confirmDialog>
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

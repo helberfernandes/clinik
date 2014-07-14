@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	
+	
+	<link href="./template/liteadmin/css/config.css"
+		rel="stylesheet" type="text/css" />
+		
+	<title>#{msg['chamados.nome.sistema']}</title>
+</h:head>
+<h:body styleClass="login">
+
+	<div id="login">
+	<div class="signin-box">
+	<h2><h:outputText value="#{msg['chamados.label.login.recupera.senha']}" /> <strong><p:graphicImage
+		url="./template/adminsupermaia_1_0_0/css/imagem/logo_mine.png" /></strong></h2>
+	<h:form id="loginform">
+	    <p:messages id="msgs"/>
+		<label> <strong class="label"><h:outputLabel 
+			value="#{msg['chamados.label.login.usuario']}" /></strong> <h:inputText id="user"
+			value="#{loginController.usuario.login}" label="Login"
+			required="true" styleClass="campo" /> <p:message for="user" /> </label>
+		
+		<h2>
+		
+		<strong id="btn">
+		<p:commandButton id="btn" value="#{msg['chamados.label.recuperar']}" update="loginform, msgs"
+			action="#{loginController.defineNovaSenha}" styleClass="botao" >
+			  
+		</p:commandButton>	
+		</strong>
+		</h2>
+		
+	</h:form></div>
+	<div id="nav">
+	<h:form >
+	<h:commandLink value="Voltar" action="index.xhtml"/>
+	</h:form>
+	</div>
+	</div>
+	
+</h:body>
+</html>

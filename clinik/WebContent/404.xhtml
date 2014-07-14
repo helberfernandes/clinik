@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+
+
+	
+	<link href="http://#{facesContext.externalContext.requestServerName}:#{facesContext.externalContext.requestServerPort}/#{facesContext.externalContext.contextName}/template/liteadmin/css/config.css" rel="stylesheet"
+		type="text/css" />
+	<link href="http://#{facesContext.externalContext.requestServerName}:#{facesContext.externalContext.requestServerPort}/#{facesContext.externalContext.contextName}/template/liteadmin/css/paginas-erros.css" rel="stylesheet"
+		type="text/css" />	
+		
+	<title>#{msg['chamados.nome.sistema']}</title>
+	
+	<script type="text/javascript">
+		function teste(){
+			var newURL = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname;		
+			document.getElementById("url").innerHTML =newURL;
+		}
+	
+	</script>
+</h:head>
+<h:body styleClass="login" onload="teste()">
+
+	<div id="glb-doc">
+		<div id="glb-corpo">
+			<div class="glb-conteudo">
+
+				<div class="glb-bloco">
+					<div class="glb-grid-12">
+
+						<div class="paginas-erro conteudo-erro">
+							<h1>Ops!</h1>
+							<h2>página não encontrada</h2>
+							<p>O endereço abaixo não existe no sistema de Chamados</p>
+							<p id="url" class="endereco-404"> </p>
+							
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+
+
+
+
+</h:body>
+</html>

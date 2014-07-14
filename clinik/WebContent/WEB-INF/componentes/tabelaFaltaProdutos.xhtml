@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	
+	xmlns:f="http://java.sun.com/jsf/core">
+	
+	
+    <ui:component  >
+        
+           <p:dataTable  value="#{value}"
+				var="faltaProduto" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom" emptyMessage="#{msg['chamados.msg.nenhuma.faltaProduto.encontrado']}"
+			rowIndexVar="index"
+				>
+
+			<p:column headerText="#{msg['chamados.label.numero']}"
+					styleClass="colunaVisualizada"  style="
+							 border-style: solid !important;
+border-left-width: 10px !important;
+
+ border-left-color: #{faltaProduto.status.cor}!important;
+padding-bottom:2px;
+margin-top:2px;
+							 
+							">
+					<h:outputText value="#{(index+1)}" />
+				</p:column>
+				
+				
+					<p:column headerText="#{msg['chamados.label.protocolo']}"
+							filterBy="#{faltaProduto.protocolo}"
+							sortBy="#{faltaProduto.protocolo}" styleClass="colunaVisualizada">
+							
+							
+								<p:commandLink action="#{faltaProdutoController.editar}">
+								<h:outputText value="#{faltaProduto.protocolo}">
+
+							</h:outputText>
+								<f:param name="faltaProdutoId"
+									value="#{faltaProduto.faltaProdutoId}" />
+							</p:commandLink>
+						</p:column>
+
+
+						<p:column headerText="#{msg['chamados.label.data']}"
+							filterBy="#{faltaProduto.dataCadastroConsulta}"
+							sortBy="#{faltaProduto.dataCadastroConsulta}"
+							styleClass="colunaVisualizada" filterStyleClass="data">
+						
+							<p:commandLink action="#{faltaProdutoController.editar}">
+								<h:outputText value="#{faltaProduto.dataCadastroConsulta}">
+								<f:convertDateTime timeZone="#{configuracaoController.timeZone}"
+									pattern="dd/MM/yyyy" />
+							</h:outputText>
+								<f:param name="faltaProdutoId"
+									value="#{faltaProduto.faltaProdutoId}" />
+							</p:commandLink>
+						</p:column>
+
+
+
+
+						<p:column headerText="#{msg['chamados.label.loja']}"
+							filterBy="#{faltaProduto.loja.nome}"
+							sortBy="#{faltaProduto.loja.nome}" styleClass="colunaVisualizada">
+							
+							
+								<p:commandLink action="#{faltaProdutoController.editar}">
+								<h:outputText value="#{faltaProduto.loja.nome}">
+
+							</h:outputText>
+								<f:param name="faltaProdutoId"
+									value="#{faltaProduto.faltaProdutoId}" />
+							</p:commandLink>
+						</p:column>
+
+
+
+						
+
+
+
+						<p:column headerText="#{msg['chamados.label.nome']}"
+							filterBy="#{faltaProduto.cliente.nome}"
+							sortBy="#{faltaProduto.cliente.nome}"
+							styleClass="colunaVisualizada">
+							
+							
+							
+							<p:commandLink action="#{faltaProdutoController.editar}">
+								<h:outputText value="#{faltaProduto.cliente.nome}">
+
+							</h:outputText>
+								<f:param name="faltaProdutoId"
+									value="#{faltaProduto.faltaProdutoId}" />
+							</p:commandLink>
+							
+						</p:column>
+
+
+		
+		
+			</p:dataTable>
+            
+	        
+	    </ui:component>
+	</html>

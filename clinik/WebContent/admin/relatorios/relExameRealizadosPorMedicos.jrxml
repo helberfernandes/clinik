@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relExameRealizadosPorMedicos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c63bb20-c028-4e9b-9d60-030ff5b42001">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="31"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="logoEmpresa" class="java.lang.Object">
+		<defaultValueExpression><![CDATA["C:\\Users\\Helber\\Pictures\\logo.png"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="medicoId" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[new Integer(0)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dataDe" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="dataAte" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT tab.data_lancamento, month(tab.data_lancamento) mes, tab.medico_id, tab.medico, tab.exame, tab.total_exames_x_por_medico_no_mes,
+tab.total_exames_por_medico, tab.total_exames_x_no_mes, tab.total_do_mes, coalesce((((tab.total_do_mes/tab.total_do_mes_anterior)-1)*100),0) percentual_cresimento FROM(
+SELECT data_lancamento, m.nome medico, ex.nome exame,
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento) and medico_id=a.medico_id and exame_id=a.exame_id
+) total_exames_x_por_medico_no_mes,
+
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento) and medico_id=a.medico_id
+) total_exames_por_medico,
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento)  and exame_id=a.exame_id
+) total_exames_x_no_mes,
+
+(
+ SELECT count(*) FROM wof_atendimento where month(data_lancamento)=month(a.data_lancamento)
+) total_do_mes,
+coalesce(
+(
+SELECT  count(*) total FROM wof_atendimento
+   where month(data_lancamento)=month(DATE_ADD(a.data_lancamento, INTERVAL -1 MONTH))
+  group by month(a.data_lancamento)
+),0)
+total_do_mes_anterior,a.medico_id
+
+FROM wof_atendimento a
+join wof_medicos m on a.medico_id=m.medico_id
+join wof_exames ex on a.exame_id=ex.exame_id
+group by a.medico_id, a.exame_id, month(a.data_lancamento)
+order by data_lancamento, medico
+
+) tab
+where  tab.data_lancamento between $P{dataDe} and $P{dataAte} and (tab.medico_id=$P{medicoId}) or (0=$P{medicoId})]]>
+	</queryString>
+	<field name="data_lancamento" class="java.sql.Date"/>
+	<field name="mes" class="java.lang.Long"/>
+	<field name="medico_id" class="java.lang.Integer"/>
+	<field name="medico" class="java.lang.String"/>
+	<field name="exame" class="java.lang.String"/>
+	<field name="total_exames_x_por_medico_no_mes" class="java.lang.Long"/>
+	<field name="total_exames_por_medico" class="java.lang.Long"/>
+	<field name="total_exames_x_no_mes" class="java.lang.Long"/>
+	<field name="total_do_mes" class="java.lang.Long"/>
+	<field name="percentual_cresimento" class="java.math.BigDecimal"/>
+	<variable name="total_exame_medico" class="java.lang.String"/>
+	<variable name="CONTAGEM_PAGINA" class="java.lang.Integer" incrementType="Page" calculation="Count">
+		<variableExpression><![CDATA[$V{PAGE_NUMBER}]]></variableExpression>
+	</variable>
+	<group name="medico">
+		<groupExpression><![CDATA[$F{medico}]]></groupExpression>
+		<groupHeader>
+			<band/>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="mes">
+		<groupExpression><![CDATA[$F{mes}]]></groupExpression>
+		<groupHeader>
+			<band height="35">
+				<textField pattern="MMMMM" isBlankWhenNull="true">
+					<reportElement x="33" y="0" width="50" height="11" uuid="0ca880d2-64f4-469f-a5b8-db323624102e"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="0" width="33" height="11" uuid="98c43ffb-f3b5-478d-aeae-9f08f496e84f"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Mes:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="33" y="11" width="255" height="11" uuid="965dd9be-05a8-4dc4-b35c-8c81e98a2b51"/>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{medico}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="0" y="22" width="187" height="11" uuid="f9c4838f-3165-40df-ac1c-5e97dd8c6a94"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Exame]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="187" y="22" width="116" height="11" uuid="091ab641-c294-4f82-9c80-1ef2b51ca3c1"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="11" width="33" height="11" uuid="fb2835e5-6684-4b3f-967b-a8589a6d0ef9"/>
+					<textElement>
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Medico:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="303" y="22" width="100" height="11" uuid="7955cb5b-5712-4ea1-996a-5c4a3b3baa1b"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<text><![CDATA[Total deste Exame no Mes]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="403" y="22" width="151" height="11" uuid="34260aed-d289-4515-a368-1c0fcd69f79c"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.75"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.75"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right">
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total de Exames do Médico no Mes]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="26">
+				<staticText>
+					<reportElement x="346" y="3" width="153" height="11" uuid="bba7df1f-a621-413b-8ffb-79497fca5b0d"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Total de exames mes (Todos Os Médicos):]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="424" y="14" width="75" height="11" uuid="bf4fde22-e0d7-427d-9b38-08793d37f8b8"/>
+					<box>
+						<pen lineWidth="0.25"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="0.0"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement>
+						<font size="8" isBold="false"/>
+					</textElement>
+					<text><![CDATA[% de Crescimento:]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="499" y="3" width="55" height="11" uuid="2a0f38e3-cd3a-4f0f-ab5b-2b1348c9f8a0"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{total_do_mes}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00" isBlankWhenNull="true">
+					<reportElement x="499" y="14" width="55" height="11" uuid="599b4fc2-cbfc-41e0-a43b-1e6cf90ca89d"/>
+					<textElement textAlignment="Right">
+						<font size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{percentual_cresimento}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="0" width="555" height="2" uuid="36003b72-8182-44f5-8a0a-93759e3d04dd"/>
+				</line>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="109" y="1" width="336" height="25" uuid="bfbdbc8d-9b9f-43eb-9298-1264f342d0a8"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Exames Realizados por Médicos]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="41" uuid="942f4121-cb95-4053-a0ef-31e552378a32"/>
+				<imageExpression><![CDATA[$P{logoEmpresa}]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="41" width="555" height="1" uuid="a44083fb-2471-400a-964e-e2a406e0b9f6"/>
+			</line>
+			<staticText>
+				<reportElement x="428" y="29" width="43" height="11" uuid="65527bf3-0dcb-4d7e-8ebc-5f7a168ab367"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Período de:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="471" y="29" width="34" height="11" uuid="8431996b-be24-490e-8785-f50bf87bd616"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataDe}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="505" y="29" width="15" height="11" uuid="f43723b8-2a1d-455a-a759-321b7f0c264a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Até]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="520" y="29" width="34" height="11" uuid="20e75865-47d2-4b85-a7da-d10945950ba0"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dataAte}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="11" splitType="Stretch">
+			<rectangle>
+				<reportElement stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="555" height="11" forecolor="#FFFFFF" backcolor="#B7C28D" uuid="d77c9dda-e6ac-4c76-a01b-a318c1682965">
+					<printWhenExpression><![CDATA[new Boolean(($V{COLUMN_COUNT}.intValue() % 2) != 0)]]></printWhenExpression>
+				</reportElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="187" height="11" uuid="e814628d-608e-444c-98be-47050dff7a83"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exame}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="187" y="0" width="116" height="11" uuid="67e9603a-2b51-4c1b-8baf-279f076e4615"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_x_por_medico_no_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="0" width="100" height="11" uuid="8a720aa2-a6d4-404a-9689-467a0be420a3"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_x_no_mes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="151" height="11" uuid="5e4e7918-3d83-4395-93a9-2f85c826a6b2"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_exames_por_medico}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="11" splitType="Stretch">
+			<textField>
+				<reportElement x="507" y="0" width="17" height="11" uuid="fbfa393b-4982-4609-bc8b-7479e8914797"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="471" y="0" width="36" height="11" uuid="31deab14-7462-4626-bf0d-3d9ccabfe10c"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Página :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="524" y="0" width="15" height="11" uuid="e3819185-5d82-4929-99c6-66b76c4fcb9d"/>
+				<textElement>
+					<font size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="46" height="11" uuid="da83ad7a-d5ae-4e8e-8a4c-aff574d1d378"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Data e Hora:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy h.mm a">
+				<reportElement x="50" y="0" width="100" height="11" uuid="cc97a34e-4056-46ad-b750-00cfa89ba65f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="539" y="0" width="15" height="11" uuid="2cfcef8d-88cd-4523-85c3-fdb58ae0f65a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{CONTAGEM_PAGINA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

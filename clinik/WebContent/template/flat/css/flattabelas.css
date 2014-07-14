@@ -1,0 +1,36 @@
+.tabela{
+	padding: 0px;
+}
+
+
+.ui-datatable tbody td {
+	padding: 10px 5px 10px 5px;
+	border-bottom: 2px solid #fff;
+	
+}
+
+.ui-datatable .ui-widget-header{
+	background: none !important;
+	border: none !important;
+}
+
+.ui-datatable thead th{
+	background: none !important;
+	border: none !important;
+	border-bottom: 3px solid #DDD !important;
+	font-weight:  bold;
+}
+
+
+
+
+.ui-paginator  .ui-paginator-current {
+	text-align: left !important;	
+	left: 0em !important;
+	margin-left: 0px !important;
+	
+}
+
+.ui-paginator .ui-paginator-page, .ui-paginator .ui-paginator-pages, .ui-paginator .ui-paginator-next, .ui-paginator .ui-paginator-last, .ui-paginator .ui-paginator-first, .ui-paginator .ui-paginator-prev, .ui-paginator .ui-paginator-current {
+	
+	}

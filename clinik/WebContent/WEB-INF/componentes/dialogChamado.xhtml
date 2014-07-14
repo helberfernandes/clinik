@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+	<h:form id="dialogFormChamado">
+		<p:dialog id="janelaChamado"
+			header="#{msg['chamados.titulo.chamados']}" widgetVar="janelaChamado"
+			modal="true" height="800" width="800">
+			<div class="box-element">
+				<div class="box-content">
+					<ul class="actions">
+						<li><div>
+								<p:commandLink
+									update="growl, :formNota:chamadoData, :formNota:chamadoDataEmAtendimento"
+									
+									styleClass="btn_salvar"
+									actionListener="#{chamadoController.salvar}">
+									<h:outputText value="#{msg['chamados.label.salvar']}" />
+								</p:commandLink>
+								<span>#{msg['chamados.label.salvar']}</span>
+							</div></li>
+						<li><div>
+								<p:commandLink action="#{chamadoController.cancelar}"
+									immediate="true" styleClass="btn_voltar">
+									<h:outputText value="#{msg['chamados.label.voltar']}" />
+								</p:commandLink>
+								<span>#{msg['chamados.label.voltar']}</span>
+							</div></li>
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			<p:messages id="growl" escape="false" />
+			<table>
+				<tr>
+					<td><h:outputLabel value="* Status:" for="status" /></td>
+					<td><h:selectOneListbox id="status"
+							value="#{chamadoController.chamado.status}" size="1"
+							disabled="#{chamadoController.chamado.status==null}">
+
+							<f:selectItem itemLabel="#{chamadoController.chamado.status}"
+								itemValue="#{chamadoController.chamado.status}"
+								itemDisabled="true" />
+
+							<f:selectItems
+								value="#{chamadoController.workflowPeloModulo.estadoWorkflows}"
+								var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
+								itemValue="#{estadoWorkflow.nome}" />
+
+						</h:selectOneListbox></td>
+					<td><h:message for="status" errorClass="error" /></td>
+
+					<td><h:outputLabel value="* TÃ©cnico:" for="tecnico"
+							rendered="#{sessaoController.usuarioSessao.role.permissao.atribuirChamado}" />
+					</td>
+					<td><h:selectOneListbox id="tecnico"
+							value="#{chamadoController.chamado.tecnico}" size="1"
+							converter="#{usuarioConverter}"
+							rendered="#{sessaoController.usuarioSessao.role.permissao.atribuirChamado}">
+							<f:selectItems value="#{chamadoController.usuarioListSuporte}"
+								var="usuario" itemLabel="#{usuario.nome}" itemValue="#{usuario}" />
+						</h:selectOneListbox></td>
+					<td><h:message for="tecnico" errorClass="error"
+							rendered="#{sessaoController.usuarioSessao.role.permissao.atribuirChamado}" /></td>
+				</tr>
+				<tr>
+					<td style="border-bottom: 1px solid #ccc" colspan="6"><h:outputText
+							value="Detalhes do servico" styleClass="labelTitulo" /></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="* 	DescriÃ§Ã£o do ServiÃ§o:" /></td>
+					<td><h:inputTextarea id="descricaoFechamento"
+							onkeydown="mascara(this, maiusculo)"
+							value="#{chamadoController.chamado.descricaoFechamento}"
+							disabled="#{sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE' or sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE' or sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'}"
+							cols="100" rows="10" /></td>
+					<td><h:message for="descricaoFechamento" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td style="border-bottom: 1px solid #ccc" colspan="6"><h:outputText
+							value="Detalhes do equipamento subistituto"
+							styleClass="labelTitulo" /></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="* NÂº equipamento subistituto:" /></td>
+					<td><p:inputMask id="numSerieSubistituto" size="40"
+							value="#{chamadoController.chamado.numSerieSubistituto}"
+							mask="99999?99999999999"
+							valueChangeListener="#{chamadoController.buscaEquipamentoSubistituto}"
+							validator="#{chamadoController.validateChamado}"
+							disabled="#{sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE' or sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE' or sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'}">
+							<p:ajax event="change" update="equipamentoSubistituto" />
+
+						</p:inputMask></td>
+					<td><h:message for="numSerieSubistituto" errorClass="error" /></td>
+				</tr>
+				<tr>
+					<td><h:outputText value="* 	Equipamento subistituto:" /></td>
+					<td><h:inputTextarea id="equipamentoSubistituto" cols="50"
+							rows="5" onkeydown="mascara(this, maiusculo)"
+							value="#{chamadoController.chamado.equipamentoSubistituto.descricao}"
+							 disabled="true"
+							validator="#{chamadoController.validateChamado}">
+						</h:inputTextarea></td>
+					<td><h:message for="equipamentoSubistituto" errorClass="error" /></td>
+				</tr>
+			</table>
+		</p:dialog>
+	</h:form>
+</ui:component>
+</html>

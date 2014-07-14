@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	>
+	
+	<div id='cssmenu'>
+		<ul>
+		<li class='has-sub'><a href='#' onclick="bar.show()"
+					class="#{status.last?'last':''}"><span>
+		<h:graphicImage value="#{pastaImagens}logo.png" />
+		</span></a>
+		</li>
+		
+		
+		
+			<ui:repeat var="modulo" value="#{moduloController.lista}"
+				varStatus="status">
+
+				<h:panelGroup rendered="#{modulo.permissao}">
+					<li class='has-sub'><a href='#{modulo.link}'
+						class="#{status.last?'last':''}"><span>#{modulo.descricao}</span></a>
+						<ul>
+							<ui:repeat var="pagina" value="#{modulo.paginas}"
+								varStatus="status">
+								<h:panelGroup rendered="#{pagina.permissao}">
+								
+									
+
+
+									<li>
+									
+									<h:outputLink value="#{server}/#{siteName}#{pagina.link}" title="#{pagina.descricao}" rendered="#{pagina.onClik==null}">
+									<span>#{pagina.descricao}</span></h:outputLink> 
+									
+									<p:commandLink onclick="#{pagina.onClik}" rendered="#{pagina.onClik!=null}">
+									<span>#{pagina.descricao}</span></p:commandLink> 
+									
+									
+									
+									</li>
+								</h:panelGroup>
+							</ui:repeat>
+						</ul></li>
+					
+					
+					
+				</h:panelGroup>
+			</ui:repeat>
+
+		</ul>
+		<ul style="position: absolute; right: 15px;">
+			
+			
+			
+			
+			
+			
+			
+			
+		
+				<li class='has-sub'><a href='#' onclick="bar.show()"
+					class="#{status.last?'last':''}"><span>
+		<h:outputText value="#{msg['system.versao.sistema']}" style="fonte-size:24px; " /> 
+		</span></a>
+		</li>
+			
+			
+			<li class='has-sub'><h:form id="formMinhaConta">
+			 
+					<p:commandLink action="#{usuarioController.editar}"
+						styleClass="profile-16 tt-top-center">
+
+						<h:graphicImage value="#{fotoUserTumb}" />
+					#{userName}
+													<f:param name="usuarioId" value="#{userId}" />
+					</p:commandLink>
+				</h:form>
+				<ul>
+					<li  class='has-sub ' style="background-color: red;">
+				
+			
+				
+				 <h:outputLink 
+							
+							value="/chamados/config/" rel="/config/" 
+						immediate="true" 
+							
+							>
+							 <h:outputText value="#{msg['system.label.configuracoes']}"/>
+						</h:outputLink>	
+				</li>
+					<li><h:form id="formSair">
+							<p:commandLink id="logout" value="Sair"
+								actionListener="#{loginController.logout}" />
+						</h:form></li>
+				</ul></li>
+				
+				
+				
+		</ul>
+	</div>
+
+
+
+	
+	
+	
+</ui:composition>

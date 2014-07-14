@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" template="param.xhtml">
+
+	<ui:define name="status">
+		<ui:include src="/admin/subtemplate/status.xhtml" />
+	</ui:define>
+
+	<ui:define name="navigation">
+		<p:log
+			rendered="#{sessaoController.usuarioSessao.role.permissao.verLog}" />
+		<ui:include src="#{pathTheme}templates/navigation.xhtml" />
+	</ui:define>
+
+	<ui:define name="menu">
+		<p:idleMonitor timeout="360000">
+			<p:ajax event="idle" listener="#{loginController.idleListener}"
+				onstart="#{configuracaoController.configuracao.manutencao==true?'bar.show()':'bar.hide()'}" />
+		</p:idleMonitor>
+		
+<!-- 		Cria o menu  -->
+		<ui:include src="#{pathTheme}templates/menu.xhtml" >
+			
+			
+			
+			
+		</ui:include>
+	</ui:define>
+
+	<ui:insert name="conteudo" />
+
+</ui:composition>

@@ -1,0 +1,244 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formUsuario" styleClass="stdform" enctype="multipart/form-data">
+		
+		
+			
+			
+			
+			
+			
+			<div class="box-element">
+                    <div class="box-head"><span class="forms-16"></span><h3>#{msg['chamados.titulo.pagina.usuario']}</h3></div>
+                    <div class="box-content">
+                        <ul class="actions">
+                         
+                    
+                            <li><div>
+                            
+                       
+											<p:commandLink
+											
+											 styleClass="btn_salvar"
+											 update="growl, :formUsuario"
+											actionListener="#{usuarioController.salvar}">
+											
+										
+												<h:outputText value="#{msg['chamados.label.salvar']}" />
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.salvar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                       <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}">
+                       
+                         <li><div>
+                            
+                       
+											<p:commandLink update="growl, :formUsuario:dtusuario"
+											action="#{usuarioController.cancelar}"
+											
+											 styleClass="btn_voltar">
+										
+										
+											
+										
+												<h:outputText value="#{msg['chamados.label.voltar']}" />
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.voltar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                    </h:panelGroup>
+                      
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+
+			<table>
+				<tr>
+					<td style="vertical-align: top;">
+					
+					<p:graphicImage
+							id="fotoperfil" styleClass="fotoperfil"
+							value="#{usuarioController.usuario.foto}" /></td>
+					<td style="padding-left: 30px;">
+					
+					
+					<p:messages id="growl" /> 
+					
+		
+					
+					
+					
+					
+					<h:panelGrid id="dtusuario" columns="3"
+									style="margin-top: 15px;">
+									<h:outputLabel value="* #{msg['chamados.label.nome']}: " styleClass="label" for="nome" />
+									
+									<h:inputText id="nome" size="40"
+										value="#{usuarioController.usuario.nome}" styleClass="mediuminput"
+										  onkeydown="mascara(this, maiusculo)">
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="nome" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.login.login']}:" styleClass="label" for="login" />
+									<h:inputText id="login" size="20"
+										value="#{usuarioController.usuario.login}" styleClass="campo"
+										 >
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="login" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.telefone']}:" styleClass="label"
+										for="telefone" />
+									<p:inputMask id="telefone" size="9"
+										value="#{usuarioController.usuario.telefone}"
+										styleClass="campo" mask="9999-9999" >
+										<f:validateLength minimum="4" maximum="80" />
+									</p:inputMask>
+									<h:message for="telefone" errorClass="error" />
+								
+									<h:outputLabel value="* #{msg['chamados.label.login.senha']}:" styleClass="label" for="senha"  />
+									<p:password id="senha" size="20"
+										value="#{usuarioController.usuario.senha}" styleClass="campo"
+										 promptLabel="Informe uma senha" />
+									<h:message for="senha" errorClass="error" />
+								
+								
+								
+									<h:outputLabel value="* #{msg['chamados.label.email']}:" styleClass="label" for="email" />
+									<h:inputText id="email" size="40"
+										value="#{usuarioController.usuario.email}" styleClass="campo"
+										 onkeydown="mascara(this, maiusculo)">
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="email" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.loja']}:" styleClass="label" for="loja"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:selectOneListbox id="loja"
+										value="#{usuarioController.usuario.loja}" styleClass="campo"
+										size="1" converter="#{lojaConverter}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+										<f:selectItems value="#{lojaController.lojas}" var="loja"
+											itemLabel="#{loja.nome}" itemValue="#{loja}" />
+									</h:selectOneListbox>
+									<h:message for="loja" errorClass="error"   rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:outputLabel value="* #{msg['chamados.label.perfil']}:" styleClass="label" for="email"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:selectOneListbox id="role"
+										value="#{usuarioController.usuario.role}" styleClass="campo"
+										size="1" converter="#{roleConverter}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+										<f:selectItems value="#{usuarioController.todasAsRoles}"
+											var="role" itemLabel="#{role.descricao}" itemValue="#{role}" />
+									</h:selectOneListbox>
+									<h:message for="role" errorClass="error"   rendered="#{sessaoController.usuarioSessao.role.permissao.addUser }" />
+
+
+
+
+						<h:outputText value="Plantao?:"   rendered="#{sessaoController.usuarioSessao.role.permissao.addUser or sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'}"/>
+						<h:selectBooleanCheckbox id="plantao"
+							value="#{usuarioController.usuario.plantao}" rendered="#{sessaoController.usuarioSessao.role.permissao.addUser or sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'}"/>
+						<h:message for="plantao" errorClass="error" rendered="#{sessaoController.usuarioSessao.role.permissao.addUser or sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'}"/>									
+						
+						
+						
+						<h:outputText value="Ativo?:"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:selectBooleanCheckbox id="status"
+							value="#{usuarioController.usuario.status}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:message for="status" errorClass="error"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+									
+									<h:outputText value="* #{msg['chamados.label.loja']}"
+					 rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+
+				<p:pickList id="lojaResponsavel"
+					value="#{usuarioController.lojasResponsaveis}" var="loja"
+					iconOnly="true" itemValue="#{loja}"
+					converter="#{lojaConverter}" showSourceControls="true"
+					showTargetControls="true"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+					<f:facet name="sourceCaption">#{msg['chamados.label.loja.disponivel']}</f:facet>
+					<f:facet name="targetCaption">#{msg['chamados.label.loja.disponivel2']}</f:facet>
+
+
+					<p:column style="width:75%">  
+            #{loja.nome}  
+        </p:column>
+				</p:pickList>
+
+
+				<h:message for="lojaResponsavel" errorClass="error"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"  />
+									
+									<h:column />
+
+
+
+
+									<p:fileUpload
+										fileUploadListener="#{usuarioController.handleFileUpload}"
+										showButtons="true" mode="advanced" update="formUsuario, :form:imgCroper"
+										sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+										fileLimitMessage="Tamanho invalido"   auto="true" 
+										
+										oncomplete="dlg.show();"
+										  />
+
+
+
+
+
+
+
+
+									<h:column />
+
+ <p:colorPicker id="popupCP" value="#{usuarioController.usuario.cor}" widgetVar="picker"/>  
+									<h:outputText value="#{msg['chamados.label.campo.obrigatorio']}"
+										style="color: #D8000C;" />
+								</h:panelGrid></td>
+				</tr>
+			</table>
+
+
+			
+		</h:form>
+
+
+	</ui:define>
+	
+	<ui:define name="dialog" >
+	
+			<p:dialog header="Foto do Perfil" widgetVar="dlg" resizable="false"
+			modal="true" style="max-height:500px">
+			<h:form id="form">
+			
+			<p:commandButton value="Crop" action="#{usuarioController.crop}"
+					update=":formUsuario:fotoperfil" oncomplete="dlg.hide();" />
+
+				<p:imageCropper id="imgCroper"
+					value="#{usuarioController.croppedImage}"
+					image="#{usuarioController.usuario.foto}"
+					initialCoords="225,75,300,125"  />
+
+				
+
+
+
+			</h:form>
+		</p:dialog>
+	</ui:define>	
+</ui:composition>

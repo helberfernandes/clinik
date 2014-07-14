@@ -1,0 +1,12 @@
+@CHARSET "ISO-8859-1";
+.fc-event {
+height: 45px !important;
+
+}	
+
+.fc-event-title{
+font-size: 10px !important;	
+}
+.fc-event-time{
+font-size: 10px !important;	
+}

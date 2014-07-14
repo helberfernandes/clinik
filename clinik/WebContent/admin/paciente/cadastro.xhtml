@@ -1,0 +1,798 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+
+
+		<h:form id="formPrincipal">
+			<div class="box-element">
+				<div class="box-content">
+					<ul class="actions">
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink actionListener="#{pacienteController.salvar}"
+										update="growl" styleClass="btn_salvar">
+
+										<h:outputText value="#{msg['system.label.salvar']}" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.salvar']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink action="#{pacienteController.cancelar}"
+										immediate="true" styleClass="btn_voltar">
+
+										<h:outputText value="#{msg['system.label.voltar']}" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.voltar']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+						
+						
+						
+						
+		<div class="bg-primary" style="right: 0px; float: right; width: 38%;">
+						<div class="media" style="padding-left: 250px;">
+							<a href="" class="pull-left">
+								<h:graphicImage value="#{pacienteController.obj.foto}" styleClass="media-object" width="65"/>
+							</a>
+							<div class="media-body innerTB innerR">
+								<div class="innerT half pull-right">
+								<a href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
+									<i class="fa fa-pencil"></i>#{msg['system.label.prontuario']}
+									<br/>
+									<h4 id="nomePlantao" class="text-white pull-left innerAll strong display-block margin-none">#{pacienteController.obj.nome}</h4>
+								</a>
+								</div>                                                                                                                
+								<h4  class="text-white pull-left innerAll strong display-block margin-none">#{pacienteController.obj.telefone}</h4>
+								
+
+							</div>
+
+						</div>
+					</div>
+                          
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+
+
+
+			<p:messages id="growl" />
+
+
+			<p:tabView id="tab" activeIndex="#{nomeRole=='ROLE_MEDICO'?1:0}">
+				<p:tab title="#{msg['system.titulo.dados.pessoais']}">
+
+
+
+					<div class="box-element">
+						<div class="box-content">
+
+
+							<h:outputLabel value="#{msg['system.label.prontuario']}" />
+							<br />
+							<h:outputLabel value="#{pacienteController.obj.pacienteId}" />
+
+							<h:panelGrid id="form" columns="2" style="margin-top: 15px;">
+
+
+								<h:outputLabel for="name" value="#{msg['system.label.nome']}" />
+
+								<h:outputLabel for="cpf" value="#{msg['system.label.cpf']}" />
+
+								<p:inputText id="name" label="name" size="50"
+									value="#{pacienteController.obj.nome}" 
+									onkeydown="mascara(this, maiusculo)" />
+
+
+
+								<p:inputText id="cpf" label="name" size="14"
+									value="#{pacienteController.obj.cpf}" 
+									onBlur="ValidarCPF(formPrincipal.cpf);"
+									onKeyPress="MascaraCPF(formPrincipal.cpf);" />
+
+
+								<h:outputLabel for="telefone"
+									value="#{msg['system.label.telefone']}" />
+
+								<h:outputLabel for="datanascimento"
+									value="#{msg['system.label.datanascimento']}" />
+
+
+
+								<p:inputText id="telefone" label="telefone" size="20"
+									value="#{pacienteController.obj.telefone}" 
+									onkeydown="mascara(this, telefone)" />
+
+								<p:calendar id="datanascimento"
+									value="#{pacienteController.obj.dataNascimento}"
+									showButtonPanel="true" />
+
+								<h:outputLabel for="naturalidade"
+									value="#{msg['system.label.naturalidade']}" />
+
+
+								<h:outputLabel for="sexo" value="#{msg['system.label.sexo']}" />
+
+								<p:inputText id="naturalidade" label="naturalidade" size="50"
+									value="#{pacienteController.obj.naturalidade}" 
+									onkeydown="mascara(this, maiusculo)" />
+
+
+
+								<h:selectOneRadio id="sexo"
+									value="#{pacienteController.obj.sexo}">
+									<f:selectItem itemLabel="#{msg['system.label.masculino']}"
+										itemValue="#{msg['system.label.masculino']}" />
+									<f:selectItem itemLabel="#{msg['system.label.feminino']}"
+										itemValue="#{msg['system.label.feminino']}" />
+
+
+								</h:selectOneRadio>
+
+
+
+
+								<h:outputLabel for="estadoCivil"
+									value="#{msg['system.label.estadocivil']}" />
+								<p:column />
+
+								<h:selectOneRadio id="estadoCivil"
+									value="#{pacienteController.obj.estadoCivil}">
+
+									<f:selectItem itemLabel="#{msg['system.label.solteiro']}"
+										itemValue="#{msg['system.label.solteiro']}" />
+
+									<f:selectItem itemLabel="#{msg['system.label.casado']}"
+										itemValue="#{msg['system.label.casado']}" />
+
+
+									<f:selectItem itemLabel="#{msg['system.label.uniaoestavel']}"
+										itemValue="#{msg['system.label.uniaoestavel']}" />
+
+
+									<f:selectItem itemLabel="#{msg['system.label.viuvo']}"
+										itemValue="#{msg['system.label.viuvo']}" />
+
+								</h:selectOneRadio>
+								<p:column />
+
+								<h:outputLabel for="endereco"
+									value="#{msg['system.label.endereco']}" />
+								<p:column />
+								<p:inputText id="endereco" label="endereco" size="50"
+									value="#{pacienteController.obj.endereco}"
+									onkeydown="mascara(this, maiusculo)" />
+								<p:column />
+								<h:column />
+
+
+								<p:column />
+								<h:outputText value="* #{msg['system.label.campo.obrigatorio']}"
+									style="color: #D8000C;" />
+							</h:panelGrid>
+							<div class="clearfix"></div>
+						</div>
+					</div>
+				</p:tab>
+				<p:tab title="#{msg['system.titulo.prontuario']}">
+
+					<table>
+
+						<tr>
+							<td>
+
+
+								<div class="box-element">
+									<div class="box-head">
+										<span class="forms-16"></span>
+										<h3>#{msg['system.titulo.procedimentos']}</h3>
+									</div>
+									<div class="box-content">
+
+										<p:dataTable id="listaDados"
+											value="#{pacienteController.obj.atendimentos}"
+											var="atendimento" rows="10" paginator="true"
+											paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+											rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+											emptyMessage="#{msg['system.msg.nenhum.registro.encontrado']}"
+											rowIndexVar="index" rowKey="#{paciente.pacienteId}">
+
+
+
+
+
+
+											<p:column headerText="#{msg['system.label.numero']}"
+												styleClass="coluna1">
+												<h:outputText value="#{(index+1)}" />
+											</p:column>
+
+											<p:column headerText="#{msg['system.label.nome']}"
+												styleClass="colunaDefault">
+
+
+												<h:outputText value="#{atendimento.dataLancamento}" />
+
+											</p:column>
+
+
+											<p:column headerText="#{msg['system.label.exame']}"
+												styleClass="colunaDefault">
+												<h:outputText value="#{atendimento.exame.nome}" />
+											</p:column>
+
+
+											<p:column headerText="#{msg['system.label.medico']}"
+												styleClass="colunaDefault">
+												<h:outputText value="#{atendimento.medico.nome}" />
+											</p:column>
+
+
+											<p:column headerText="#{msg['system.label.solicitante']}"
+												styleClass="colunaDefault">
+												<h:outputText value="#{atendimento.solicitante.nome}" />
+											</p:column>
+
+										</p:dataTable>
+									</div>
+								</div>
+
+
+							</td>
+							<td>
+
+							
+									<p:panel 
+									header="#{msg['system.titulo.diagnosticos']}"
+									styleClass="box-element"
+									
+									>
+
+									<f:facet name="options">
+										<p:menu>
+											<p:submenu label="Cadastro">
+												<p:menuitem value="Add"
+													actionListener="#{pacienteController.novaDiagnostico}"
+													update=":formDialogDiagnostico:diagnostico" immediate="true"
+													oncomplete="PF('diagnosticoDialog').show();  " />
+
+												<p:menuitem value="Excluir"
+													actionListener="#{pacienteController.excluirDiagnostico}"
+													immediate="true"
+													
+													/>
+
+
+											</p:submenu>
+										</p:menu>
+									</f:facet>
+
+
+
+									<p:dataTable id="listaDiagnosticos"
+										value="#{pacienteController.obj.diagnosticos}"
+										rowKey="#{diagnostico.diagnosticoId}" var="diagnostico" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+										emptyMessage="#{msg['system.msg.nenhuma.diagnostico.encontrada']}"
+										rowIndexVar="index"
+										
+										
+										
+										>
+
+										
+										<p:column selectionMode="multiple"
+											
+											style="width:2%;text-align:center"/>
+
+
+										<p:column headerText="#{msg['system.label.numero']}"
+											styleClass="coluna1">
+											<h:outputText value="#{(index+1)}" />
+										</p:column>
+
+										<p:column headerText="#{msg['system.label.diagnostico']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.editarDiagnostico(diagnostico)}"
+												update=":formDialogDiagnostico:diagnostico"
+												oncomplete="PF('diagnosticoDialog').show(); ">
+
+												<h:outputText value="#{diagnostico.descricao}" escape="false" />
+											</p:commandLink>
+										</p:column>
+
+
+										
+
+										<p:column headerText="#{msg['system.label.data']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{diagnostico.data}" />
+										</p:column>
+
+
+<p:column headerText="#{msg['system.label.excluir']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.excluirDiagnostico(diagnostico)}"
+												update=":formPrincipal"
+												>
+
+												<h:outputText value="Excluir" />
+											</p:commandLink>
+										</p:column>
+
+									</p:dataTable>
+								</p:panel>
+									
+								
+
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+
+									<p:panel 
+									header="#{msg['system.titulo.medicamentos']}"
+									
+									styleClass="box-element"
+									>
+
+									<f:facet name="options">
+										<p:menu>
+											<p:submenu label="Cadastro">
+												<p:menuitem value="Add"
+													actionListener="#{pacienteController.novoMedicamento}"
+													update=":formDialogMedicamento:medicamento" immediate="true"
+													oncomplete="PF('medicamentoDialog').show();  " />
+
+												<p:menuitem value="Excluir"
+													actionListener="#{pacienteController.excluirMedicamento}"
+													immediate="true"
+													
+													/>
+
+
+											</p:submenu>
+										</p:menu>
+									</f:facet>
+
+
+
+									<p:dataTable id="listaMedicamentos"
+										value="#{pacienteController.obj.medicamentos}"
+										rowKey="#{medicamento.medicamentoId}" var="medicamento" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+										emptyMessage="#{msg['system.msg.nenhuma.medicamento.encontrada']}"
+										rowIndexVar="index"
+									
+										
+										
+										>
+
+									
+
+
+										<p:column headerText="#{msg['system.label.numero']}"
+											styleClass="coluna1">
+											<h:outputText value="#{(index+1)}" />
+										</p:column>
+
+										<p:column headerText="#{msg['system.label.medicamento']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.editarMedicamento(medicamento)}"
+												update=":formDialogMedicamento:medicamento"
+												oncomplete="PF('medicamentoDialog').show(); ">
+
+												<h:outputText value="#{medicamento.medicamento}" />
+											</p:commandLink>
+										</p:column>
+
+
+										<p:column headerText="#{msg['system.label.concentracao']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{medicamento.concentracao}" />
+										</p:column>
+
+<p:column headerText="#{msg['system.label.quantidade']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{medicamento.quantidade}" />
+										</p:column>
+
+
+<p:column headerText="#{msg['system.label.uso']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{medicamento.uso}" />
+										</p:column>
+										
+										
+										
+										<p:column headerText="#{msg['system.label.em.uso']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{medicamento.emUso?'Sim':'Não'}" />
+										</p:column>
+
+										<p:column headerText="#{msg['system.label.data']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{medicamento.data}" />
+										</p:column>
+
+
+<p:column headerText="#{msg['system.label.excluir']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.excluirMedicamento(medicamento)}"
+												update=":formPrincipal"
+												>
+
+												<h:outputText value="Excluir" />
+											</p:commandLink>
+										</p:column>
+
+									</p:dataTable>
+								</p:panel>
+									
+									
+								
+
+							</td>
+
+							<td><p:panel id="pnl"
+									header="#{msg['system.titulo.alergias']}"
+									
+									styleClass="box-element"
+									>
+
+									<f:facet name="options">
+										<p:menu>
+											<p:submenu label="Cadastro">
+												<p:menuitem value="Add"
+													actionListener="#{pacienteController.novaAlergia}"
+													update=":formDialog:alergia" immediate="true"
+													oncomplete="PF('alergiaDialog').show();  " />
+
+												<p:menuitem value="Excluir"
+													actionListener="#{pacienteController.excluirAlergia}"
+													immediate="true"
+													
+													/>
+
+
+											</p:submenu>
+										</p:menu>
+									</f:facet>
+
+
+
+									<p:dataTable id="listaAlergias"
+										value="#{pacienteController.obj.alergias}"
+										rowKey="#{alergia.alergiaId}" var="alergia" rows="10"
+										paginator="true"
+										paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+										rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+										emptyMessage="#{msg['system.msg.nenhuma.alergia.encontrada']}"
+										rowIndexVar="index"
+										selection="#{pacienteController.alergiasSelecionadas}"
+										
+										
+										>
+
+										
+										<p:column selectionMode="multiple"
+											
+											style="width:2%;text-align:center"/>
+
+
+										<p:column headerText="#{msg['system.label.numero']}"
+											styleClass="coluna1">
+											<h:outputText value="#{(index+1)}" />
+										</p:column>
+
+										<p:column headerText="#{msg['system.label.alergia']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.editarAlergia(alergia)}"
+												update=":formDialog:alergia"
+												oncomplete="PF('alergiaDialog').show(); ">
+
+												<h:outputText value="#{alergia.alergia}" />
+											</p:commandLink>
+										</p:column>
+
+
+										<p:column headerText="#{msg['system.label.reacao']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{alergia.reacao}" />
+										</p:column>
+
+
+										<p:column headerText="#{msg['system.label.data']}"
+											styleClass="colunaDefault">
+											<h:outputText value="#{alergia.data}" />
+										</p:column>
+
+
+<p:column headerText="#{msg['system.label.excluir']}"
+											styleClass="colunaDefault">
+											<p:commandLink immediate="true"
+												action="#{pacienteController.excluirAlergia(alergia)}"
+												update=":formPrincipal"
+												>
+
+												<h:outputText value="Excluir" />
+											</p:commandLink>
+										</p:column>
+
+									</p:dataTable>
+								</p:panel></td>
+						</tr>
+
+
+
+						<tr>
+							<td>
+
+								<div class="box-element">
+									<div class="box-head">
+										<span class="forms-16"></span>
+										<h3>#{msg['system.titulo.documentos']}</h3>
+									</div>
+									<div class="box-content"></div>
+								</div>
+
+							</td>
+
+							<td>
+
+								<div class="box-element">
+									<div class="box-head">
+										<span class="forms-16"></span>
+										<h3>#{msg['system.titulo.laboratorio']}</h3>
+									</div>
+									<div class="box-content"></div>
+								</div>
+
+							</td>
+						</tr>
+					</table>
+
+
+				</p:tab>
+			</p:tabView>
+
+		</h:form>
+	</ui:define>
+
+
+	<ui:define name="dialog">
+		<h:form id="formDialog">
+			<p:dialog id="alergia" widgetVar="alergiaDialog"
+				header="#{msg['system.titulo.alergias']}" modal="true" width="650"
+				height="500">
+
+
+
+				<div class="box-element">
+					<div class="box-content">
+						<ul class="toolbarDialog">
+
+							<h:panelGroup>
+								<li><div>
+
+										<p:commandLink
+											actionListener="#{pacienteController.salvarAlergia}"
+											update=":formPrincipal:tab"
+											oncomplete="PF('alergiaDialog').hide();"
+											styleClass="btn_salvar">
+
+											<h:outputText value="#{msg['system.label.salvar']}" />
+
+										</p:commandLink>
+
+										<span>#{msg['system.label.salvar']}</span>
+
+
+									</div></li>
+							</h:panelGroup>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+
+
+
+				<h:panelGrid columns="3">
+
+
+					<h:outputText value="#{msg['system.label.alergia']}" />
+					<h:outputText value="#{msg['system.label.reacao']}" />
+					<h:outputText value="#{msg['system.label.data']}" />
+
+					<h:inputText value="#{pacienteController.alergia.alergia}" />
+					<h:inputText value="#{pacienteController.alergia.reacao}" />
+					<p:calendar id="data" value="#{pacienteController.alergia.data}"
+						pattern="dd/MM/yyyy"  showButtonPanel="true"
+						showOn="button" />
+
+
+
+
+
+
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+		
+		
+		
+		
+<!-- 		Dialogo de medicamentos -->
+		
+		
+		
+		<h:form id="formDialogMedicamento">
+			<p:dialog id="medicamento" widgetVar="medicamentoDialog"
+				header="#{msg['system.titulo.medicamentos']}" modal="true" width="650"
+				height="500">
+
+
+
+				<div class="box-element">
+					<div class="box-content">
+						<ul class="toolbarDialog">
+
+							<h:panelGroup>
+								<li><div>
+
+										<p:commandLink 
+											actionListener="#{pacienteController.salvarMedicamento}"
+											update=":formPrincipal:tab"
+											oncomplete="PF('medicamentoDialog').hide();"
+											styleClass="btn_salvar">
+
+											<h:outputText value="#{msg['system.label.salvar']}" />
+
+										</p:commandLink>
+
+										<span>#{msg['system.label.salvar']}</span>
+
+
+									</div></li>
+							</h:panelGroup>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+
+
+
+				<h:panelGrid columns="3">
+
+
+					<h:outputText value="#{msg['system.label.medicamento']}" />
+					<h:outputText value="#{msg['system.label.concentracao']}" />
+					<h:outputText value="#{msg['system.label.quantidade']}" />
+					
+
+					<h:inputText value="#{pacienteController.medicamento.medicamento}" />
+					<h:inputText value="#{pacienteController.medicamento.concentracao}" />
+					<h:inputText value="#{pacienteController.medicamento.quantidade}" />
+					
+					
+					<h:outputText value="#{msg['system.label.data']}" />
+					<h:outputText value="#{msg['system.label.uso']}" />
+					<h:outputText value="#{msg['system.label.em.uso']}" />				
+					
+					<p:calendar id="data" value="#{pacienteController.medicamento.data}"
+						pattern="dd/MM/yyyy"  showButtonPanel="true"
+						showOn="button" />
+					<h:selectOneListbox value="#{pacienteController.medicamento.uso}" size="1">
+						<f:selectItem itemLabel="Interno" itemValue="Interno"/>
+						<f:selectItem itemLabel="Externo" itemValue="Externo"/>
+					
+					</h:selectOneListbox>
+					<p:selectBooleanCheckbox value="#{pacienteController.medicamento.emUso}" />
+					
+					
+
+
+
+
+
+
+				</h:panelGrid>
+				<h:outputText value="#{msg['system.label.instrucoes']}" />
+				
+				<p:editor value="#{pacienteController.medicamento.instrucoes}"/>
+			</p:dialog>
+		</h:form>
+		
+		
+		
+		
+		<h:form id="formDialogDiagnostico">
+			<p:dialog id="diagnostico" widgetVar="diagnosticoDialog"
+				header="#{msg['system.titulo.diagnosticos']}" modal="true" width="650"
+				height="500">
+
+
+
+				<div class="box-element">
+					<div class="box-content">
+						<ul class="toolbarDialog">
+
+							<h:panelGroup>
+								<li><div>
+
+										<p:commandLink
+											actionListener="#{pacienteController.salvarDiagnostico}"
+											update=":formPrincipal:tab"
+											oncomplete="PF('diagnosticoDialog').hide();"
+											styleClass="btn_salvar">
+
+											<h:outputText value="#{msg['system.label.salvar']}" />
+
+										</p:commandLink>
+
+										<span>#{msg['system.label.salvar']}</span>
+
+
+									</div></li>
+							</h:panelGroup>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+
+
+
+				<h:panelGrid columns="1">
+
+
+					<h:outputText value="#{msg['system.label.diagnostico']}" />
+					
+
+					<p:editor value="#{pacienteController.diagnostico.descricao}" />
+					
+
+
+
+
+
+
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+</ui:composition>

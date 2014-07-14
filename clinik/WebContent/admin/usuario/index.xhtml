@@ -1,0 +1,194 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	
+	
+	<ui:param name="mostrarBarraEsquerda" value="true" />
+		
+		<ui:define name="left">
+		<h:form id="menus">
+
+
+
+			<ul>
+  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.criarWorkflow}">
+				<li class="menu-trigger active"><a href="/chamados/workflow/"
+					class="elements-16" id="c-elements">#{msg['chamados.menu.workflow.label']}</a></li>
+		</h:panelGroup>			
+				  <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.verCockpit}">
+				
+				<li class="menu-trigger"><a href="/chamados/role/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.permicao.label']}</a></li>
+					
+				</h:panelGroup>
+				
+				 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}">
+				<li class="menu-trigger"><a href="/chamados/usuario/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.usuario.label']}</a></li>
+				</h:panelGroup>	
+				
+				<h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addFornecedor}">
+					<li class="menu-trigger"><a href="/chamados/fornecedor/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.fornecedor.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addCentroDeCusto}">
+					<li class="menu-trigger"><a href="/chamados/centrodecusto/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.centro.de.custo.label']}</a></li>
+					</h:panelGroup>
+					
+					 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addEquipamento}">
+					<li class="menu-trigger"><a href="/chamados/equipamento/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.equipamento.label']}</a></li>
+					</h:panelGroup>
+						 <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addLocal}">
+					<li class="menu-trigger"><a href="/chamados/local/"
+					class="widgets-16" id="c-widgets">#{msg['chamados.menu.local.label']}</a></li>
+					</h:panelGroup>
+			</ul>
+			<div class="clearfix"></div>
+
+
+		</h:form>
+</ui:define>
+	
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+		
+		
+		<table  class="menuBar" >
+				<tr>
+					<td><h:outputText value="#{msg['chamados.titulo.pagina.usuario']}"
+						styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+					<table>
+						<tr>		
+						<td>
+						<div class="figura"><p:commandLink
+						action="#{usuarioController.novo}">
+						<p><img class="escala"
+							src="#{pastaImagens}#{msg['chamados.ic.novo']}"
+							title="#{msg['chamados.label.novo']}" border="0" /></p>
+						<p><h:outputText /></p>
+					</p:commandLink></div>			
+						</td>
+						
+						
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xls" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xls']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="pdf" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.pdf']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xml" target="usuarioData" fileName="usuarios"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xml']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td><h:outputLink id="lnk" value="#">
+								<p:printer target="usuarioData" />
+								<p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.printer']}" />
+							</h:outputLink></td>
+						</tr>
+					</table>
+
+					</td>
+
+				</tr>
+			</table>
+		
+		 
+		
+			
+			
+			<p:messages id="growl"/>
+
+			
+			<p:dataTable id="usuarioData" value="#{usuarioController.usuarios}"
+				var="usuario" rows="20" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="20,25,50" paginatorPosition="bottom" emptyMessage="#{msg['chamados.msg.nenhum.usuario.encontrado']}"
+			rowIndexVar="index"
+				>
+				
+				<p:column headerText="#{msg['chamados.label.numero']}"
+					styleClass="coluna1">
+					<h:outputText value="#{(index+1)}" />
+				</p:column>
+				
+			
+				<p:column headerText="#{msg['chamados.label.nome']}"
+					filterBy="#{usuario.nome}" sortBy="#{usuario.nome}" styleClass="colunaDefault">
+					<h:outputText value="#{usuario.nome}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['chamados.label.telefone']}"
+					filterBy="#{usuario.telefone}" sortBy="#{usuario.telefone}" styleClass="coluna1">
+					<h:outputText value="#{usuario.telefone}" />
+				</p:column>
+				<p:column headerText="#{msg['chamados.label.email']}"
+					filterBy="#{usuario.email}" sortBy="#{usuario.email}" styleClass="coluna1">
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+				
+						<p:column headerText="#{msg['chamados.label.editar']}"
+					styleClass="coluna1">
+					<p:commandLink 
+						action="#{usuarioController.editar(usuario)}">
+						<p:graphicImage
+							url="#{pastaImagens}#{msg['chamados.ic.editar']}"
+							style="border:0;" />
+						<f:param name="usuarioId" value="#{usuario.usuarioId}" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="#{msg['chamados.label.excluir']}"
+					styleClass="coluna1">
+					<p:commandLink 
+						oncomplete="confirmation.show()">
+						<p:graphicImage
+							url="#{pastaImagens}#{msg['chamados.ic.lixeira']}"
+							style="border:0;" />
+					</p:commandLink>
+				</p:column>
+		
+			</p:dataTable>
+			
+
+			
+	<p:confirmDialog  modal="true"
+				message="#{msg['chamados.msg.excluir']}" showEffect="bounce"
+				hideEffect="explode" header="#{msg['chamados.label.excluir']}"
+				severity="alert" widgetVar="confirmation">
+
+				<p:commandButton id="excluir" value="#{msg['chamados.label.sim']}"
+					update=":formNota:growl, :formNota:usuarioData" oncomplete="confirmation.hide()"
+					actionListener="#{usuarioController.excluir}" />
+				<p:commandButton value="#{msg['chamados.label.nao']}"
+					onclick="confirmation.hide()" type="button" />
+
+			</p:confirmDialog>
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

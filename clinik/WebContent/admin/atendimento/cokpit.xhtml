@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:param name="mostrarBarraEsquerda" value="false" />
+	<ui:param name="leftMargin" value="0px" />
+
+
+
+
+
+
+
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+
+
+			<table class="menuBar">
+				<tr>
+					<td><h:outputText
+							value="#{msg['chamados.titulo.pagina.chamados']}"
+							styleClass="titulo_pagina" /></td>
+					<td width="80px;"></td>
+
+				</tr>
+			</table>
+
+
+
+			<p:tabView>
+
+				<p:tab title="Geral">
+
+
+					
+
+							<table>
+								<tr>
+									<td><p:pieChart 
+											value="#{cockpitClienteAmigoController.pieModel3}"
+											legendPosition="ne" title="Total de casos por status "
+											
+											style="width:400px;height:300px" 
+											showDataLabels="true" 
+											diameter="150" 
+											sliceMargin="5" 
+											
+											seriesColors="C78482,759DAA,93BF91,006400,FFD400,FF6A06,FFFF00,CD0000,8B008B" 
+											
+											 /></td>
+											 
+											 
+											 
+									<td>
+									<p:meterGaugeChart  value="#{cockpitClienteAmigoController.meterGaugeModel}" style="width:400px;height:250px" title="Total de casos nao resolvidos" label="total"
+									
+									seriesColors="66cc66, 93b75f, E7E658, FFD700,FF8C00,cc6666"
+									
+									/>
+									</td>
+									
+									<td><p:pieChart 
+											value="#{cockpitClienteAmigoController.pieModel2}"
+											legendPosition="ne" title="Percentual de casos atendidos "
+											
+											style="width:400px;height:300px" 
+											showDataLabels="true" 
+											diameter="150" 
+											sliceMargin="5" 
+											
+										 
+											
+											 /></td>
+											 
+											 
+											 
+									
+								</tr>
+								
+								<tr>
+									<td colspan="3"><p:lineChart id="category" value="#{cockpitClienteAmigoController.categoryModel}" legendPosition="e"  
+     title="Total de lancamentos por mes" minY="0" maxY="200" style="height:500px;width:100%;margin-top:20px"/></td>
+								</tr>
+							</table>
+
+
+
+
+
+
+
+
+
+				</p:tab>
+			</p:tabView>
+
+
+
+
+
+
+		</h:form>
+
+
+
+
+	</ui:define>
+
+
+
+</ui:composition>

@@ -1,0 +1,232 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="formUsuario" enctype="multipart/form-data">
+		
+			<table  class="menuBar" >
+				<tr>
+					<td><h:outputText value="#{msg['chamados.titulo.pagina.usuario']}"
+							styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+						<table>
+							<tr>
+								<td>
+									<div class="figura">
+										<p:commandLink update="growl, :formUsuario"
+											actionListener="#{usuarioController.salvar}">
+											<p>
+												<img class="escala" src="#{pastaImagens}#{msg['chamados.ic.save']}"
+													border="0" />
+											</p>
+										
+										</p:commandLink>
+									</div>
+								</td>
+								<td>
+									<div class="figura">
+										<p:commandLink update="growl, :formUsuario:dtusuario"
+											action="#{usuarioController.cancelar}" immediate="true">
+											<p>
+												<img class="escala"
+													src="#{pastaImagens}#{msg['chamados.ic.cancel']}" border="0" />
+											</p>
+											
+										</p:commandLink>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+
+
+			<table>
+				<tr>
+					<td style="vertical-align: top;"><p:graphicImage
+							id="fotoperfil" styleClass="fotoperfil"
+							value="#{usuarioController.usuario.foto}" /></td>
+					<td style="padding-left: 30px;">
+					
+					
+					<p:messages id="growl" /> 
+					
+					
+					<p:tabView orientation="top|bottom|left|right">  
+    <p:tab title="Godfather Part I">  
+        <h:panelGrid columns="2" cellpadding="10">  
+            <p:graphicImage value="/images/godfather/godfather1.jpg" />  
+            <h:outputText  
+                value="The story begins as Don Vito Corleone, the head of a New York Mafia family, oversees his daughter's wedding.  
+                His beloved son Michael has just come home from the war, but does not intend to become part of his father's business. T  
+                hrough Michael's life the nature of the family business becomes clear. The business of the family is just like the head of the family, kind and benevolent to those who give respect,  
+                but given to ruthless violence whenever anything stands against the good of the family." />  
+        </h:panelGrid>  
+    </p:tab>  
+    <p:tab title="Godfather Part II">  
+        <h:panelGrid columns="2" cellpadding="10">  
+            <p:graphicImage value="/images/godfather/godfather2.jpg" />  
+            <h:outputText value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.  
+            In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,  
+            killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows."></h:outputText>  
+        </h:panelGrid>  
+    </p:tab>  
+    <p:tab title="Godfather Part III">  
+        <h:panelGrid columns="2" cellpadding="10">  
+            <p:graphicImage value="/images/godfather/godfather3.jpg" />  
+            <h:outputText value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.  
+                Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate."></h:outputText>  
+        </h:panelGrid>  
+    </p:tab>  
+</p:tabView>  
+					
+					
+					
+					
+					
+					<h:panelGrid id="dtusuario" columns="3"
+									style="margin-top: 15px;">
+									<h:outputLabel value="* #{msg['chamados.label.nome']}: " styleClass="label" for="nome" />
+									<h:inputText id="nome" size="40"
+										value="#{usuarioController.usuario.nome}" styleClass="campo"
+										required="true"  onkeydown="mascara(this, maiusculo)">
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="nome" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.login.login']}:" styleClass="label" for="login" />
+									<h:inputText id="login" size="20"
+										value="#{usuarioController.usuario.login}" styleClass="campo"
+										required="true" >
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="login" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.telefone']}:" styleClass="label"
+										for="telefone" />
+									<p:inputMask id="telefone" size="9"
+										value="#{usuarioController.usuario.telefone}"
+										styleClass="campo" mask="9999-9999" >
+										<f:validateLength minimum="4" maximum="80" />
+									</p:inputMask>
+									<h:message for="telefone" errorClass="error" />
+								
+									<h:outputLabel value="* #{msg['chamados.label.login.senha']}:" styleClass="label" for="senha"  />
+									<p:password id="senha" size="20"
+										value="#{usuarioController.usuario.senha}" styleClass="campo"
+										required="true" promptLabel="Informe uma senha" />
+									<h:message for="senha" errorClass="error" />
+								
+								
+								
+									<h:outputLabel value="* #{msg['chamados.label.email']}:" styleClass="label" for="email" />
+									<h:inputText id="email" size="40"
+										value="#{usuarioController.usuario.email}" styleClass="campo"
+										required="true" onkeydown="mascara(this, maiusculo)">
+										<f:validateLength minimum="4" maximum="80" />
+									</h:inputText>
+									<h:message for="email" errorClass="error" />
+									<h:outputLabel value="* #{msg['chamados.label.loja']}:" styleClass="label" for="loja"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:selectOneListbox id="loja"
+										value="#{usuarioController.usuario.loja}" styleClass="campo"
+										size="1" converter="#{lojaConverter}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+										<f:selectItems value="#{lojaController.lojas}" var="loja"
+											itemLabel="#{loja.nome}" itemValue="#{loja}" />
+									</h:selectOneListbox>
+									<h:message for="loja" errorClass="error"   rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:outputLabel value="* #{msg['chamados.label.perfil']}:" styleClass="label" for="email"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+									<h:selectOneListbox id="role"
+										value="#{usuarioController.usuario.role}" styleClass="campo"
+										size="1" converter="#{roleConverter}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+										<f:selectItems value="#{usuarioController.todasAsRoles}"
+											var="role" itemLabel="#{role.descricao}" itemValue="#{role}" />
+									</h:selectOneListbox>
+									<h:message for="role" errorClass="error"   rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+
+
+
+
+						<h:outputText value="Plantao?:" styleClass="label"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:selectBooleanCheckbox id="plantao"
+							value="#{usuarioController.usuario.plantao}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:message for="plantao" errorClass="error"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>									
+						
+						
+						
+						<h:outputText value="Ativo?:" styleClass="label"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:selectBooleanCheckbox id="status"
+							value="#{usuarioController.usuario.status}"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+						<h:message for="status" errorClass="error"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"/>
+									
+									<h:outputText value="* #{msg['chamados.label.loja']}"
+					styleClass="label"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" />
+
+				<p:pickList id="lojaResponsavel"
+					value="#{usuarioController.lojasResponsaveis}" var="loja"
+					iconOnly="true" itemValue="#{loja}"
+					converter="#{lojaConverter}" showSourceControls="true"
+					showTargetControls="true"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}" >
+					<f:facet name="sourceCaption">#{msg['chamados.label.loja.disponivel']}</f:facet>
+					<f:facet name="targetCaption">#{msg['chamados.label.loja.disponivel2']}</f:facet>
+
+
+					<p:column style="width:75%">  
+            #{loja.nome}  
+        </p:column>
+				</p:pickList>
+
+
+				<h:message for="lojaResponsavel" errorClass="error"  rendered="#{sessaoController.usuarioSessao.role.permissao.addUser}"  />
+									
+									<h:column />
+
+
+
+
+									<p:fileUpload
+										fileUploadListener="#{usuarioController.handleFileUpload}"
+										showButtons="true" mode="advanced" update=":form:imgCroper"
+										sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+										fileLimitMessage="Tamanho invalido" oncomplete="dlg.show()" />
+
+
+
+
+
+
+
+
+									<h:column />
+
+
+									<h:outputText value="#{msg['chamados.label.campo.obrigatorio']}"
+										style="color: #D8000C;" />
+								</h:panelGrid></td>
+				</tr>
+			</table>
+
+
+			
+		</h:form>
+
+		<p:dialog header="Foto do Perfil" widgetVar="dlg" resizable="false"
+			modal="true">
+			<h:form id="form">
+
+				<p:imageCropper id="imgCroper"
+					value="#{usuarioController.croppedImage}"
+					image="#{usuarioController.usuario.foto}"
+					initialCoords="225,75,300,125" />
+
+				<p:commandButton value="Crop" action="#{usuarioController.crop}"
+					update=":formUsuario:fotoperfil" oncomplete="dlg.hide();" />
+
+
+
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,861 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="form">
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();"/>  
+              
+<p:dialog modal="true" widgetVar="statusDialog" header="Aguarde..."   
+        draggable="false" closable="false">  
+    <p:graphicImage value="#{pastaImagens}ajaxloadingbar.gif" />  
+</p:dialog>  
+		
+		<div class="box-element">
+		
+				<div class="box-content">
+					<ul class="actions">
+					
+										
+								
+										
+										 <li><div>
+                            
+                      			<p:commandLink update="growl"
+										
+                      			
+                      			
+                      			styleClass="btn_salvar"
+                      			oncomplete="confirmation.show()"
+												actionListener="#{faltaProdutoController.salvar}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.salvar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.salvar']}</span>
+                            </div></li>
+                            
+                            
+                            
+                             
+                       
+                         <li><div>
+                            
+                       
+											<p:commandLink 
+											action="#{faltaProdutoController.cancelar}"
+											immediate="true"
+											 styleClass="btn_voltar">
+										
+										
+											
+										
+												<h:outputText value="#{msg['chamados.label.voltar']}" />
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.voltar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            
+                            
+                            
+                            
+                            <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addCliente}">
+                            
+                            <li><div>
+                            
+                       
+											<p:commandLink 
+											onclick="dialogResposta.show();"
+											immediate="true"
+											 styleClass="btn_cadcliente">
+										
+										
+											
+										
+												<h:outputText value="Add Cliente" />
+											
+										</p:commandLink>
+                            
+                            <span>Add Cliente</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                   </h:panelGroup>
+                   
+                   
+                      <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.addCategoriaCliente}">
+                            
+                            <li><div>
+                            
+                       
+											<p:commandLink 
+											onclick="dialogCategoria.show();"
+											immediate="true"
+											 styleClass="btn_agrupar">
+										
+										
+											
+										
+												<h:outputText value="Add Categoria" />
+											
+										</p:commandLink>
+                            
+                            <span>Add Categoria</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                   </h:panelGroup>
+                   
+                   
+                   
+                      <h:panelGroup >
+                            
+                            <li><div>
+                            
+                       
+											<p:commandLink 
+											onclick="dialogComentario.show();"
+											immediate="true"
+											 styleClass="btn_discuss">
+										
+										
+											
+										
+												<h:outputText value="Responder" />
+											
+										</p:commandLink>
+                            
+                            <span>Responder</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                   </h:panelGroup>
+                   
+                   
+                   	
+										 <li><div>
+                            
+                      			<p:commandLink update="growl"
+										
+                      			
+                      			
+                      			styleClass="btn_email"
+                      			
+												actionListener="#{faltaProdutoController.enviaEmailParaCliente}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.email']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.email']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                           
+					
+					</ul>
+					
+					
+					              <div style="margin-left: 95%;">
+					<h:outputLink value="/chamados/faltaproduto/#{faltaProdutoController.anterior}/"  disabled="#{faltaProdutoController.anterior==0}">
+<h:graphicImage value="#{pastaImagens}32x32/anterior.png"/>
+</h:outputLink>			
+<h:outputLink value="/chamados/faltaproduto/#{faltaProdutoController.proximo}/" disabled="#{faltaProdutoController.proximo==0}">
+
+<h:graphicImage value="#{pastaImagens}32x32/proximo.png"/>
+</h:outputLink>
+			</div>
+			
+			
+			
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		
+
+
+
+
+
+
+			<p:messages id="growl" />
+			
+			 <div class="box-element">
+                    <div class="box-head"><span class="forms-16"></span><h3>
+                    #{msg['chamados.cliente.amigo.titulo']}
+                    </h3></div>
+                    <div class="box-content">
+                    
+                    
+                    
+                     <p:contextMenu for="tree">  
+        <p:menuitem value="Editar" update="tree :formCategoria" actionListener="#{faltaProdutoController.displaySelectedSingle}" icon="ui-icon-search" oncomplete="dialogCategoria.show();" immediate="true" />  
+        <p:menuitem value="Excluir" update=":form   :formCategoria:categoriaFaltaProdutoPai :formCategoria:nome :formCategoria:resposta tree :formCategoria" actionListener="#{faltaProdutoController.deleteNode}" icon="ui-icon-search"  immediate="true" />
+        
+          
+    </p:contextMenu> 
+                    
+                    <p:tree id="tree" value="#{faltaProdutoController.root}" 
+
+ var="node" dynamic="true" cache="false" orientation="horizontal"  
+            selectionMode="single"   
+ selection="#{faltaProdutoController.selectedNode}" 
+>
+                    
+                     <p:ajax event="select" update=":form:resposta :formCategoria" listener="#{faltaProdutoController.onNodeSelect}" />    
+        <p:treeNode id="treeNode" >  
+            <h:outputText value="#{node}" id="lblNode"/>  
+        </p:treeNode>  
+    </p:tree>
+			
+				
+			
+			</div>
+			</div>
+ <div class="box-element">
+                    <div class="box-head"><span class="forms-16"></span><h3>
+                    #{msg['chamados.cliente.amigo.titulo']}
+                    </h3></div>
+                    <div class="box-content">
+                    
+                    
+                    
+                    
+                    
+          
+                    
+             
+                    
+			<table>
+				<tr>
+					<td><h:outputText value="* Data:" /></td>
+					<td><h:inputText id="dataLancamento" size="20"
+							value="#{faltaProdutoController.faltaProduto.dataLancamento}"
+							styleClass="campo" required="true" disabled="true">
+							<f:convertDateTime timeZone="#{configuracaoControllerController.timeZone}"
+								pattern="dd/MM/yyyy hh:mm:ss" />
+						</h:inputText></td>
+					<td><h:message for="dataLancamento" errorClass="error" /></td>
+				</tr>
+
+
+				<tr>
+					<td><h:outputText value="* Usuario:" />
+
+
+					</td>
+					<td><h:inputText id="solicitante" size="40"
+							value="#{faltaProdutoController.faltaProduto.usuario.nome}"
+							styleClass="campo" required="true" disabled="true">
+							<f:validateLength minimum="4" maximum="80" />
+						</h:inputText></td>
+					<td><h:message for="solicitante" errorClass="error" /></td>
+
+					<td><h:outputLabel value="* Loja:" styleClass="label"
+							for="loja" /></td>
+					<td>
+					
+					
+					<h:selectOneListbox id="loja"
+									value="#{faltaProdutoController.faltaProduto.loja}" 
+									size="1" converter="#{lojaConverter}"
+									>
+									<f:selectItems value="#{lojaController.lojas}" var="loja"
+										itemLabel="#{loja.nome}" itemValue="#{loja}" />
+								</h:selectOneListbox>
+					
+					</td>
+					<td><h:message for="loja" errorClass="error" /></td>
+				</tr>
+				
+				<tr>
+				<td><h:outputLabel value="* Local:" 
+									for="local" /></td>
+							<td><h:selectOneListbox id="local"
+									value="#{faltaProdutoController.faltaProduto.local}" size="1"
+									 converter="#{localConverter}"
+									>
+									<f:selectItems value="#{localController.somenteLocais}" var="local"
+										itemLabel="#{local.descricao}" itemValue="#{local}" />
+								</h:selectOneListbox></td>
+							<td><h:message for="local" errorClass="error" /></td>
+				</tr>
+				
+
+				<tr>
+					<td><h:outputLabel value="* Status:" styleClass="label"
+							for="status" /></td>
+					<td><h:selectOneListbox id="status"
+							value="#{faltaProdutoController.faltaProduto.status}"
+							styleClass="campo" size="1"
+							converter="#{estadoWorkflowConverter}" >
+
+
+
+							<f:selectItems
+								value="#{faltaProdutoController.estadoWorkflows}"
+								var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
+								itemValue="#{estadoWorkflow}" />
+
+						</h:selectOneListbox></td>
+					<td><h:message for="status" errorClass="error" /></td>
+
+					<td><h:outputText
+							value="*#{msg['chamados.label.data']}:"
+							/></td>
+					<td>
+					<p:calendar value="#{faltaProdutoController.faltaProduto.data}" id="data" showButtonPanel="true"/> 
+					</td>
+					
+			</tr>
+			<tr>
+	<td><h:outputText
+							value="*#{msg['chamados.label.data.chegada.formulario']}:"
+							/></td>
+					<td>
+					<p:calendar value="#{faltaProdutoController.faltaProduto.dataChagadaDoFormulario}" id="dataChagadaDoFormulario" showButtonPanel="true"/> 
+					</td>
+					
+				</tr>			
+							
+				
+				
+				
+				
+				
+					<tr>
+					<td><h:outputText value="* Nome:" />
+					</td>
+					<td>
+					
+					 <p:autoComplete value="#{faltaProdutoController.faltaProduto.cliente}" id="nome" completeMethod="#{faltaProdutoController.completeCliente}"  
+                        var="c" itemLabel="#{c.nome} | #{c.telefone} | #{c.email}"  itemValue="#{c}" converter="#{clienteConverter}" forceSelection="true" styleClass="campo" 
+                          valueChangeListener="#{faltaProdutoController.selecionaCliente}"    
+                        >
+                        <p:ajax event="itemSelect" update="cpf telefone email :formResposta"/>
+                        </p:autoComplete> 
+					
+					</td>
+					
+					<td><h:message for="nome" errorClass="error" /></td>
+					
+					
+					<td><h:outputText value="* CPF:" />
+					</td>
+					<td><h:inputText id="cpf" size="40"
+							value="#{faltaProdutoController.faltaProduto.cliente.cpf}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="cpf" errorClass="error" /></td>
+					</tr>	
+						
+						
+						
+						
+						<tr>
+						<td><h:outputText value="* telefone:" />
+					</td>
+					<td><h:inputText id="telefone" size="40"
+							value="#{faltaProdutoController.faltaProduto.cliente.telefone}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="telefone" errorClass="error" /></td>
+					
+					
+					
+					
+					<td><h:outputText value="* E-mail:" />
+					</td>
+					<td><h:inputText id="email" size="40"
+							value="#{faltaProdutoController.faltaProduto.cliente.email}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="email" errorClass="error" /></td>
+					
+					
+					
+				</tr>
+				
+				<tr>
+				<td ></td>
+					<td ></td>
+						<td ></td>
+				<td ><h:outputText value="* Copia E-mail:" />
+					</td>
+					<td><h:inputText id="copiaOculta" size="40"
+							value="#{faltaProdutoController.faltaProduto.copiaOculta}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="copiaOculta" errorClass="error" /></td>
+				</tr>
+				
+				<tr>
+				<td><h:outputLabel value="* Tipo:" 
+									for="tipo" /></td>
+							<td><h:selectOneRadio id="tipo"
+									value="#{faltaProdutoController.faltaProduto.tipo}" 
+									size="1"
+									>
+									<f:selectItem itemLabel="#{msg['chamados.label.reclamacao']}" itemValue="#{msg['chamados.label.reclamacao']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.sugestao']}" itemValue="#{msg['chamados.label.sugestao']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.informacao']}" itemValue="#{msg['chamados.label.informacao']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.elogio']}" itemValue="#{msg['chamados.label.elogio']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.falta.de.produto']}" itemValue="#{msg['chamados.label.falta.de.produto']}" />
+									
+
+								</h:selectOneRadio></td>
+							<td><h:message for="tipo" errorClass="error" /></td>
+				</tr>
+				
+				
+				<tr>
+				<td><h:outputLabel value="* Meio de Contato:" 
+									for="meio" /></td>
+							<td><h:selectOneRadio id="meio"
+									value="#{faltaProdutoController.faltaProduto.meio}" 
+									size="1"
+									>
+									<f:selectItem itemLabel="#{msg['chamados.label.telefone']}" itemValue="#{msg['chamados.label.telefone']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.formulario']}" itemValue="#{msg['chamados.label.formulario']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.email']}" itemValue="#{msg['chamados.label.email']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.fale.conosco']}" itemValue="#{msg['chamados.label.fale.conosco']}" />
+							
+									
+
+								</h:selectOneRadio></td>
+							<td><h:message for="meio" errorClass="error" /></td>
+				</tr>
+
+
+	<tr>
+				<td><h:outputLabel value="* Classificacao:" 
+									for="classificacaoRespComercial" /></td>
+							<td><h:selectOneRadio id="classificacaoRespComercial"
+									value="#{faltaProdutoController.faltaProduto.classificacaoRespComercial}" 
+									size="1"
+									>
+									<f:selectItem itemLabel="#{msg['chamados.label.tem.mix.rupitura']}" itemValue="#{msg['chamados.label.tem.mix.rupitura']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.nao.tem.mix.subistituto']}" itemValue="#{msg['chamados.label.nao.tem.mix.subistituto']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.nao.tem.mix.vamos.cadastrar']}" itemValue="#{msg['chamados.label.nao.tem.mix.vamos.cadastrar']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.nao.tem.mix.nem.vamos.cadastrar']}" itemValue="#{msg['chamados.label.nao.tem.mix.nem.vamos.cadastrar']}" />
+									<f:selectItem itemLabel="#{msg['chamados.label.tem.na.loja']}" itemValue="#{msg['chamados.label.tem.na.loja']}" />
+							
+									
+
+								</h:selectOneRadio></td>
+							<td><h:message for="classificacaoRespComercial" errorClass="error" /></td>
+				</tr>
+
+
+
+
+				<tr>
+
+					<td><h:outputText
+							value="*#{msg['chamados.label.descricao']}:"
+							/></td>
+					<td><h:inputTextarea id="descricao"
+							onkeydown="mascara(this, maiusculo)"
+							value="#{faltaProdutoController.faltaProduto.descricao}"
+							styleClass="campo" cols="100" rows="10"  /></td>
+					<td><h:message for="descricao" errorClass="error" /></td>
+				</tr>
+		
+				
+				
+				<tr>
+
+					<td><h:outputText
+							value="*#{msg['chamados.label.resposta']}:"
+							/></td>
+					<td>
+					
+					<p:editor id="resposta" value="#{faltaProdutoController.faltaProduto.resposta}" width="600" />  
+					
+					</td>
+					<td><h:message for="resposta" errorClass="error" /></td>
+				</tr>
+		
+
+
+
+			<tr>
+					<td colspan="5"><p:dataGrid id="comentario" var="comentario"
+							value="#{faltaProdutoController.faltaProduto.comentarios}"
+							columns="1" rows="12" paginator="true"
+							paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							rowsPerPageTemplate="9,12,15" paginatorPosition="bottom">
+							
+							
+							<div class="box">
+							
+							
+							
+									
+								
+							<p><h:graphicImage value="#{comentario.usuario.foto}" styleClass="fotoComentario" width="85" height="85"/>
+							<br/>
+							 <h:outputText value="#{comentario.usuario.nome}"/>
+							<br/>
+							
+							 <h:outputText value="#{comentario.dataCadastro}" styleClass="dataComentario">
+							 	<f:convertDateTime timeZone="#{configuracaoController.timeZone}"
+								pattern="dd/MM/yyyy hh:mm:ss" />
+							 </h:outputText> 
+							 
+							 </p>
+							</div>
+
+								<p class="triangle-right left"><h:outputText value="#{comentario.comentario}" escape="false"/></p>
+
+
+						</p:dataGrid></td>
+				</tr>
+			
+
+
+			</table>
+			
+			</div>
+			</div>
+		</h:form>
+
+
+	</ui:define>
+
+	<ui:define name="dialog" >
+
+		<h:form id="formResposta" enctype="multipart/form-data">
+			<p:dialog id="dialogResposta"
+				header="#{msg['chamados.label.responder']}"
+				widgetVar="dialogResposta" modal="true" height="450" width="800">
+
+				<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>#{msg['chamados.cliente.amigo.titulo']}</h3>
+				</div>
+				<div class="box-content">
+					<ul class="actions">
+					
+										
+										
+										
+										 <li><div>
+                            
+                      			<p:commandLink update="growl3 :form:nome :form:cpf :form:telefone :form:email "
+										
+                      			
+                      			
+                      			styleClass="btn_salvar"
+                      			
+												actionListener="#{faltaProdutoController.salvarCliente}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.salvar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.salvar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            
+                            
+                             
+                       
+          
+					
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			
+			<p:messages id="growl3" />
+		<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>#{msg['chamados.cliente.amigo.titulo']}</h3>
+				</div>
+				<div class="box-content">
+
+			<table>
+			
+			<tr>
+					<td><h:outputText value="* Nome:" />
+					</td>
+					<td><h:inputText id="nomeCliente" size="40"
+							value="#{faltaProdutoController.cliente.nome}"
+							styleClass="campo" validator="#{faltaProdutoController.validateCliente}"  required="true" >
+							
+						</h:inputText>
+						
+						
+						
+						</td>
+					<td><h:message for="nomeCliente" errorClass="error" /></td>
+					
+					
+					
+						<td><h:outputText value="* CPF:" />
+					</td>
+					<td><h:inputText id="cpfCliente" size="40"
+							value="#{faltaProdutoController.cliente.cpf}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="cpfCliente" errorClass="error" /></td>
+					
+					
+					
+					
+					
+					</tr>	
+						<tr>
+						<td><h:outputText value="* telefone:" />
+					</td>
+					<td><h:inputText id="telefoneCliente" size="40"
+							value="#{faltaProdutoController.cliente.telefone}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="telefoneCliente" errorClass="error" /></td>
+					
+					<td><h:outputText value="* E-mail:" />
+					</td>
+					<td><h:inputText id="emailCliente" size="40"
+							value="#{faltaProdutoController.cliente.email}"
+							styleClass="campo"  >
+							
+						</h:inputText></td>
+					<td><h:message for="emailCliente" errorClass="error" /></td>
+				</tr>
+			</table>
+				
+	</div>
+			</div>
+
+			</p:dialog>
+		</h:form>
+
+
+
+
+
+
+		<h:form id="formCategoria" enctype="multipart/form-data">
+			<p:dialog id="dialogCategoria"
+				header="Adicionar Categoria"
+				widgetVar="dialogCategoria" modal="true" height="750" width="800">
+
+				<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>#{msg['chamados.cliente.amigo.titulo']}</h3>
+				</div>
+				<div class="box-content">
+					<ul class="actions">
+					
+										
+										
+										
+										 <li><div>
+                            
+                      			<p:commandLink update="growl2 categoriaFaltaProdutoPai nome resposta :form:tree"
+										
+                      			
+                      			
+                      			styleClass="btn_salvar"
+                      			
+												actionListener="#{faltaProdutoController.salvarCategoria}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.salvar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.salvar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            <h:panelGroup >
+                            <li><div>
+                            
+                            <p:commandLink   actionListener="#{faltaProdutoController.novaCategoriaFaltaProduto}"
+                            styleClass="btn_novo"
+                            			update="categoriaFaltaProdutoPai nome resposta"		 
+                            				  oncomplete="dialogCategoria.show();"
+											>
+										
+												<h:outputText value="#{msg['chamados.label.novo']}" />
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.novo']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            </h:panelGroup>
+                            
+                             
+                       
+          
+					
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			
+					<p:messages id="growl2" />
+		<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>#{msg['chamados.cliente.amigo.titulo']}</h3>
+				</div>
+				<div class="box-content">
+
+			<h:panelGrid columns="1" cellpadding="10">  
+			
+			 <h:outputText value="* Categoria Pai" />
+				<h:inputText id="categoriaFaltaProdutoPai" size="40"
+					value="#{faltaProdutoController.categoriaFaltaProduto.categoriaFaltaProdutoPai.nome}"
+					styleClass="campo" disabled="true">
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="categoriaFaltaProdutoPai" errorClass="error" />
+			
+			
+               <h:outputText value="* #{msg['chamados.label.nome']}" />
+				<h:inputText id="nome" size="40"
+					value="#{faltaProdutoController.categoriaFaltaProduto.nome}"
+					styleClass="campo" >
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="nome" errorClass="error" />
+
+
+
+				<h:outputText value="* #{msg['chamados.label.resposta']}" />
+				
+				<p:editor id="resposta" value="#{faltaProdutoController.categoriaFaltaProduto.resposta}" width="600"/>  
+				
+				
+				
+				<h:message for="resposta" errorClass="error" />  
+            </h:panelGrid>  
+				
+	</div>
+			</div>
+
+			</p:dialog>
+		</h:form>
+
+<h:form id="formComentario" enctype="multipart/form-data">
+			<p:dialog id="dialogComentario"
+				header="#{msg['chamados.label.responder']}"
+				widgetVar="dialogComentario" modal="true" height="450" width="800">
+
+
+	<table>
+							<tr>
+								<td>
+									<div class="figura">
+										<p:commandLink update=":form:growl, :form, formComentario"
+											actionListener="#{faltaProdutoController.salvarComentario}">
+											<p>
+												<img class="escala"
+													src="#{pastaImagens}#{msg['chamados.ic.save']}" border="0" />
+											</p>
+											<p:ajax update="comentario"/>
+										</p:commandLink>
+									</div>
+								</td>
+								
+			</tr>
+			</table>					
+
+
+				<table>
+	
+					<tr>
+						<td><h:outputText value="*#{msg['chamados.label.comentar']}:"
+								/></td>
+						<td>
+						
+						
+						<p:editor id="comentario"
+								onkeydown="mascara(this, maiusculo)"
+								value="#{faltaProdutoController.comentario.comentario}"/>
+						
+						</td>
+						<td><h:message for="comentario" errorClass="error" /></td>
+					</tr>
+
+
+
+
+				</table>
+
+
+			</p:dialog>
+		</h:form>
+
+	<h:form id="formConfirm">
+	
+			 <p:confirmDialog id="confirmDialog" message="Deseja duplicar este registro?"  
+                header="Deseja duplicar este registro?" severity="alert" widgetVar="confirmation">  
+                  
+        <p:commandButton id="confirm" value="Sim" update=":form" oncomplete="confirmation.hide()"  
+                    actionListener="#{faltaProdutoController.ducplicaRegistro}" />  
+        <p:commandButton id="decline" value="Nao" update=":form" onclick="confirmation.hide()" type="button" />   
+                  
+    </p:confirmDialog> 
+		</h:form>
+
+	</ui:define>
+</ui:composition>

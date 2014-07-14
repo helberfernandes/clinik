@@ -1,0 +1,163 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../subtemplate/index.xhtml">
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+
+			<table  class="menuBar">
+				<tr>
+					<td><h:outputText
+							value="Relatorio de gasto de fornecedores por locais"
+							styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+						<table>
+						<tr>
+						<td>
+							<div class="figura"><p:commandLink update="formNota,nota"
+						actionListener="#{notaFiscalController.limpaLista}">
+						<p><img class="escala"
+							src="#{pastaImagens}/png/32x32/cancel.png"
+							title="#{msg['chamados.label.cancelar']}" border="0" /></p>
+						<p><h:outputText /></p>
+					</p:commandLink></div>
+						</td>
+						
+						<td>
+						<div class="figura"></div>			
+						</td>
+						
+						
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xls" target="nota" fileName="notafiscal"
+									pageOnly="true"  />
+								<p><p:graphicImage value="#{pastaImagens}/png/32x32/xls.png" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="pdf" target="nota" fileName="notafiscal"
+									pageOnly="true"  />
+								<p><p:graphicImage value="#{pastaImagens}/png/32x32/pdf.jpg" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink>
+								<p:dataExporter type="xml" target="nota" fileName="notafiscal"
+									pageOnly="true"  />
+								<p><p:graphicImage value="#{pastaImagens}/png/32x32/xml.jpg" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td><h:outputLink id="lnk" value="#">
+								<p:printer target="nota" />
+								<p:graphicImage value="#{pastaImagens}/png/32x32/Printer.png" />
+							</h:outputLink></td>
+						</tr>
+					</table>
+					</td>
+				</tr>
+			</table>
+			<p:messages id="growl" />
+			<p:dataTable id="nota" value="#{lojaController.lojasRelatorio}" var="loja">
+			 <f:facet name="header">  
+             <p:outputPanel layout="inline" >  	 
+		
+				<table>
+					<tr>
+						<td><h:outputText value="* #{msg['chamados.label.fornecedor']}:"
+					styleClass="label" /></td>
+						<td>
+						<p:selectOneMenu id="fornecedor" size="1"
+					 value="#{lojaController.fornecedor}"
+					styleClass="campo" converter="#{fornecedorConverter}" >					
+					<f:selectItems					
+						value="#{fornecedorController.fornecedors}"
+						var="fornecedor" 
+						itemLabel="#{fornecedor.nome}"
+						itemValue="#{fornecedor}"						
+					/>
+					
+					 <p:ajax event="blur" update="form"  listener="#{notaFiscalController.montaNumeroDocumento}" />	
+				</p:selectOneMenu> 
+						</td>
+						<td>
+						<h:outputText value="* #{msg['chamados.label.data.vencimento']}:"
+					styleClass="label" />
+						</td>
+						<td>
+						<p:calendar id="dataDe"
+					value="#{lojaController.dataDe}"
+					 showOn="button"
+					 pages="3"
+					 locale="pt"
+					styleClass="campo" required="true"
+					pattern="dd/MM/yyyy"
+					timeZone="#{notaFiscalController.timeZone}"
+					
+					 >
+					 
+					</p:calendar> 
+						</td>
+						<td>
+						
+							<h:outputText value="* #{msg['chamados.label.data.vencimento']}:"
+					styleClass="label" />
+						</td>
+						<td>
+						<p:calendar id="dataAte"
+					 value="#{lojaController.dateAte}"
+					 showOn="button"
+					 pages="3"
+					 locale="pt"
+					styleClass="campo" required="true"
+					pattern="dd/MM/yyyy"
+					timeZone="#{notaFiscalController.timeZone}"
+					
+					 >
+					 
+					
+				</p:calendar>
+						</td>
+						<td>
+						<p:commandButton value="Buscar" actionListener="#{lojaController.buscaLojaRElatorio}" update="formNota"/>
+						</td>
+					</tr>
+				</table>
+		
+				 
+				 
+				
+					
+				
+					 
+				
+			
+			</p:outputPanel>	
+        </f:facet>  
+			
+				<p:column>
+					<f:facet name="header">
+						<h:outputText value="Loja" />
+					</f:facet>
+					<h:outputText value="#{loja.nome}" />
+				</p:column>
+				<p:column >
+					<f:facet name="header">
+						<h:outputText value="Valor" />
+					</f:facet>
+					<h:outputText value="#{loja.valorTotal}"
+						converter="#{moedaConverter}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

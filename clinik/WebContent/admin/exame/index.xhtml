@@ -1,0 +1,171 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:maia="http://supermaia.com.br"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:param name="mostrarBarraEsquerda" value="true" />
+	<ui:param name="leftMargin" value="170px" />
+
+
+	<ui:define name="left">
+
+	</ui:define>
+
+
+	<ui:define name="conteudo">
+		<h:form id="formPrincipal">
+			<div class="box-element">
+				<div class="box-content">
+					<ul class="actions">
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink action="#{exameController.novo}"
+										styleClass="btn_novo">
+
+										<h:outputText value="Novo" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.novo']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_excel">
+										<p:dataExporter type="xls" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="Excel" />
+
+									</h:commandLink>
+
+									<span> Excel</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_pdf">
+										<p:dataExporter type="pdf" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="PDF" />
+
+									</h:commandLink>
+
+									<span>PDF</span>
+
+
+								</div></li>
+
+
+						</h:panelGroup>
+
+
+
+
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_xml">
+										<p:dataExporter type="xml" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="XML" />
+
+									</h:commandLink>
+
+									<span>XML</span>
+
+
+								</div></li>
+
+						</h:panelGroup>
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_imprimir">
+
+										<p:printer target=":formPrincipal:listaDados" />
+
+										<h:outputText value="Imprimir" />
+
+									</h:commandLink>
+
+									<span>Imprimir</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+
+
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<p:dataTable id="listaDados" value="#{exameController.lista}"
+				var="exame" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+				emptyMessage="#{msg['system.msg.nenhum.registro.encontrado']}"
+				rowIndexVar="index" rowKey="#{exame.exameId}">
+
+
+
+
+
+
+				<p:column headerText="#{msg['system.label.numero']}"
+					styleClass="coluna1">
+					<h:outputText value="#{(index+1)}" />
+				</p:column>
+
+				<p:column headerText="#{msg['system.label.nome']}"
+					filterBy="#{exame.nome}" sortBy="#{exame.nome}"
+					styleClass="colunaDefault">
+
+					<p:commandLink action="#{exameController.editar}"
+						update=":formPrincipal">
+						<f:param name="objectId" value="#{exame.exameId}" />
+						<h:outputText value="#{exame.nome}" />
+					</p:commandLink>
+				</p:column>
+
+
+
+				
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+
+
+
+
+
+
+
+</ui:composition>
+

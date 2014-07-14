@@ -1,0 +1,147 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	<ui:define name="conteudo">
+		<h:form id="formNota">
+		
+	
+			
+		
+			
+	
+		<table class="menuBar" >
+				<tr>
+					<td><h:outputText value="#{msg['chamados.titulo.pagina.loja']}"
+						styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+					<table>
+						<tr>
+						
+
+							<td>
+							<div class="figura">
+							<p:commandLink
+						action="#{lojaController.novo}" rendered="#{usuarioController.usuarioSessao.role.permissao.addLoja}">
+						
+						<p><img class="escala"
+							src="#{pastaImagens}#{msg['chamados.ic.novo']}"
+							title="#{msg['chamados.label.novo']}" border="0" /></p>
+						
+						
+						</p:commandLink>
+						</div>
+						
+						
+						
+						
+							</td>
+
+
+							<td>
+							<div class="figura"><h:commandLink rendered="#{usuarioController.usuarioSessao.role.permissao.exportarLoja}">
+								<p:dataExporter type="xls" target="nota" fileName="notafiscal"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xls']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink rendered="#{usuarioController.usuarioSessao.role.permissao.exportarLoja}">
+								<p:dataExporter type="pdf" target="nota" fileName="notafiscal"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.pdf']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><h:commandLink rendered="#{usuarioController.usuarioSessao.role.permissao.exportarLoja}">
+								<p:dataExporter type="xml" target="nota" fileName="notafiscal"
+									pageOnly="true" excludeColumns="0,7,8,9" />
+								<p><p:graphicImage value="#{pastaImagens}#{msg['chamados.ic.xml']}" />
+								</p>
+								<p><h:outputText /></p>
+							</h:commandLink></div>
+							</td>
+							
+						</tr>
+					</table>
+
+					</td>
+
+				</tr>
+			</table>
+			
+			<p:messages id="growl"/>
+
+	
+		
+			
+			<p:dataTable id="lojaData" value="#{lojaController.lojas}"
+				var="loja" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom" emptyMessage="#{msg['chamados.msg.nenhuma.loja.encontrado']}"
+			rowIndexVar="index"
+				>
+
+			<p:column headerText="#{msg['chamados.label.numero']}"
+					styleClass="coluna1">
+					<h:outputText value="#{(index+1)}" />
+				</p:column>
+			
+				<p:column headerText="#{msg['chamados.label.nome']}"
+					filterBy="#{loja.nome}" sortBy="#{loja.nome}" styleClass="colunaDefault">
+					<h:outputText value="#{loja.nome}" />
+				</p:column>
+				
+				<p:column headerText="#{msg['chamados.label.recebedor']}"
+					filterBy="#{loja.recebedor}" sortBy="#{loja.recebedor}" styleClass="coluna1">
+					<h:outputText value="#{loja.recebedor}" />
+				</p:column>
+						<p:column headerText="#{msg['chamados.label.editar']}"
+					styleClass="coluna1" rendered="#{usuarioController.usuarioSessao.role.permissao.podeEditarLoja}">
+					<p:commandLink
+						action="#{lojaController.editar}">
+						<p:graphicImage
+							url="#{pastaImagens}#{msg['chamados.ic.editar']}"
+							style="border:0;" />
+						<f:param name="lojaId" value="#{loja.lojaId}" />
+					</p:commandLink>
+				</p:column>
+				<p:column headerText="#{msg['chamados.label.excluir']}"
+					styleClass="coluna1" rendered="#{usuarioController.usuarioSessao.role.permissao.podeExcluirLoja}">
+					<p:commandLink 
+					actionListener="#{lojaController.carregaLoja}"
+						oncomplete="confirmation.show()">
+						<p:graphicImage
+							url="#{pastaImagens}#{msg['chamados.ic.lixeira']}"
+							style="border:0;" />
+							<f:param name="lojaId" value="#{loja.lojaId}" />
+					</p:commandLink>
+				</p:column>
+		
+			</p:dataTable>
+
+			
+		<p:confirmDialog modal="true"
+				message="#{msg['chamados.msg.excluir']}" showEffect="bounce"
+				hideEffect="explode" header="#{msg['chamados.label.excluir']}"
+				severity="alert" widgetVar="confirmation">
+
+				<p:commandButton id="excluir" value="#{msg['chamados.label.sim']}"
+					update="growl, lojaData" oncomplete="confirmation.hide()"
+					actionListener="#{lojaController.excluir}" />
+				<p:commandButton value="#{msg['chamados.label.nao']}"
+					onclick="confirmation.hide()" type="button" />
+
+			</p:confirmDialog>
+			
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+

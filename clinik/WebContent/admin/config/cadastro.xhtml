@@ -1,0 +1,303 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form>
+			<table class="menuBar">
+				<tr>
+					<td><h:outputText
+							value="#{msg['chamados.titulo.pagina.configuracao']}"
+							styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+						<table>
+							<tr>
+								<td>
+									<div class="figura">
+										<p:commandLink update="growl, form"
+											actionListener="#{configuracaoController.salvar}">
+											<p>
+												<img class="escala"
+													src="#{pastaImagens}#{msg['chamados.ic.save']}" border="0" />
+											</p>
+
+										</p:commandLink>
+									</div>
+								</td>
+
+							</tr>
+						</table>
+
+					</td>
+
+				</tr>
+			</table>
+
+
+
+
+			<p:messages id="growl" />
+
+			<h:panelGrid id="form" columns="3" style="margin-top: 15px;">
+
+
+
+
+
+
+
+				<h:outputText value="#{msg['chamados.label.manutencao']}:"
+					 />
+				<h:selectBooleanCheckbox id="manutencao"
+					value="#{configuracaoController.configuracao.manutencao}" />
+				<h:message for="manutencao" errorClass="error" />
+
+
+
+				<h:outputText
+					value="#{msg['chamados.label.atribuir.automaticamente']}:"
+					 />
+				<h:selectBooleanCheckbox id="atribuirChamadoDaLojaAutomaticamente"
+					value="#{configuracaoController.configuracao.atribuirChamadoDaLojaAutomaticamente}" />
+				<h:message for="atribuirChamadoDaLojaAutomaticamente"
+					errorClass="error" />
+
+
+
+
+				<h:outputText
+					value="#{msg['chamados.label.atribuir.automaticamente.plantao']}:"
+					 />
+				<h:selectBooleanCheckbox
+					id="plantaoAtribuirChamadoDaLojaAutomaticamente"
+					value="#{configuracaoController.configuracao.plantaoAtribuirChamadoDaLojaAutomaticamente}" />
+				<h:message for="plantaoAtribuirChamadoDaLojaAutomaticamente"
+					errorClass="error" />
+
+
+
+
+<h:outputText
+					value="#{msg['chamados.label.dias.resposta.cliente']}:"
+					 />
+
+				<h:panelGroup>
+
+					<h:outputText id="outputCliente"
+						value="#{configuracaoController.configuracao.diasParaAguardarRespostaDoCliente}" />
+					<h:outputText value=" Dias" />
+
+
+					<h:inputHidden id="diasParaAguardarRespostaDoCliente"
+						value="#{configuracaoController.configuracao.diasParaAguardarRespostaDoCliente}" />
+					<p:slider for="diasParaAguardarRespostaDoCliente" display="outputCliente"
+						style="width:200px" />
+				</h:panelGroup>
+				<h:message for="diasParaAguardarRespostaDoCliente" errorClass="error" />
+
+
+
+
+				<h:outputText
+					value="#{msg['chamados.label.dias.resposta.gerente']}:"
+					 />
+
+				<h:panelGroup>
+
+					<h:outputText id="output"
+						value="#{configuracaoController.configuracao.diasParaRespostaDoGerente}" />
+					<h:outputText value=" Dias" />
+
+
+					<h:inputHidden id="diasParaRespostaDoGerente"
+						value="#{configuracaoController.configuracao.diasParaRespostaDoGerente}" />
+					<p:slider for="diasParaRespostaDoGerente" display="output"
+						style="width:200px" />
+				</h:panelGroup>
+				<h:message for="diasParaRespostaDoGerente" errorClass="error" />
+
+
+				<h:outputText
+					value="#{msg['chamados.label.qtd.maxima.chamados.atribuidos.automaticamente']}:"
+					 />
+
+				<h:panelGroup>
+
+					<h:outputText id="output2"
+						value="#{configuracaoController.configuracao.qtdMaximaChamadoAtribuidoAutomaticamente}" />
+					<h:outputText value=" Chamados" />
+
+
+					<h:inputHidden id="qtdMaximaChamadoAtribuidoAutomaticamente"
+						value="#{configuracaoController.configuracao.qtdMaximaChamadoAtribuidoAutomaticamente}" />
+					<p:slider for="qtdMaximaChamadoAtribuidoAutomaticamente"
+						display="output2" style="width:200px" minValue="1"
+						maxValue="10000" />
+				</h:panelGroup>
+				<h:message for="qtdMaximaChamadoAtribuidoAutomaticamente"
+					errorClass="error" />
+
+
+				<h:outputText
+					value="#{msg['chamados.label.qtd.maxima.chamados.com.codigo.generico.por.loja']}:"
+					 />
+
+				<h:panelGroup>
+
+					<h:outputText id="qtdMaximaChamadoComCaodigoGenericoPorLoja2"
+						value="#{configuracaoController.configuracao.qtdMaximaChamadoComCaodigoGenericoPorLoja}" />
+					<h:outputText value=" Chamados" />
+
+
+					<h:inputHidden id="qtdMaximaChamadoComCaodigoGenericoPorLoja"
+						value="#{configuracaoController.configuracao.qtdMaximaChamadoComCaodigoGenericoPorLoja}" />
+					<p:slider for="qtdMaximaChamadoComCaodigoGenericoPorLoja"
+						display="qtdMaximaChamadoComCaodigoGenericoPorLoja2"
+						style="width:600px" minValue="1" animate="true" maxValue="10000" />
+				</h:panelGroup>
+				<h:message for="qtdMaximaChamadoComCaodigoGenericoPorLoja"
+					errorClass="error" />
+
+
+
+
+
+
+<h:outputText
+					value="Largura do site:"
+					 />
+		<h:panelGroup>
+
+					<h:outputText id="larguraDoSite"
+						value="#{configuracaoController.configuracao.larguraDoSite}" />
+					<h:outputText value=" pixels" />
+
+
+					<h:inputHidden id="larguraDoSite2"
+						value="#{configuracaoController.configuracao.larguraDoSite}" />
+					<p:slider for="larguraDoSite2"
+						display="larguraDoSite"  style="width:200px" minValue="500"
+						maxValue="10000" step="5" />
+				</h:panelGroup>
+
+<h:message for="larguraDoSite"
+					errorClass="error" />
+
+
+
+
+
+				<h:outputLabel for="proxy" value=" #{msg['chamados.label.proxy']}" />
+				<h:inputText id="proxy"
+					value="#{configuracaoController.configuracao.proxy}"
+					styleClass="campo" />
+				<h:message for="proxy" />
+
+
+				<h:outputLabel for="proxyPorta"
+					value=" #{msg['chamados.label.proxy.porta']}" />
+				<h:inputText id="proxyPorta"
+					value="#{configuracaoController.configuracao.proxyPorta}"
+					styleClass="campo" />
+				<h:message for="proxyPorta" />
+
+				<h:outputLabel for="requerAutenticacao"
+					value=" #{msg['chamados.label.proxy.autenticacao']}" />
+
+				<p:selectBooleanCheckbox id="requerAutenticacao"
+					value="#{configuracaoController.configuracao.requerAutenticacao}">
+					<p:ajax update="proxyUsuario, proxySenha" />
+				</p:selectBooleanCheckbox>
+
+
+
+				<h:outputLabel for="proxyUsuario"
+					value=" #{msg['chamados.label.proxy.usuario']}" />
+				<h:inputText id="proxyUsuario"
+					value="#{configuracaoController.configuracao.proxyUsuario}"
+					styleClass="campo"
+					rendered="#{configuracaoController.configuracao.requerAutenticacao}" />
+				<h:message for="proxyUsuario" />
+
+				<h:outputLabel for="proxySenha"
+					value=" #{msg['chamados.label.proxy.senha']}" />
+				<h:inputSecret id="proxySenha"
+					value="#{configuracaoController.configuracao.proxySenha}"
+					styleClass="campo"
+					rendered="#{configuracaoController.configuracao.requerAutenticacao}" />
+				<h:message for="proxySenha" />
+
+
+
+
+
+
+<h:outputLabel for="smtp"
+					value=" SMTP" />
+				<h:inputText id="smtp"
+					value="#{configuracaoController.configuracao.smtp}"
+					styleClass="campo"
+					 />
+				<h:message for="smtp" />
+				
+				
+				
+				
+				<h:outputLabel for="portaSmtp"
+					value=" Porta do SMTP" />
+				<h:inputText id="portaSmtp"
+					value="#{configuracaoController.configuracao.portaSmtp}"
+					styleClass="campo"
+					 />
+				<h:message for="portaSmtp" />
+				
+				
+				
+				
+					
+				<h:outputLabel for="emailSistema"
+					value=" Email Autenticacao" />
+				<h:inputText id="emailSistema"
+					value="#{configuracaoController.configuracao.emailSistema}"
+					styleClass="campo"
+					 />
+				<h:message for="emailSistema" />
+				
+				
+				
+				
+				
+					<h:outputLabel for="emailEnvioSistema"
+					value=" Email Remetente" />
+				<h:inputText id="emailEnvioSistema"
+					value="#{configuracaoController.configuracao.emailEnvioSistema}"
+					styleClass="campo"
+					 />
+				<h:message for="emailEnvioSistema" />
+				
+				
+				
+
+				<h:outputLabel for="senhaEmailSistema"
+					value=" Senha do email" />
+				<h:inputSecret id="senhaEmailSistema"
+					value="#{configuracaoController.configuracao.senhaEmailSistema}"
+					styleClass="campo"
+					 />
+				<h:message for="senhaEmailSistema" />
+
+
+
+
+
+
+				<h:column />
+				<h:outputText value="* #{msg['chamados.label.campo.obrigatorio']}"
+					style="color: #D8000C;" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

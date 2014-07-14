@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	
+	<ui:define name="conteudo">
+		<h:form>
+			<table class="menuBar" >
+				<tr>
+					<td><h:outputText
+						value="#{msg['chamados.titulo.pagina.loja']}"
+						styleClass="titulo_pagina" /></td>
+					<td width="80px;">
+					<table>
+						<tr>
+							<td>
+							<div class="figura"><p:commandLink update="growl, form"
+								actionListener="#{lojaController.salvar}">
+								<p><img class="escala"
+									src="#{pastaImagens}#{msg['chamados.ic.save']}"
+									border="0" /></p>
+								
+							</p:commandLink></div>
+							</td>
+							<td>
+							<div class="figura"><p:commandLink update="growl, form"
+								action="#{lojaController.cancelar}" immediate="true">
+								<p><img class="escala"
+									src="#{pastaImagens}#{msg['chamados.ic.cancel']}"
+									border="0" /></p>
+								
+							</p:commandLink></div>
+							</td>
+						</tr>
+					</table>
+
+					</td>
+
+				</tr>
+			</table>
+
+
+
+			
+			<p:messages id="growl"/>
+
+			<h:panelGrid id="form" columns="3" style="margin-top: 15px;">
+
+
+				<h:outputText value="* #{msg['chamados.label.nome']}:"
+					styleClass="label" />
+				<h:inputText id="nome" size="40"
+					value="#{lojaController.loja.nome}" styleClass="campo"
+					required="true" >
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="nome" errorClass="error" />
+
+
+<h:outputLabel value="* Tipo:" styleClass="label" for="tipo" />
+									<h:selectOneListbox id="loja"
+										value="#{lojaController.loja.tipo}" styleClass="campo"
+										size="1"  >
+										<f:selectItem itemLabel="Loja" itemValue="LOJA"/>
+										<f:selectItem itemLabel="Padaria" itemValue="PADARIA"/>
+										<f:selectItem itemLabel="Outro" itemValue="OUTROS"/>
+									</h:selectOneListbox>
+									<h:message for="tipo" errorClass="error"    />
+
+
+	<h:outputText value="* #{msg['chamados.label.recebedor']}:"
+					styleClass="label" />
+				<h:inputText id="recebedor" size="40"
+					value="#{lojaController.loja.recebedor}" styleClass="campo"
+					required="true" >
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="recebedor" errorClass="error" />
+				
+
+				<h:column />
+				<h:outputText value="* #{msg['chamados.label.campo.obrigatorio']}"
+					style="color: #D8000C;" />
+			</h:panelGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>

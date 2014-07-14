@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job-scheduling-data
+	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
+	version="1.8">
+
+<!-- 	<schedule> -->
+<!-- 		<job> -->
+<!-- 			<name>AcessoGmailClienteAmigo</name> -->
+<!-- 			<group>Cliente Amigo</group> -->
+<!-- 			<description>Verifica a caixa de mensagens do sacsupermaia</description> -->
+<!-- 			<job-class>br.com.supermaia.jobs.AcessaGmailClienteAmigo</job-class> -->
+<!-- 		</job> -->
+
+<!-- 		<trigger> -->
+<!-- 			<cron> -->
+<!-- 				<name>dummyTriggerNameA</name> -->
+<!-- 				<job-name>AcessoGmailClienteAmigo</job-name> -->
+<!-- 				<job-group>Cliente Amigo</job-group> -->
+<!-- 				roda a cada 10 minutos -->
+<!-- 				<cron-expression>0 0/10 * * * ?</cron-expression> -->
+<!-- 			</cron> -->
+<!-- 		</trigger> -->
+<!-- 	</schedule> -->
+
+
+
+<!-- 	<schedule> -->
+<!-- 		<job> -->
+<!-- 			<name>FinalizaCasosNaoRespondidosPeloClienteClienteAmigo</name> -->
+<!-- 			<group>Cliente Amigo</group> -->
+<!-- 			<description>Finaliza os casos que excederam o tempo configurado para resposta</description> -->
+<!-- 			<job-class>br.com.supermaia.jobs.FinalizaCasosNaoRespondidosPeloClienteClienteAmigo</job-class> -->
+<!-- 		</job> -->
+
+<!-- 		<trigger> -->
+<!-- 			<cron> -->
+<!-- 				<name>finalizaCasos</name> -->
+<!-- 				<job-name>FinalizaCasosNaoRespondidosPeloClienteClienteAmigo</job-name> -->
+<!-- 				<job-group>Cliente Amigo</job-group> -->
+<!-- 				It will run every 30 seconds -->
+<!-- 				<cron-expression>0 0/10 * * * ?</cron-expression> -->
+<!-- 			</cron> -->
+<!-- 		</trigger> -->
+<!-- 	</schedule> -->
+	
+<!-- 	<schedule> -->
+<!-- 		<job> -->
+<!-- 			<name>ImportaLigacoes</name> -->
+<!-- 			<group>Cliente Amigo</group> -->
+<!-- 			<description>Importa as ligacoes</description> -->
+<!-- 			<job-class>br.com.supermaia.jobs.ImportaLigacoes</job-class> -->
+<!-- 		</job> -->
+
+<!-- 		<trigger> -->
+<!-- 			<cron> -->
+<!-- 				<name>ImportaLigacoes</name> -->
+<!-- 				<job-name>ImportaLigacoes</job-name> -->
+<!-- 				<job-group>Cliente Amigo</job-group> -->
+<!-- 				It will run every 30 seconds -->
+<!-- 				<cron-expression>0 0 5 * * ?</cron-expression> -->
+<!-- 			</cron> -->
+<!-- 		</trigger> -->
+<!-- 	</schedule> -->
+	
+
+
+<!-- 	<schedule> -->
+<!-- 		<job> -->
+<!-- 			<name>CalculaOsDiasAtrasadosDoChamado</name> -->
+<!-- 			<group>Chamados</group> -->
+<!-- 			<description>Calcula os dias em atraso do chamado</description> -->
+<!-- 			<job-class>br.com.supermaia.jobs.CalculaOsDiasAtrasadosDoChamado</job-class> -->
+<!-- 		</job> -->
+
+<!-- 		<trigger> -->
+<!-- 			<cron> -->
+<!-- 				<name>CalculaOsDiasAtrasadosDoChamado</name> -->
+<!-- 				<job-name>CalculaOsDiasAtrasadosDoChamado</job-name> -->
+<!-- 				<job-group>Chamados</job-group> -->
+<!-- 				It will run every 30 seconds -->
+<!-- 				<cron-expression>* * 7 * * ?</cron-expression> -->
+<!-- 			</cron> -->
+<!-- 		</trigger> -->
+<!-- 	</schedule> -->
+
+
+<!-- 	<schedule> -->
+<!-- 		<job> -->
+<!-- 			<name>IncluiNovosEquipamentos</name> -->
+<!-- 			<group>Chamados</group> -->
+<!-- 			<description>Calcula os dias em atraso do chamado</description> -->
+<!-- 			<job-class>br.com.supermaia.jobs.IncluiNovosEquipamentos</job-class> -->
+<!-- 		</job> -->
+
+<!-- 		<trigger> -->
+<!-- 			<cron> -->
+<!-- 				<name>IncluiNovosEquipamentos</name> -->
+<!-- 				<job-name>IncluiNovosEquipamentos</job-name> -->
+<!-- 				<job-group>Chamados</job-group> -->
+<!-- 				It will run every 30 seconds -->
+<!-- 				<cron-expression>* * 22 * * ?</cron-expression> -->
+<!-- 			</cron> -->
+<!-- 		</trigger> -->
+<!-- 	</schedule> -->
+
+	
+
+
+
+</job-scheduling-data>

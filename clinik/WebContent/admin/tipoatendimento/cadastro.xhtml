@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+	
+	<ui:define name="conteudo">
+		<h:form>
+			<div class="box-element">
+				<div class="box-content">
+					<ul class="actions">
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink actionListener="#{tipoAtendimentoController.salvar}"
+										update="growl"
+										styleClass="btn_salvar" >
+
+										<h:outputText value="#{msg['system.label.salvar']}" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.salvar']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink action="#{tipoAtendimentoController.cancelar}"
+										styleClass="btn_voltar"  immediate="true">
+
+										<h:outputText value="#{msg['system.label.voltar']}" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.voltar']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+
+
+			
+			<p:messages id="growl"/>
+<div class="box-element">
+				<div class="box-content">
+					
+			<h:panelGrid id="form" columns="2" style="margin-top: 15px;">
+
+
+			<h:outputLabel for="name" value="#{msg['system.label.descricao']}" />
+					<p:inputText id="name" label="name" size="50"
+						value="#{tipoAtendimentoController.obj.descricao}" required="true"
+						onkeydown="mascara(this, maiusculo)" />
+
+				
+				
+				<h:outputText
+					value="#{msg['system.label.retorno']}:"
+					 />
+				<h:selectBooleanCheckbox id="retorno"
+					value="#{tipoAtendimentoController.obj.retorno}" />
+				<h:message for="retorno"
+					errorClass="error" />
+
+
+				<h:column />
+				<h:outputText value="* #{msg['system.label.campo.obrigatorio']}"
+					style="color: #D8000C;" />
+			</h:panelGrid>
+				<div class="clearfix"></div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

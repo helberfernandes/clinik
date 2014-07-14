@@ -1,0 +1,69 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="../../template/flat/templates/template.xhtml">
+
+	<!-- Parametros de dados do site -->
+	<ui:param name="site" value="#{msg['system.nome.sistema']}" />
+	<ui:param name="versao" value="#{msg['system.versao.sistema']}" />
+	<ui:param name="logo" value="./../templates/flat/css/imagens/logo36.png" />
+	<ui:param name="server"
+		value="http://#{facesContext.externalContext.requestServerName}:#{facesContext.externalContext.requestServerPort}" />
+	<ui:param name="siteName"
+		value="#{facesContext.externalContext.contextName}" />
+	<!-- Fim dos parametros de dados do site -->
+
+
+	<!-- Parametros do usuario logado -->
+	<ui:param name="fotoUserTumb"
+		value="#{server}/#{siteName}#{sessaoController.usuarioSessao.fotoTumb}" />
+	<ui:param name="fotoUser"
+		value="#{server}/#{siteName}#{sessaoController.usuarioSessao.foto}" />
+	<ui:param name="userName"
+		value="#{sessaoController.usuarioSessao.nome}" />
+	<ui:param name="userMail"
+		value="#{sessaoController.usuarioSessao.email}" />
+	<ui:param name="userId"
+		value="#{sessaoController.usuarioSessao.usuarioId}" />
+	<ui:param name="dataUltimoAcesso"
+		value="#{sessaoController.usuarioSessao.dataUltimoAcesso}" />
+	<ui:param name="nomeRole"
+		value="#{sessaoController.usuarioSessao.role.nome}" />	
+	<!-- Fim dos parametros do usuario logado -->
+
+
+	<!-- Parametros do CSS -->
+	<ui:param name="css"
+		value="#{server}/#{siteName}/template/flat/css/main.css" />
+
+	<ui:param name="larguraDoSite"
+		value="#{configuracaoController.configuracao.larguraDoSite}" />
+	<ui:param name="cor" value="#{sessaoController.usuarioSessao.cor}" />
+	<!-- Fim dos parametros do CSS -->
+
+
+	<!-- Parametros de javascript -->
+	<!-- 	<ui:param name="js" value="#{server}/#{siteName}/template/flat/js/jquery.megamenu.js" /> -->
+	<ui:param name="js2"
+		value="#{server}/#{siteName}/template/flat/js/default.js" />
+		
+<!-- 		<ui:param name="js" -->
+<!-- 		value="#{server}/#{siteName}/template/flat/js/chat.js" /> -->
+	<ui:param name="js3"
+		value="#{server}/#{siteName}/template/flat/js/mask.js" />
+	<!-- Fim dos parametros de javascript -->
+
+<ui:param name="js"
+		value="#{server}/#{siteName}/template/flat/js/mascarasValidacao.js" />
+
+
+	<!-- Parametros do thema -->
+	<ui:param name="pastaImagens"
+		value="#{server}/#{siteName}/template/flat/css/imagens/" />
+	<ui:param name="pathTheme" value="/template/flat/" />
+	<ui:param name="folderPathTheme" value="/template/flat/templates/" />
+	<!-- Fim dos parametros do thema -->
+
+</ui:composition>

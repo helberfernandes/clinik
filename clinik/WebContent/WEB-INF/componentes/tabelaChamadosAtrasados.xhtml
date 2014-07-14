@@ -1,0 +1,351 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	
+	xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        
+            <p:dataTable id="chamadoDataAtrasados"
+									value="#{chamadoController.frozenChamados}"
+									rowKey="#{chamado.chamadoId}" var="chamado" rows="5"
+									paginator="true" rowIndexVar="index"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="10,20"
+									paginatorPosition="bottom"
+									emptyMessage="Nenhum chamado encontrada"
+									
+									 sortBy="#{chamado.numChamadoArupado}"
+									 filterEvent="enter"
+									scrollable="true"
+									
+									
+									
+									>
+
+
+
+
+
+									<p:column style="width:10px"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+				
+				
+										<p:rowToggler   />
+									</p:column>
+
+								
+										
+										
+								
+
+
+
+		
+											<p:column headerText="Dias Atrasados" style="width:10px"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+				
+				
+										<p:outputLabel value="#{chamado.qtdDiasAtrasados}"/>
+									</p:column>
+										
+
+									<p:column headerText="#{msg['chamados.label.numero']}"
+										style="width:40px"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+				
+									<p:commandLink action="#{chamadoController.editar}"
+										disabled="#{
+sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?false:
+
+sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+
+sessaoController.usuarioSessao.usuarioId==chamado.tecnico.usuarioId?false:true
+
+:true
+										}"
+											>
+<f:param name="chamadoId" value="#{chamado.chamadoId}" />
+										<h:outputText value="#{chamado.numChamado}" />
+						</p:commandLink>				
+									</p:column>
+
+
+
+
+
+									<p:column headerText="#{msg['chamados.label.data']}"
+										style="width:30px"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+									<p:commandLink action="#{chamadoController.editar}"
+										disabled="#{
+sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?false:
+
+sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+
+sessaoController.usuarioSessao.usuarioId==chamado.tecnico.usuarioId?false:true
+
+:true
+										}"
+											>
+<f:param name="chamadoId" value="#{chamado.chamadoId}" />
+										<h:outputText value="#{chamado.dateForFilter}">
+											<f:convertDateTime timeZone="#{usuarioController.timeZone}"
+												pattern="dd/MM/yyyy" />
+										</h:outputText>
+										
+							</p:commandLink>			
+									</p:column>
+
+
+									<p:column headerText="Solicitante" 
+									style="width:80px"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+									<p:commandLink action="#{chamadoController.editar}"
+										disabled="#{
+sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?false:
+
+sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+
+sessaoController.usuarioSessao.usuarioId==chamado.tecnico.usuarioId?false:true
+
+:true
+										}"
+											>
+<f:param name="chamadoId" value="#{chamado.chamadoId}" />
+				
+										<h:outputText
+											value="#{fn:substring(chamado.solicitante.nome,0,10)}." />
+											
+						</p:commandLink>					
+									</p:column>
+
+									<p:column headerText="#{msg['chamados.label.loja']}"
+										filterOptions="#{chamadoController.lojaOptions}"
+										filterMatchMode="contains" filterBy="#{chamado.loja.nome}"
+										sortBy="#{chamado.loja.nome}"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+				
+									<p:commandLink action="#{chamadoController.editar}"
+										disabled="#{
+sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?false:
+
+sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+
+sessaoController.usuarioSessao.usuarioId==chamado.tecnico.usuarioId?false:true
+
+:true
+										}"
+											>
+<f:param name="chamadoId" value="#{chamado.chamadoId}" />
+										<h:outputText value="#{chamado.loja.nome}" />
+										
+									</p:commandLink>	
+									</p:column>
+
+									<p:column
+										headerText="#{msg['chamados.label.tecnico.atribuido']}"
+										filterOptions="#{usuarioController.tecnicoOptions}"
+										filterMatchMode="contains" filterBy="#{chamado.tecnico.nome}"
+										sortBy="#{chamado.tecnico.nome}"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+				
+				
+										<p:commandLink action="#{chamadoController.editar}"
+										disabled="#{
+sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?false:
+
+sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE_FILIZOLA'?false:
+sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+
+sessaoController.usuarioSessao.usuarioId==chamado.tecnico.usuarioId?false:true
+
+:true
+										}"
+											>
+<f:param name="chamadoId" value="#{chamado.chamadoId}" />
+										<h:outputText
+											value="#{fn:substring(chamado.tecnico.nome,0,10)}." />
+											
+											
+								</p:commandLink>			
+									</p:column>
+
+
+
+
+
+
+									<p:summaryRow
+										rendered="#{sessaoController.usuarioSessao.role.permissao.agruparChamados}">
+										<p:column colspan="10" style="text-align:right">  
+               #{msg['chamados.label.numero']} :  
+            </p:column>
+
+										<p:column>
+											<h:outputText value="#{chamado.numChamadoArupado}" />
+										</p:column>
+									</p:summaryRow>
+
+
+									
+
+
+
+									<p:column headerText="#{msg['chamados.label.loja']}"
+										filterOptions="#{chamadoController.todasLojasSelectItem}"
+										filterMatchMode="contains" filterBy="#{chamado.loja.nome}"
+										sortBy="#{chamado.loja.nome}"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}"
+										rendered="#{sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE' or sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'}">
+
+
+
+										<h:outputText value="#{chamado.loja.nome}" />
+										
+										
+										
+
+									</p:column>
+
+
+
+
+									<p:column headerText="#{msg['chamados.label.status']}"
+										
+										style="width:25px;"
+										styleClass="#{
+				sessaoController.usuarioSessao.role.nome=='ROLE_ADMINISTRADOR'?
+				chamado.dataVisualizadoAdmin==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_SUPORTE'?
+				chamado.dataVisualizadoTecnico==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_FRENTE'?
+				chamado.dataVisualizadoFrente==null?'colunaNaoVisualizada':'colunaVisualizada':
+				sessaoController.usuarioSessao.role.nome=='ROLE_GERENTE'?
+				chamado.dataVisualizadoGerente==null?'colunaNaoVisualizada':'colunaVisualizada':''
+				}">
+
+										<p:commandLink onclick="dialogStatus.show();">
+
+
+											<p:graphicImage id="statusimg"
+												url="#{pastaImagens}18x18/#{chamado.status}.png"
+												style="border:0;" />
+										</p:commandLink>
+										<p:tooltip for="statusimg"
+											rendered="#{chamado.status=='STATUS_PENDENTE_APROVACAO'}">
+
+
+											<h:outputFormat value="#{msg['chamados.msg.dias.restantes']}">
+												<f:param value="#{chamado.faltaDias}" />
+											</h:outputFormat>
+
+										</p:tooltip>
+
+
+									</p:column>
+
+
+						
+
+
+
+</p:dataTable>
+            
+	        
+	    </ui:component>
+	</html>

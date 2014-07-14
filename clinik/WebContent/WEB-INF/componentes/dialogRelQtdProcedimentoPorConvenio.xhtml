@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+	<h:form id="dialogFormQtdProcedimentoConvenio">
+		<p:dialog id="janelaQtdProcedimentoConvenio"
+			header="#{msg['system.titulo.relatorio.qtd.procedimento.convenio']}"
+			widgetVar="janelaQtdProcedimentoConvenio" modal="true" height="300" width="600">
+
+
+
+
+			<div class="box-element">
+
+				<div class="box-content">
+					<ul class="actions">
+
+
+
+
+
+
+
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_imprimir"
+									actionListener="#{relatorioController.imprimeRelatorioQtdProcedimentoPorConvenio}"
+									>
+
+									
+
+										<h:outputText value="Imprimir" />
+
+									</h:commandLink>
+
+									<span>Imprimir</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+
+
+			<h:panelGrid columns="2">
+
+				<h:outputLabel value="#{msg['systemlabel.data.de']}" for="dataDe" />
+
+
+				<h:outputLabel value="#{msg['systemlabel.data.ate']}" for="dataDAte" />
+				<p:calendar value="#{relatorioController.dataDe}" id="dataDe"
+					showOn="button" />
+
+				<p:calendar value="#{relatorioController.dataAte}" id="dataAte"
+					showOn="button" />
+
+
+
+				<h:outputLabel value="#{msg['system.label.mostrar.exame']}" />
+				
+				<h:outputLabel value="#{msg['system.label.mostrar.convenio']}" />
+				<p:selectBooleanCheckbox
+					value="#{relatorioController.mostrarExame}">
+					<p:ajax update="exameGroup exameGroupLabel" />
+				</p:selectBooleanCheckbox>
+				
+				
+				
+				<p:selectBooleanCheckbox
+					value="#{relatorioController.mostrarConvenio}">
+					<p:ajax update="convenioGroup convenioGroupLabel" />
+				</p:selectBooleanCheckbox>	
+				
+
+				<h:panelGroup id="exameGroupLabel">
+					<h:outputText value="#{msg['system.label.exame']}"
+						rendered="#{relatorioController.mostrarExame}" />
+				</h:panelGroup>
+				<h:panelGroup id="convenioGroupLabel">
+					<h:outputText value="#{msg['system.label.convenio']}"
+						rendered="#{relatorioController.mostrarConvenio}" />
+				</h:panelGroup>
+				<h:panelGroup id="exameGroup">
+					<h:selectOneListbox value="#{relatorioController.exame}"
+						converter="#{exameConverter}" size="1"
+						rendered="#{relatorioController.mostrarExame}">
+						<f:selectItems value="#{relatorioController.exames}"
+							var="exame" itemLabel="#{exame.nome}" itemValue="#{exame}" />
+					</h:selectOneListbox>
+				</h:panelGroup>
+				
+				
+				
+				<h:panelGroup id="convenioGroup">
+					<h:selectOneListbox value="#{relatorioController.convenio}"
+						converter="#{convenioConverter}" size="1"
+						rendered="#{relatorioController.mostrarConvenio}">
+						<f:selectItems value="#{relatorioController.convenios}"
+							var="convenio" itemLabel="#{convenio.nome}" itemValue="#{convenio}" />
+					</h:selectOneListbox>
+				</h:panelGroup>
+
+			<h:column/>
+
+				
+
+			</h:panelGrid>
+
+		</p:dialog>
+	</h:form>
+</ui:component>
+</html>

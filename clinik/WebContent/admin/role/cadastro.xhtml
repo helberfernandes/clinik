@@ -1,0 +1,728 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form>
+		
+		
+		
+			<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>Cadastro de Permissoes</h3>
+				</div>
+				<div class="box-content">
+					<ul class="actions">
+					
+										
+										
+										
+										 <li><div>
+                            
+                      			<p:commandLink update="growl"
+										
+                      			
+                      			
+                      			styleClass="btn_salvar"
+                      			
+												actionListener="#{usuarioController.salvarPermissao}">
+											
+												  
+											
+												<h:outputText value="#{msg['chamados.label.salvar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.salvar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            
+                            
+                             
+                       
+                         <li><div>
+                            
+                       
+											<p:commandLink 
+											action="#{usuarioController.cancelarRole}"
+											immediate="true"
+											 styleClass="btn_voltar">
+										
+										
+											
+										
+												<h:outputText value="#{msg['chamados.label.voltar']}" />
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.voltar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                   
+					
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		
+		
+			
+
+
+
+
+			<p:messages id="growl" />
+			
+			
+			
+			<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>Cadastro de Permissoes</h3>
+				</div>
+				<div class="box-content">
+				
+				
+						<h:outputText value="* #{msg['chamados.label.nome']}:"
+					 />
+				<h:inputText id="nome" size="40"
+					value="#{usuarioController.role.nome}" styleClass="campo"
+					required="true" >
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="nome" errorClass="error" />
+				
+				
+						<h:outputText value="* #{msg['chamados.label.descricao']}:"
+					 />
+				<h:inputText id="descricao" size="40"
+					value="#{usuarioController.role.descricao}" styleClass="campo"
+					required="true" >
+					<f:validateLength minimum="4" maximum="80" />
+				</h:inputText>
+				<h:message for="descricao" errorClass="error" />
+				
+				</div>
+				</div>
+			
+
+
+<div class="box-element">
+				<div class="box-head">
+					<span class="forms-16"></span>
+					<h3>Cadastro de Permissoes</h3>
+				</div>
+				<div class="box-content">
+			<p:tabView orientation="top">
+				<p:tab title="Usuario">
+					<h:panelGrid columns="6" cellpadding="1">
+					
+					
+					
+					
+					
+								<h:outputText value="Ver menu de cadastros?:"  />
+						<h:selectBooleanCheckbox id="verMenuCadastro"
+							value="#{usuarioController.role.permissao.verMenuCadastro}" />
+						<h:message for="verMenuCadastro" errorClass="error" />
+						
+						
+						
+							<h:outputText value="Criar Workflow?:"  />
+						<h:selectBooleanCheckbox id="criarWorkflow"
+							value="#{usuarioController.role.permissao.criarWorkflow}" />
+						<h:message for="criarWorkflow" errorClass="error" />
+						
+						
+						
+							<h:outputText value="Criar Item de Despesa?:"  />
+						<h:selectBooleanCheckbox id="criarItemDespesa"
+							value="#{usuarioController.role.permissao.criarItemDespesa}" />
+						<h:message for="criarItemDespesa" errorClass="error" />
+						
+						
+						
+						
+						
+							<h:outputText value="Criar nota impressao?:"  />
+						<h:selectBooleanCheckbox id="criarNotaImpressao"
+							value="#{usuarioController.role.permissao.criarNotaImpressao}" />
+						<h:message for="criarNotaImpressao" errorClass="error" />
+						
+						
+						<h:outputText value="Home nota impressao?:"  />
+						<h:selectBooleanCheckbox id="homeNotaImpressao"
+							value="#{usuarioController.role.permissao.homeNotaImpressao}" />
+						<h:message for="homeNotaImpressao" errorClass="error" />
+						
+						
+						
+						
+						
+						
+							<h:outputText value="#{msg['chamados.label.ver.menu.central']}:"  />
+						<h:selectBooleanCheckbox id="visualizarMenuCentralMonitoramento"
+							value="#{usuarioController.role.permissao.visualizarMenuCentralMonitoramento}" />
+						<h:message for="visualizarMenuCentralMonitoramento" errorClass="error" />
+						
+						
+						
+						
+						
+					
+						<h:outputText value="Ver marcadores?:"  />
+						<h:selectBooleanCheckbox id="verMarcador"
+							value="#{usuarioController.role.permissao.verMarcador}" />
+						<h:message for="verMarcador" errorClass="error" />
+					
+					
+					
+							<h:outputText value="Ver grafico veolicimetro desempenho?:"  />
+						<h:selectBooleanCheckbox id="verGraficoVelocimetroDesempenho"
+							value="#{usuarioController.role.permissao.verGraficoVelocimetroDesempenho}" />
+						<h:message for="verGraficoVelocimetroDesempenho" errorClass="error" />
+					
+					
+					
+					
+					<h:outputText value="Pode solicitar viagens?:"  />
+						<h:selectBooleanCheckbox id="solicitarViagem"
+							value="#{usuarioController.role.permissao.solicitarViagem}" />
+						<h:message for="solicitarViagem" errorClass="error" />
+					
+					
+						<h:outputText value="Pode adicionar usuarios?:"  />
+						<h:selectBooleanCheckbox id="addUser"
+							value="#{usuarioController.role.permissao.addUser}" />
+						<h:message for="addUser" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Pode ver os logs?:"  />
+						<h:selectBooleanCheckbox id="verLog"
+							value="#{usuarioController.role.permissao.verLog}" />
+						<h:message for="verLog" errorClass="error" />
+						
+						
+						
+						
+						<h:outputText value="Pode criar marcador?:"  />
+						<h:selectBooleanCheckbox id="criarMarcador"
+							value="#{usuarioController.role.permissao.criarMarcador}" />
+						<h:message for="criarMarcador" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Ver Configuracoes avancadas?:"  />
+						<h:selectBooleanCheckbox id="verConfig"
+							value="#{usuarioController.role.permissao.verConfig}" />
+						<h:message for="verConfig" errorClass="error" />
+						
+						<h:outputText value="Pode excluir usuarios?:"  />
+						<h:selectBooleanCheckbox id="excluirUser"
+							value="#{usuarioController.role.permissao.excluirUser}" />
+						<h:message for="excluirUser" errorClass="error" />
+
+
+
+
+						<h:outputText value="Pode editar usuarios?:"  />
+						<h:selectBooleanCheckbox id="editarUser"
+							value="#{usuarioController.role.permissao.editarUser}" />
+						<h:message for="editarUser" errorClass="error" />
+
+
+						<h:outputText value="Pode adicionar permissoes?:"
+							 />
+						<h:selectBooleanCheckbox id="addRole"
+							value="#{usuarioController.role.permissao.addRole}" />
+						<h:message for="addRole" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Home chamados?:"
+							 />
+						<h:selectBooleanCheckbox id="homeChamados"
+							value="#{usuarioController.role.permissao.homeChamados}" />
+						<h:message for="homeChamados" errorClass="error" />
+						
+						<h:outputText value="Home notas?:"
+							 />
+						<h:selectBooleanCheckbox id="homeNotas"
+							value="#{usuarioController.role.permissao.homeNotas}" />
+						<h:message for="homeNotas" errorClass="error" />
+						
+						
+						<h:outputText value="Home cockpit Notas?:"
+							 />
+						<h:selectBooleanCheckbox id="homeCockpitNotas"
+							value="#{usuarioController.role.permissao.homeCockpitNotas}" />
+						<h:message for="homeCockpitNotas" errorClass="error" />
+						
+						
+						<h:outputText value="Home cockpit chamados gestor loja?:"
+							 />
+						<h:selectBooleanCheckbox id="homeCockpitChamadosGestorLoja"
+							value="#{usuarioController.role.permissao.homeCockpitChamadosGestorLoja}" />
+						<h:message for="homeCockpitChamadosGestorLoja" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Home cockpit chamados gestor?:"
+							 />
+						<h:selectBooleanCheckbox id="homeCockpitChamadosGestor"
+							value="#{usuarioController.role.permissao.homeCockpitChamadosGestor}" />
+						<h:message for="homeCockpitChamadosGestor" errorClass="error" />
+						
+						
+						
+						
+							<h:outputText value="Home Viagem?:"
+							 />
+						<h:selectBooleanCheckbox id="homeViagem"
+							value="#{usuarioController.role.permissao.homeViagem}" />
+						<h:message for="homeViagem" errorClass="error" />
+						
+						
+				
+						
+						
+						<h:outputText value="Pode adicionar equipamento?:"  />
+						<h:selectBooleanCheckbox id="addEquipamento"
+							value="#{usuarioController.role.permissao.addEquipamento}" />
+						<h:message for="addEquipamento" errorClass="error" />
+						
+						
+						
+							<h:outputText value="Pode adicionar locais?:"  />
+						<h:selectBooleanCheckbox id="addLocal"
+							value="#{usuarioController.role.permissao.addLocal}" />
+						<h:message for="addLocal" errorClass="error" />
+						
+						
+							<h:outputText value="Cliente Amigo?:"  />
+						<h:selectBooleanCheckbox id="clienteAmigo"
+							value="#{usuarioController.role.permissao.clienteAmigo}" />
+						<h:message for="clienteAmigo" errorClass="error" />
+						
+						
+							<h:outputText value="Add Cliente?:"  />
+						<h:selectBooleanCheckbox id="addCliente"
+							value="#{usuarioController.role.permissao.addCliente}" />
+						<h:message for="addCliente" errorClass="error" />
+						
+						
+						
+							<h:outputText value="Add Categoria Cliente?:"  />
+						<h:selectBooleanCheckbox id="addCategoriaCliente"
+							value="#{usuarioController.role.permissao.addCategoriaCliente}" />
+						<h:message for="addCategoriaCliente" errorClass="error" />
+					
+					
+					
+					
+					
+						
+							<h:outputText value="Home Cliente Amigo?:"  />
+						<h:selectBooleanCheckbox id="homeClienteAmigo"
+							value="#{usuarioController.role.permissao.homeClienteAmigo}" />
+						<h:message for="homeClienteAmigo" errorClass="error" />	
+						
+					</h:panelGrid>
+				</p:tab>
+				<p:tab title="Fornecedor">
+					<h:panelGrid columns="6" cellpadding="1">
+						<h:outputText value="Pode ver fornecedor?:"  />
+						<h:selectBooleanCheckbox id="verFornecedor"
+							value="#{usuarioController.role.permissao.verFornecedor}" />
+						<h:message for="verFornecedor" errorClass="error" />
+
+
+						<h:outputText value="Pode adicionar fornecedor?:"
+							 />
+						<h:selectBooleanCheckbox id="addFornecedor"
+							value="#{usuarioController.role.permissao.addFornecedor}" />
+						<h:message for="addFornecedor" errorClass="error" />
+
+
+						<h:outputText value="Pode excluir fornecedor?:"  />
+						<h:selectBooleanCheckbox id="podeExcluirFornecedor"
+							value="#{usuarioController.role.permissao.podeExcluirFornecedor}" />
+						<h:message for="podeExcluirFornecedor" errorClass="error" />
+
+
+						<h:outputText value="Pode editar fornecedor?:"  />
+						<h:selectBooleanCheckbox id="podeEditarFornecedor"
+							value="#{usuarioController.role.permissao.podeEditarFornecedor}" />
+						<h:message for="podeEditarFornecedor" errorClass="error" />
+
+
+
+						<h:outputText value="Pode exportar fornecedor?:"
+							 />
+						<h:selectBooleanCheckbox id="exportarFornecedor"
+							value="#{usuarioController.role.permissao.exportarFornecedor}" />
+						<h:message for="exportarFornecedor" errorClass="error" />
+
+
+					</h:panelGrid>
+				</p:tab>
+
+				<p:tab title="Centro De Custo">
+					<h:panelGrid columns="6" cellpadding="1">
+						<h:outputText value="Pode ver centro de custo?:"
+							 />
+						<h:selectBooleanCheckbox id="verCentroDeCusto"
+							value="#{usuarioController.role.permissao.verCentroDeCusto}" />
+						<h:message for="verCentroDeCusto" errorClass="error" />
+
+
+						<h:outputText value="Pode adicionar centro de custo?:"
+							 />
+						<h:selectBooleanCheckbox id="addCentroDeCusto"
+							value="#{usuarioController.role.permissao.addCentroDeCusto}" />
+						<h:message for="addCentroDeCusto" errorClass="error" />
+
+
+						<h:outputText value="Pode excluir centro de custo?:"
+							 />
+						<h:selectBooleanCheckbox id="podeExcluirCentroDeCusto"
+							value="#{usuarioController.role.permissao.podeExcluirCentroDeCusto}" />
+						<h:message for="podeExcluirCentroDeCusto" errorClass="error" />
+
+
+						<h:outputText value="Pode editar centro de custo?:"
+							 />
+						<h:selectBooleanCheckbox id="podeEditarCentroDeCusto"
+							value="#{usuarioController.role.permissao.podeEditarCentroDeCusto}" />
+						<h:message for="podeEditarCentroDeCusto" errorClass="error" />
+
+
+
+						<h:outputText value="Pode exportar centro de custo?:"
+							 />
+						<h:selectBooleanCheckbox id="exportarCentroDeCusto"
+							value="#{usuarioController.role.permissao.exportarCentroDeCusto}" />
+						<h:message for="exportarCentroDeCusto" errorClass="error" />
+
+
+					</h:panelGrid>
+				</p:tab>
+
+
+				<p:tab title="Loja">
+					<h:panelGrid columns="6" cellpadding="1">
+						<h:outputText value="Pode ver loja?:"  />
+						<h:selectBooleanCheckbox id="verLoja"
+							value="#{usuarioController.role.permissao.verLoja}" />
+						<h:message for="verLoja" errorClass="error" />
+
+
+						<h:outputText value="Pode adicionar loja?:"  />
+						<h:selectBooleanCheckbox id="addLoja"
+							value="#{usuarioController.role.permissao.addLoja}" />
+						<h:message for="addLoja" errorClass="error" />
+
+
+						<h:outputText value="Pode excluir loja?:"  />
+						<h:selectBooleanCheckbox id="podeExcluirLoja"
+							value="#{usuarioController.role.permissao.podeExcluirLoja}" />
+						<h:message for="podeExcluirLoja" errorClass="error" />
+
+
+						<h:outputText value="Pode editar loja?:"  />
+						<h:selectBooleanCheckbox id="podeEditarLoja"
+							value="#{usuarioController.role.permissao.podeEditarLoja}" />
+						<h:message for="podeEditarLoja" errorClass="error" />
+
+
+
+						<h:outputText value="Pode exportar loja?:"  />
+						<h:selectBooleanCheckbox id="exportarLoja"
+							value="#{usuarioController.role.permissao.exportarLoja}" />
+						<h:message for="exportarLoja" errorClass="error" />
+
+
+					</h:panelGrid>
+				</p:tab>
+
+
+				<p:tab title="Chamados">
+					<h:panelGrid columns="6" cellpadding="1">
+
+<h:outputText value="Atribuir chamados automaticamente ao tecnico responsavel da loja?:"  />
+						<h:selectBooleanCheckbox id="atribuirChamadoDaLojaAutomaticamente"
+							value="#{usuarioController.role.permissao.atribuirChamadoDaLojaAutomaticamente}" />
+						<h:message for="atribuirChamadoDaLojaAutomaticamente" errorClass="error" />
+
+						<h:outputText value="Pode abrir chamados?:"  />
+						<h:selectBooleanCheckbox id="abrirChamado"
+							value="#{usuarioController.role.permissao.abrirChamado}" />
+						<h:message for="abrirChamado" errorClass="error" />
+
+
+						<h:outputText value="Pode editar chamados?:"  />
+						<h:selectBooleanCheckbox id="editarChamado"
+							value="#{usuarioController.role.permissao.editarChamado}" />
+						<h:message for="editarChamado" errorClass="error" />
+
+
+						<h:outputText value="Pode excluir chamados?:"  />
+						<h:selectBooleanCheckbox id="excluirChamado"
+							value="#{usuarioController.role.permissao.excluirChamado}" />
+						<h:message for="excluirChamado" errorClass="error" />
+
+
+						<h:outputText value="Pode atribuir chamados?:"  />
+						<h:selectBooleanCheckbox id="atribuirChamado"
+							value="#{usuarioController.role.permissao.atribuirChamado}" />
+						<h:message for="atribuirChamado" errorClass="error" />
+
+
+	<h:outputText value="Pode solicitar chamados?:"  />
+						<h:selectBooleanCheckbox id="solicitarChamado"
+							value="#{usuarioController.role.permissao.solicitarChamado}" />
+						<h:message for="solicitarChamado" errorClass="error" />
+
+
+
+
+						<h:outputText value="Pode ver chamados?:"  />
+						<h:selectBooleanCheckbox id="verChamado"
+							value="#{usuarioController.role.permissao.verChamado}" />
+						<h:message for="verChamado" errorClass="error" />
+
+
+
+
+<h:outputText value="Pode agrupar chamados?:"  />
+						<h:selectBooleanCheckbox id="agruparChamados"
+							value="#{usuarioController.role.permissao.agruparChamados}" />
+						<h:message for="agruparChamados" errorClass="error" />
+
+
+
+<h:outputText value="Pode ver chamados agrupado por tecnico?:"  />
+						<h:selectBooleanCheckbox id="homeChamadosPorStatusPorTecnico"
+							value="#{usuarioController.role.permissao.homeChamadosPorStatusPorTecnico}" />
+						<h:message for="homeChamadosPorStatusPorTecnico" errorClass="error" />
+
+
+
+<h:outputText value="Pode ver historico dos chamados?:"  />
+						<h:selectBooleanCheckbox id="verHistoricoChamado"
+							value="#{usuarioController.role.permissao.verHistoricoChamado}" />
+						<h:message for="verHistoricoChamado" errorClass="error" />
+
+
+
+
+						<h:outputText value="Pode ver chamados filizola?:"
+							 />
+						<h:selectBooleanCheckbox id="verChamadoFilizola"
+							value="#{usuarioController.role.permissao.verChamadoFilizola}" />
+						<h:message for="verChamadoFilizola" errorClass="error" />
+
+
+						<h:outputText value="Pode encaminhar chamados filizola?:"
+							 />
+						<h:selectBooleanCheckbox id="encaminharChamadoFilizola"
+							value="#{usuarioController.role.permissao.encaminharChamadoFilizola}" />
+						<h:message for="encaminharChamadoFilizola" errorClass="error" />
+
+
+<h:outputText value="Pode encaminhar chamados seguranca?:"
+							 />
+						<h:selectBooleanCheckbox id="encaminharChamadoSeguranca"
+							value="#{usuarioController.role.permissao.encaminharChamadoSeguranca}" />
+						<h:message for="encaminharChamadoSeguranca" errorClass="error" />
+
+
+						<h:outputText value="Pode encaminhar chamados itautec?:"
+							 />
+						<h:selectBooleanCheckbox id="atribuirChamadoItauTec"
+							value="#{usuarioController.role.permissao.atribuirChamadoItauTec}" />
+						<h:message for="atribuirChamadoItauTec" errorClass="error" />
+
+
+						<h:outputText value="Pode encaminhar chamados trix?:"
+							 />
+						<h:selectBooleanCheckbox id="atribuirChamadoTrix"
+							value="#{usuarioController.role.permissao.atribuirChamadoTrix}" />
+						<h:message for="atribuirChamadoTrix" errorClass="error" />
+
+
+						<h:outputText value="Ver somente sos chamados da loja?:"
+							 />
+						<h:selectBooleanCheckbox id="verChamadosSomenteDaLoja"
+							value="#{usuarioController.role.permissao.verChamadosSomenteDaLoja}" />
+						<h:message for="verChamadosSomenteDaLoja" errorClass="error" />
+
+
+						<h:outputText value="Ver todos os chamados?:"  />
+						<h:selectBooleanCheckbox id="verTodosChamados"
+							value="#{usuarioController.role.permissao.verTodosChamados}" />
+						<h:message for="verTodosChamados" errorClass="error" />
+
+						<h:outputText value="Pode emitir laudo tecnico?:"
+							 />
+						<h:selectBooleanCheckbox id="emitirLaudoTecnico"
+							value="#{usuarioController.role.permissao.emitirLaudoTecnico}" />
+						<h:message for="emitirLaudoTecnico" errorClass="error" />
+
+
+						<h:outputText value="Pode dar feedback?:"  />
+						<h:selectBooleanCheckbox id="darFeedback"
+							value="#{usuarioController.role.permissao.darFeedback}" />
+						<h:message for="darFeedback" errorClass="error" />
+						
+						
+						
+						
+				
+						
+						
+					</h:panelGrid>
+				</p:tab>
+
+
+
+				<p:tab title="Notas Fiscais">
+					<h:panelGrid columns="6" cellpadding="1">
+						<h:outputText value="Pode adicionar notas?:"  />
+						<h:selectBooleanCheckbox id="addNotas"
+							value="#{usuarioController.role.permissao.addNotas}" />
+						<h:message for="addNotas" errorClass="error" />
+
+						<h:outputText value="Pode ver o cockpit de notas?:"
+							 />
+						<h:selectBooleanCheckbox id="verCockpit"
+							value="#{usuarioController.role.permissao.verCockpit}" />
+						<h:message for="verCockpit" errorClass="error" />
+
+
+						<h:outputText value="Pode ver notas?:"  />
+						<h:selectBooleanCheckbox id="verNotas"
+							value="#{usuarioController.role.permissao.verNotas}" />
+						<h:message for="verNotas" errorClass="error" />
+
+
+						<h:outputText value="Pode lancar nota?:"  />
+						<h:selectBooleanCheckbox id="lancarNota"
+							value="#{usuarioController.role.permissao.lancarNota}" />
+						<h:message for="lancarNota" errorClass="error" />
+
+						<h:outputText value="Pode emitir relatorios?:"  />
+						<h:selectBooleanCheckbox id="emitirRelatorios"
+							value="#{usuarioController.role.permissao.emitirRelatorios}" />
+						<h:message for="emitirRelatorios" errorClass="error" />
+						
+						<h:outputText value="Ver painel total por centro de custo?:"  />
+						<h:selectBooleanCheckbox id="verPainelTotalPorCentroDecusto"
+							value="#{usuarioController.role.permissao.verPainelTotalPorCentroDecusto}" />
+						<h:message for="verPainelTotalPorCentroDecusto" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Ver notas de todos centros de custo?:"  />
+						<h:selectBooleanCheckbox id="verNotasDeTodosCentrosDeCusto"
+							value="#{usuarioController.role.permissao.verNotasDeTodosCentrosDeCusto}" />
+						<h:message for="verNotasDeTodosCentrosDeCusto" errorClass="error" />
+						
+						
+					</h:panelGrid>
+				</p:tab>
+
+
+				<p:tab title="Rede">
+					<h:panelGrid columns="6" cellpadding="1">
+
+						<h:outputText value="Pode adicionar rede?:"  />
+						<h:selectBooleanCheckbox id="addRede"
+							value="#{usuarioController.role.permissao.addRede}" />
+						<h:message for="addRede" errorClass="error" />
+					</h:panelGrid>
+				</p:tab>
+				
+				
+					<p:tab title="Solicitar Coletores">
+					<h:panelGrid columns="6" cellpadding="1">
+
+						<h:outputText value="Pode solicitar coletores?:"  />
+						<h:selectBooleanCheckbox id="solicitarColetores"
+							value="#{usuarioController.role.permissao.solicitarColetores}" />
+						<h:message for="solicitarColetores" errorClass="error" />
+						
+						
+						
+						<h:outputText value="Pode criar uma nova solicitacao  de coletores?:"  />
+						<h:selectBooleanCheckbox id="podeCriarSolicitacaoColetores"
+							value="#{usuarioController.role.permissao.podeCriarSolicitacaoColetores}" />
+						<h:message for="podeCriarSolicitacaoColetores" errorClass="error" />
+						
+						
+						<h:outputText value="Home  solicitacao  de coletores?:"  />
+						<h:selectBooleanCheckbox id="homeSolicitarColetor"
+							value="#{usuarioController.role.permissao.homeSolicitarColetor}" />
+						<h:message for="homeSolicitarColetor" errorClass="error" />
+						
+						
+					</h:panelGrid>
+				</p:tab>
+				
+				
+				<p:tab title="Solicitar Imagens">
+					<h:panelGrid columns="6" cellpadding="1">
+
+				<h:outputText value="#{msg['chamados.label.ver.menu.solicitar.imagem']}:"  />
+						<h:selectBooleanCheckbox id="solicitarImagem"
+							value="#{usuarioController.role.permissao.solicitarImagem}" />
+						<h:message for="solicitarImagem" errorClass="error" />
+						
+					
+					
+					
+						<h:outputText value="#{msg['chamados.label.reponder.a.solicitacao']}:"  />
+						<h:selectBooleanCheckbox id="reponderASolicitacao"
+							value="#{usuarioController.role.permissao.reponderASolicitacao}" />
+						<h:message for="reponderASolicitacao" errorClass="error" />
+						
+						
+						
+						
+							<h:outputText value="#{msg['chamados.label.anexar.imagem.a.solicitacao']}:"  />
+						<h:selectBooleanCheckbox id="anexarImagemASolicitacao"
+							value="#{usuarioController.role.permissao.anexarImagemASolicitacao}" />
+						<h:message for="anexarImagemASolicitacao" errorClass="error" />
+					
+								
+							<h:outputText value="Home Solicitar Imagens?:"
+							 />
+						<h:selectBooleanCheckbox id="homeSolicitarImagem"
+							value="#{usuarioController.role.permissao.homeSolicitarImagem}" />
+						<h:message for="homeSolicitarImagem" errorClass="error" />
+						
+					</h:panelGrid>
+				</p:tab>
+				
+			</p:tabView>
+</div>
+</div>
+
+			<h:outputText value="* campos obrigatórios" style="color: #D8000C;" />
+		</h:form>
+	</ui:define>
+</ui:composition>

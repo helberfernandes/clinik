@@ -1,0 +1,257 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:maia="http://supermaia.com.br"
+	template="./../../template/sistema/subtemplate.xhtml">
+
+	<ui:param name="mostrarBarraEsquerda" value="true" />
+	<ui:param name="leftMargin" value="170px" />
+
+
+	<ui:define name="left">
+
+	</ui:define>
+
+
+	<ui:define name="conteudo">
+		<h:form id="formPrincipal">
+			<div class="box-element">
+				<div class="box-content">
+					<ul class="actions">
+
+						<h:panelGroup>
+							<li><div>
+
+									<p:commandLink action="#{medicoController.novo}"
+										styleClass="btn_novo">
+
+										<h:outputText value="Novo" />
+
+									</p:commandLink>
+
+									<span>#{msg['system.label.novo']}</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_excel">
+										<p:dataExporter type="xls" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="Excel" />
+
+									</h:commandLink>
+
+									<span> Excel</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+						<h:panelGroup>
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_pdf">
+										<p:dataExporter type="pdf" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="PDF" />
+
+									</h:commandLink>
+
+									<span>PDF</span>
+
+
+								</div></li>
+
+
+						</h:panelGroup>
+
+
+
+
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_xml">
+										<p:dataExporter type="xml" target=":formPrincipal:listaDados"
+											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+
+										<h:outputText value="XML" />
+
+									</h:commandLink>
+
+									<span>XML</span>
+
+
+								</div></li>
+
+						</h:panelGroup>
+
+						<h:panelGroup>
+
+							<li><div>
+
+									<h:commandLink styleClass="btn_exportar_imprimir">
+
+										<p:printer target=":formPrincipal:listaDados" />
+
+										<h:outputText value="Imprimir" />
+
+									</h:commandLink>
+
+									<span>Imprimir</span>
+
+
+								</div></li>
+						</h:panelGroup>
+
+
+
+
+					</ul>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+
+			<p:dataTable id="listaDados" value="#{medicoController.lista}"
+				var="medico" rows="10" paginator="true"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+				emptyMessage="#{msg['system.msg.nenhum.registro.encontrado']}"
+				rowIndexVar="index" rowKey="#{medico.medicoId}">
+
+
+
+
+
+
+				<p:column headerText="#{msg['system.label.numero']}"
+					styleClass="coluna1">
+					<h:outputText value="#{(index+1)}" />
+				</p:column>
+
+				<p:column headerText="#{msg['system.label.nome']}"
+					filterBy="#{medico.nome}" sortBy="#{medico.nome}"
+					styleClass="colunaDefault">
+
+					<p:commandLink action="#{medicoController.editar}"
+						update=":formPrincipal">
+						<f:param name="objectId" value="#{medico.medicoId}" />
+						<h:outputText value="#{medico.nome}" />
+					</p:commandLink>
+				</p:column>
+
+
+
+				<p:column headerText="#{msg['system.label.equipe']}"
+					filterBy="#{medico.equipe}" sortBy="#{medico.equipe}"
+					styleClass="colunaDefault">
+
+					<p:commandLink action="#{medicoController.editar}"
+						update=":formPrincipal">
+
+						<f:param name="objectId" value="#{medico.medicoId}" />
+						<h:outputText
+							value="#{medico.equipe?msg['system.label.sim']:msg['system.label.nao']}" />
+
+					</p:commandLink>
+				</p:column>
+
+
+
+
+				<p:column headerText="#{msg['system.label.solicitante']}"
+					filterBy="#{medico.solicitante}" sortBy="#{medico.solicitante}"
+					styleClass="colunaDefault">
+
+					<p:commandLink action="#{medicoController.editar}"
+						update=":formPrincipal">
+
+						<f:param name="objectId" value="#{medico.medicoId}" />
+						<h:outputText
+							value="#{medico.solicitante?msg['system.label.sim']:msg['system.label.nao']}" />
+
+					</p:commandLink>
+				</p:column>
+
+				
+
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+
+
+
+
+
+
+	<ui:define name="dialog">
+		<h:form id="formDialog">
+			<p:dialog id="janelaForm"
+				header="#{msg['system.titulo.pagina.medico']}" modal="true"
+				widgetVar="janelaForm" height="300" width="500">
+
+
+				<div class="box-element">
+					<div class="box-content">
+						<ul class="actions">
+
+							<h:panelGroup>
+								<li><div>
+
+										<p:commandLink actionListener="#{medicoController.salvar}"
+											styleClass="btn_salvar"
+											update="msgs, :formPrincipal, :formPrincipal:listaDados">
+
+											<h:outputText value="#{msg['system.label.salvar']}" />
+
+										</p:commandLink>
+
+										<span>#{msg['system.label.salvar']}</span>
+
+
+									</div></li>
+							</h:panelGroup>
+
+						</ul>
+
+					</div>
+				</div>
+
+
+				<p:messages id="msgs" />
+
+				<h:panelGrid columns="2" cellpadding="5">
+
+					<h:outputLabel for="name" value="#{msg['system.label.nome']}" />
+					<p:inputText id="name" label="name" size="50"
+						value="#{medicoController.obj.nome}" required="true"
+						onkeydown="mascara(this, maiusculo)" />
+
+					<h:outputLabel for="equipe" value="#{msg['system.label.equipe']}" />
+					<h:selectBooleanCheckbox id="equipe"
+						value="#{medicoController.obj.equipe}" />
+
+					<h:outputLabel for="solicitante"
+						value="#{msg['system.label.solicitante']}" />
+					<h:selectBooleanCheckbox id="solicitante"
+						value="#{medicoController.obj.solicitante}" />
+
+				</h:panelGrid>
+			</p:dialog>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+

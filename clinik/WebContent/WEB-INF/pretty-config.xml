@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretty-config xmlns="http://ocpsoft.com/prettyfaces/3.3.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://ocpsoft.com/prettyfaces/3.3.0
+                                   		http://ocpsoft.com/xml/ns/prettyfaces/ocpsoft-pretty-faces-3.3.0.xsd">
+
+	<!-- Begin Example RewriteRules // These are custom rewrite-rules, and are 
+		probably not necessary for your application. <rewrite match="^/old-url/(\w+)/$" 
+		substitute="/new_url/$1/" redirect="301" /> <rewrite match="^/cliniks/(.*)$" 
+		substitute="/$1/" redirect="301" /> -->
+
+	<rewrite match="^/old-url/(\w+)/$" substitute="/new_url/$1/"
+		redirect="301" />
+	<rewrite match="^/portal/(.*)$" substitute="/$1/" redirect="301" />
+
+
+	<url-mapping id="entrar">
+		<pattern value="/entrar/" />
+		<view-id value="/entrar.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+	<url-mapping id="config">
+		<pattern value="/config/" />
+		<view-id value="/admin/config/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+
+
+	<url-mapping id="cadastro">
+		<pattern value="/cadastros/" />
+		<view-id value="/admin/cadastros/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+	<url-mapping id="usuarioEditarCadastro">
+		<pattern value="/usuario/#{usuarioId}/" />
+		<view-id value="/admin/usuario/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="usuarioOnline">
+		<pattern value="/usuarioson/" />
+		<view-id value="/admin/usuario/usuarioson.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="usuarioOnlineParan">
+		<pattern value="/usuarioson/#{usuarioId}/" />
+		<view-id value="/admin/usuario/usuarioson.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="usuarioCadastro">
+		<pattern value="/usuario/0/" />
+		<view-id value="/admin/usuario/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+	<url-mapping id="usuarioList">
+		<pattern value="/usuario/" />
+		<view-id value="/admin/usuario/index.xhtml" />
+	</url-mapping>
+
+	<url-mapping id="clinikEditarCadastro">
+		<pattern value="/clinik/#{objectId}/" />
+		<view-id value="/admin/clinik/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="clinikCadastro">
+		<pattern value="/clinik/0/" />
+		<view-id value="/admin/clinik/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+	<url-mapping id="clinikList">
+		<pattern value="/home/" />
+		<view-id value="/admin/clinik/index.xhtml" />
+	</url-mapping>
+
+
+	<url-mapping id="medicoList">
+		<pattern value="/medico/" />
+		<view-id value="/admin/medico/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="medicoCadastro">
+		<pattern value="/medico/0/" />
+		<view-id value="/admin/medico/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="medicoEditar">
+		<pattern value="/medico/#{objectId}/" />
+		<view-id value="/admin/medico/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+
+	<url-mapping id="convenioList">
+		<pattern value="/convenio/" />
+		<view-id value="/admin/convenio/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="convenioCadastro">
+		<pattern value="/convenio/0/" />
+		<view-id value="/admin/convenio/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="convenioEditar">
+		<pattern value="/convenio/#{objectId}/" />
+		<view-id value="/admin/convenio/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+
+	<url-mapping id="exameList">
+		<pattern value="/exame/" />
+		<view-id value="/admin/exame/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="exameCadastro">
+		<pattern value="/exame/0/" />
+		<view-id value="/admin/exame/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="exameEditar">
+		<pattern value="/exame/#{objectId}/" />
+		<view-id value="/admin/exame/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping> 
+
+
+<url-mapping id="pacienteList">
+		<pattern value="/paciente/" />
+		<view-id value="/admin/paciente/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="pacienteCadastro">
+		<pattern value="/paciente/0/" />
+		<view-id value="/admin/paciente/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="pacienteEditar">
+		<pattern value="/paciente/#{objectId}/" />
+		<view-id value="/admin/paciente/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+	
+	
+	<url-mapping id="empresaList">
+		<pattern value="/empresa/" />
+		<view-id value="/admin/empresa/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="empresaCadastro">
+		<pattern value="/empresa/0/" />
+		<view-id value="/admin/empresa/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="empresaEditar">
+		<pattern value="/empresa/#{objectId}/" />
+		<view-id value="/admin/empresa/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+	
+	
+	<url-mapping id="modeloList">
+		<pattern value="/modelo/" />
+		<view-id value="/admin/modelo/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="modeloCadastro">
+		<pattern value="/modelo/0/" />
+		<view-id value="/admin/modelo/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="modeloEditar">
+		<pattern value="/modelo/#{objectId}/" />
+		<view-id value="/admin/modelo/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+	
+	
+	<url-mapping id="atendimentoList">
+		<pattern value="/atendimento/" />
+		<view-id value="/admin/atendimento/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="atendimentoCadastro">
+		<pattern value="/atendimento/0/" />
+		<view-id value="/admin/atendimento/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="atendimentoEditar">
+		<pattern value="/atendimento/#{objectId}/" />
+		<view-id value="/admin/atendimento/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping> 
+	
+	
+	<url-mapping id="tipoatendimentoList">
+		<pattern value="/tipoatendimento/" />
+		<view-id value="/admin/tipoatendimento/index.xhtml?faces-redirect=true" />
+	</url-mapping>
+	<url-mapping id="tipoatendimentoCadastro">
+		<pattern value="/tipoatendimento/0/" />
+		<view-id value="/admin/tipoatendimento/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping>
+
+	<url-mapping id="tipoatendimentoEditar">
+		<pattern value="/tipoatendimento/#{objectId}/" />
+		<view-id value="/admin/tipoatendimento/cadastro.xhtml?faces-redirect=true" />
+	</url-mapping> 
+	
+	
+	
+	
+	
+
+	<!-- Begin UrlMappings // These are examples of URL mappings, and should 
+		be customized for your application. <url-mapping id="home"> <pattern value="/" 
+		/> <view-id value="/faces/index.jsf" /> </url-mapping> <url-mapping id="store"> 
+		<pattern value="/store/" /> <view-id value="/faces/shop/store.jsf" /> </url-mapping> 
+		<url-mapping id="viewCategory"> <pattern value="/store/#{ cat : bean.category 
+		}/" /> <view-id value="/faces/shop/store.jsf" /> </url-mapping> <url-mapping 
+		id="viewItem"> <pattern value="/store/#{ cat : bean.category }/#{ iid : bean.itemId 
+		}/" /> <view-id value="/faces/shop/item.jsf" /> <action>#{bean.loadItem}</action> 
+		</url-mapping> -->
+
+</pretty-config>

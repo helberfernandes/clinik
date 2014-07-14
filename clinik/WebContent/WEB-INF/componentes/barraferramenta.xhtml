@@ -1,0 +1,269 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+	   xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	
+	xmlns:f="http://java.sun.com/jsf/core">
+    <ui:component>
+        
+            
+                 <div class="box-element">
+                   
+                    <div class="box-content">
+                        <ul class="actions">
+                         
+                         <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.abrirChamado}">
+                            <li><div>
+                            
+                            <h:commandLink   action="#{chamadoController.novo}"
+                            styleClass="btn_novo"
+                            					 
+                            				 immediate="true" 
+											>
+										
+												<h:outputText value="Novo" />
+											
+										</h:commandLink>
+                            
+                            <span>#{msg['chamados.label.novo']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            </h:panelGroup>
+                            <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.agruparChamados}">
+                               <li><div>
+                            
+                          <p:commandLink action="#"
+                          
+                           styleClass="btn_agrupar"
+											  update=":formDialog:displayMulti" 
+											  oncomplete="multiCarDialog.show()" 
+											  >
+										
+												
+										
+												<h:outputText  value="#{msg['chamados.label.agrupar']}"/>
+										
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.agrupar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            </h:panelGroup>
+                            
+                            
+                            
+                             <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.solicitarChamado}">
+                             <li><div>
+                            
+                       <p:commandLink action="#"
+                       
+                       styleClass="btn_solicitar"
+											  update=":formDialog:displayMulti3" oncomplete="multiCarDialog3.show()" >
+											
+											
+												<h:outputText value="#{msg['chamados.label.solicitar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.solicitar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                         
+                         </h:panelGroup>
+                         
+                            
+                             <h:panelGroup rendered="#{sessaoController.usuarioSessao.role.permissao.encaminharChamadoFilizola}">
+                             <li><div>
+                            
+                       <p:commandLink action="#"
+                       
+                       styleClass="btn_encaminhar"
+											  update=":formDialog:displayMulti2" oncomplete="multiCarDialog2.show()" >
+											
+											
+												<h:outputText value="#{msg['chamados.label.encaminhar']}"/>
+											
+										</p:commandLink>
+                            
+                            <span>#{msg['chamados.label.encaminhar']}</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                         
+                         </h:panelGroup>
+                         
+                         <h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.criarMarcador}">
+                                 <li><div>
+                            
+                      	<p:commandLink onclick="janelaMarcador.show();"
+                      	  styleClass="btn_marcador"
+                      	
+                      >
+											
+												<h:outputText value="Novo Marcador" />
+											
+											
+										</p:commandLink>
+                            
+                            <span>Novo Marcador</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            </h:panelGroup>
+                            
+                             <h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.criarMarcador}">
+                                    <li><div>
+                            
+                      		<p:commandLink onclick="janelaAplicarMarcador.show();" 
+                      			 styleClass="btn_aplicar_marcador"
+                      		
+                      		update=":formDialog:displayMultiJanelaAplicarMarcador" >
+											
+												<h:outputText value="marcador"/>
+											
+										</p:commandLink>
+                            
+                            <span>Aplicar marcador</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            </h:panelGroup>
+                            
+                              <h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.exportarChamado}">
+                                    <li><div>
+                            
+                      		<h:commandLink
+                      		
+                      		styleClass="btn_exportar_excel"
+											>
+											<p:dataExporter type="xls" target=":formNota:chamadoData"
+												fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											
+												<h:outputText value="Excel"/>
+										
+										</h:commandLink >
+                            
+                            <span>Exportar para Excel</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            </h:panelGroup>
+                            
+                            <h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.exportarChamado}">
+                                <li><div>
+                            
+                      		<h:commandLink
+                      		
+                      		styleClass="btn_exportar_pdf"
+											>
+											<p:dataExporter type="pdf" target=":formNota:chamadoData"
+												fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+										
+												<h:outputText value=" PDF" />
+											
+										</h:commandLink>
+                            
+                            <span>Exportar para PDF</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                            
+                          </h:panelGroup>  
+                            
+                            
+
+
+
+<h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.exportarChamado}">
+          <li><div>
+                            
+                      		<h:commandLink
+                      		
+                      		styleClass="btn_exportar_xml"
+											>
+											<p:dataExporter type="xml" target=":formNota:chamadoData"
+												fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											
+												<h:outputText value="XML"/>
+											
+										</h:commandLink>
+                            
+                            <span>Exportar para XML</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                            
+                   </h:panelGroup>   
+                   
+                   <h:panelGroup 	rendered="#{sessaoController.usuarioSessao.role.permissao.exportarChamado}">      
+                            
+                             <li><div>
+                            
+                      			<h:commandLink
+                      			
+                      			
+                      			styleClass="btn_exportar_imprimir"
+                      			
+											rendered="#{sessaoController.usuarioSessao.role.permissao.exportarChamado}">
+											
+												<p:printer  target=":formNota:chamadoData" />  
+											
+												<h:outputText value="Imprimir"/>
+											
+										</h:commandLink>
+                            
+                            <span>Imprimir</span>
+                            
+                            
+                            </div>
+                            
+                            
+                            </li>
+                        </h:panelGroup>    
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                
+                
+                
+                
+            
+            
+	        
+	    </ui:component>
+	</html>
