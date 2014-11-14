@@ -1,5 +1,8 @@
 package br.com.wofsolutions.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -25,7 +28,10 @@ public class MedicoController extends
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String GO_PAGE = "/clinik/medico/";
-
+	
+	
+	
+	
 	@Override
 	public void salvar() {
 		obj.setSenha(MaiaUtil.md5(obj.getSenha()));

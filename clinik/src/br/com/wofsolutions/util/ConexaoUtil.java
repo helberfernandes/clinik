@@ -21,7 +21,7 @@ public class ConexaoUtil implements Serializable {
 		try {
 			Class.forName("org.gjt.mm.mysql.Driver");
 			con = DriverManager
-					.getConnection("jdbc:mysql://localhost/chamados?autoReconnect=true",
+					.getConnection("jdbc:mysql://localhost/clinik?autoReconnect=true",
 							"root", "st1215");
 
 		} catch (ClassNotFoundException e) {

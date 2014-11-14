@@ -39,7 +39,7 @@ public class Exame implements Serializable, ObjectBase {
 	private String nome;	
 	private double honorarios;	
 	
-	@ManyToMany(fetch=FetchType.EAGER)	
+	@ManyToMany
 	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name="wof_exames_medicos",
 	joinColumns=@JoinColumn(name="exame_id"),

@@ -8,6 +8,7 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.wofsolutions.util.ConexaoUtil;
 import br.com.wofsolutions.vo.Convenio;
 import br.com.wofsolutions.vo.Empresa;
 import br.com.wofsolutions.vo.Exame;
@@ -16,11 +17,14 @@ import br.com.wofsolutions.vo.ExameConvenio;
 public class ExameDAOImpl extends
 		HibernateDAOImpl<Exame, ExameConvenio, Convenio> implements Serializable {
 
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	
 	public Exame getExamePeloNome(Exame exame) {
 
 		Criteria criteria = getSession().createCriteria(Exame.class);
@@ -28,6 +32,7 @@ public class ExameDAOImpl extends
 		criteria.add(Restrictions.and(
 				Restrictions.eq("empresa", exame.getEmpresa()),
 				Restrictions.eq("nome", exame.getNome())));
+		
 		Exame usuario = (Exame) criteria.uniqueResult();
 
 		return usuario;
@@ -50,7 +55,7 @@ public class ExameDAOImpl extends
 		Criteria criteria = getSession().createCriteria(Exame.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		
-		System.out.println();
+		
 		criteria.addOrder(Order.asc("nome"));
 		@SuppressWarnings("unchecked")
 		List<Exame> list = criteria.list();
