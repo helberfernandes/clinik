@@ -1,0 +1,220 @@
+@CHARSET "ISO-8859-1";
+
+.ui-state-default,.ui-widget-content .ui-state-default,.ui-widget-header .ui-state-default
+	{ /*     border: 1px solid rgb(168, 168, 168); */
+	/*     background: -moz-linear-gradient(center top , rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0)) repeat scroll 0% 0% rgb(196, 196, 196); */
+	/*     font-weight: bold; */
+	/*     color: rgb(79, 79, 79); */
+	/*     text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7); */
+	
+}
+
+/*---------------------------Tabelas-----------------------------*/
+.old {
+	background-color: #6CE26C !important;
+	background-image: none !important;
+	color: #000000 !important;  
+}
+
+* {
+	text-decoration: none;
+}
+
+table {
+	border-collapse: none !important;
+	border-spacing: none !important;
+}
+
+thead { /* 	position: fixed;
+	top: 178px; */
+	/* 	box-shadow: 0 0 0px 0 #222; */
+	/* 	-webkit-box-shadow: 0 2px 2px -1px  #222; */
+	/* 	-moz-box-shadow: 0 0 0px 0 #222; */
+	/* 	z-index: 1; */
+	/* 	 margin-left: 170px; */
+	display: table-header-group;
+	vertical-align: middle;
+	border-color: inherit;
+}
+
+.ui-datatable table {
+	width: 100% px !important;
+	border-collapse: none !important;
+}
+
+.ui-datatable .ui-datatable-data td,.ui-datatable .ui-datatable-data-empty td
+	{
+	border-style: none !important;
+	padding: 5px !important;
+	max-height: 20px;
+	min-height: 20px;
+}
+
+.coluna1 {
+	width: 32px;
+	text-align: center;
+}
+
+.coluna2 {
+	width: 50px;
+	text-align: center;
+}
+
+.colunaNaoVisualizada {
+	font-weight: bold;
+	text-align: center;
+}
+
+.colunaVisualizada {
+	text-align: center;
+}
+
+.rotacao {
+	border: 1px solid;
+	/* Safari */
+	-webkit-transform: rotate(-45deg);
+	/* Opera */
+	-o-transform: rotate(-45deg);
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+	/* Internet Explorer */
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3 );
+}
+
+/*cor das linhas*/
+.ui-datatable-even { /* 	background-color: #eeeeef; */
+	border-bottom: 1px solid #CCC !important;
+}
+
+.ui-datatable-odd {
+	border-bottom: 1px solid #CCC !important;
+}
+
+.ui-datatable-even:HOVER,.ui-datatable-odd:HOVER {
+	cursor: pointer;
+	border: 1px solid #7096AB;
+	background: #85B2CB
+		url("/chamados/javax.faces.resource/images/ui-bg_highlight-hard_80_85b2cb_1x100.png.xhtml?ln=primefaces-aristo")
+		50% 50% repeat-x;
+	background: #85B2CB linear-gradient(top, rgba(255, 255, 255, 0.6),
+		rgba(255, 255, 255, 0) );
+	background: #85B2CB
+		-webkit-gradient(linear, left top, left bottom, from(rgba(255, 255, 255,
+		0.6) ), to(rgba(255, 255, 255, 0) ) );
+	background: #85B2CB -moz-linear-gradient(top, rgba(255, 255, 255, 0.6),
+		rgba(255, 255, 255, 0) );
+	font-weight: bold;
+	color: #313131;
+	-moz-box-shadow: 0 0 5px #85b2cb;
+	-webkit-box-shadow: 0px 0px 8px #85B2CB;
+	box-shadow: 0px 0px 8px #85B2CB;
+}
+
+/* ui-widget-content ui-datatable-even */
+.chamadoData {
+	background-color: aqua;
+}
+
+.ui-treetable-data .ui-widget-content {
+	border: 1px solid #CCC;
+}
+
+.ui-treetable table {
+	border-collapse: collapse;
+	width: 100%;
+	border: 0px !important;
+}
+
+.ui-treetable .ui-treetable-header,.ui-treetable .ui-treetable-footer {
+	text-align: center;
+	padding: 4px 10px;
+}
+
+.ui-treetable .ui-treetable-header {
+	border-bottom: 0px none;
+}
+
+.ui-treetable .ui-treetable-footer {
+	border-top: 0px none;
+}
+
+.ui-treetable th,.ui-treetable tfoot td {
+	text-align: center;
+	white-space: nowrap;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+.ui-treetable .ui-treetable-data td,.ui-treetable .ui-treetable-data-empty td
+	{
+	border: 0px !important;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+.ui-treetable th div.ui-tt-c,.ui-treetable .ui-treetable-data td div.ui-tt-c,.ui-treetable tfoot td div.ui-tt-c
+	{
+	padding: 4px 10px;
+	overflow: hidden;
+	position: relative;
+}
+
+.ui-treetable .ui-treetable-toggler {
+	float: left;
+	margin-top: -2px;
+	cursor: pointer;
+} /*Imagem */
+.ui-treetable .ui-treetable-data tr.ui-state-highlight {
+	cursor: pointer;
+}
+
+.ui-treetable-scrollable {
+	
+}
+
+.ui-treetable-scrollable-body {
+	overflow: auto;
+}
+
+.ui-treetable-scrollable-header,.ui-treetable-scrollable-footer {
+	overflow: hidden;
+	border: 0 none;
+}
+
+.ui-treetable-scrollable .ui-treetable-scrollable-body table,.ui-treetable-scrollable .ui-treetable-scrollable-header table,.ui-treetable-scrollable .ui-treetable-scrollable-footer table
+	{
+	width: auto;
+}
+
+.ui-treetable-scrollable .ui-treetable-scrollable-header,.ui-treetable-scrollable .ui-treetable-scrollable-footer
+	{
+	position: relative;
+}
+
+.ui-treetable-scrollable .ui-treetable-scrollable-header-box,.ui-treetable-scrollable .ui-treetable-scrollable-footer-box
+	{
+	float: left;
+	padding-right: 40px;
+}
+
+.ui-treetable .ui-treetable-data tr.ui-state-hover {
+	border-color: inherit;
+	font-weight: inherit;
+	*font-weight: normal; /*IE7 hack*/
+}
+
+.tab tr {
+	padding: 25px;
+}
+
+.ui-widget-header {
+	border: none !important;
+	
+	color: rgb(51, 51, 51);
+	font-weight: bold;
+	text-shadow: 0px 1px 0px rgba(255, 255, 255, 0.7);
+}
+
+/*---------------------------Fim Tabelas-----------------------------*/

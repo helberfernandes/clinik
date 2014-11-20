@@ -84,7 +84,7 @@ public class Usuario implements Serializable, ObjectBase {
 	@Fetch(value = FetchMode.JOIN)
 	private Empresa empresa = new Empresa();
 
-	private boolean plantao;
+	
 	@Column(name = "cor", length = 7)
 	private String cor = "#444";
 
@@ -393,25 +393,7 @@ public class Usuario implements Serializable, ObjectBase {
 		this.horaUltimoAcesso = horaUltimoAcesso;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.wofsolutions.vo.TesteInter#isPlantao()
-	 */
 
-	public boolean isPlantao() {
-		return plantao;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see br.com.wofsolutions.vo.TesteInter#setPlantao(boolean)
-	 */
-
-	public void setPlantao(boolean plantao) {
-		this.plantao = plantao;
-	}
 
 	/*
 	 * (non-Javadoc)

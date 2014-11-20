@@ -199,7 +199,10 @@
 	
 	
 	
-	
+	<url-mapping id="cockpit">
+		<pattern value="/cockpit/" />
+		<view-id value="/admin/cockpit/index.xhtml?faces-redirect=true" />
+	</url-mapping>
 	
 
 	<!-- Begin UrlMappings // These are examples of URL mappings, and should 

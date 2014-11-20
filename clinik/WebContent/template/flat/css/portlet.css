@@ -6,16 +6,17 @@
 .box-element {
 	border-radius: 5px;
 	clear: both;
-	margin-top: 0px;
+	margin-top: 0px;	
 	margin-bottom: 25px;
 	padding: 0px;
 	margin-bottom: 20px;
 	background-color: #FFF;
 	border: 1px solid transparent;
 	border-radius: 4px;
-	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);
-	
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);	
 	border-top: 2px solid #dfdfdf;
+	min-height: 350px;
+	max-height: 350px;
 }
 /*
 	inicio do css do cabecalho	
@@ -30,8 +31,43 @@
 	border-top-right-radius: 4px;
 }
 
+
+
+/* Barra de ferramentas */
+.box-element_bar {
+	border-radius: 5px;
+	clear: both;
+	margin-top: 0px;	
+	margin-bottom: 25px;
+	padding: 0px;
+	margin-bottom: 20px;
+	background-color: #FFF;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.05);	
+	border-top: 2px solid #dfdfdf;	
+	min-height: 200px;
+}
+/*
+	inicio do css do cabecalho	
+ */
+.box-element_bar .box-head {
+	font-family: 'Oswald';
+	font-size: 18px;
+	text-transform: uppercase;
+	font-weight: bold;
+	border-bottom: 0px none;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+}
+
+.box-element_bar .box-content {
+	padding: 15px;
+	background-color: #FFF;
+}
+
 .box-head {
-	padding: 10px 15px;
+/* 	padding: 10px 15px; */
 	border-bottom: 1px solid transparent;
 	border-top-right-radius: 3px;
 	border-top-left-radius: 3px;
@@ -39,8 +75,9 @@
 
 .box-head h3 {
 	padding-left: 0.75em;
+	font-size:12px;
 }
-
+ 
 
 .forms-16 {
 	background-image:
@@ -56,52 +93,6 @@
 
 .box-element .box-content {
 	padding: 15px;
-	background-color: #F8F9FA;
+	background-color: #FFF;
 }
-
-.box-element .ui-widget-header {
-    background:none;
-    font-family: 'Oswald';	
-	text-transform: uppercase;
-	font-weight: bold;
-	border: 0px none;
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
-}
-
-
-.box-element .box-content .ui-widget-header {
-	padding: 15px;
-	background-color: #F8F9FA;
-}
-
-
-
-
-
-
-
-/*
-	header para a agenda
-*/
-
-.box-element .box-head-agenda {
-	font-family: 'Oswald';
-	font-size: 18px;
-	text-transform: uppercase;
-	font-weight: bold;
-	border-bottom: 0px none;
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
-}
-
-.box-head-agenda {
-	padding: 10px 10px 28px 5px;
-	border-bottom: 1px solid transparent;
-	border-top-right-radius: 3px;
-	border-top-left-radius: 3px;
-}
-
-
-
 

@@ -1,0 +1,49 @@
+Migrar paciente clinik 2
+
+insert into clinik.wof_pacientes (nome) SELECT paciente FROM laboratorio.wof_atendimento
+
+CREATE OR REPLACE VIEW v_pacientes_duplicados  AS
+select * from wof_pacientes group by nome having count(nome)>1
+
+deletando os pacientes duplicados 
+delete FROM wof_pacientes  where paciente_id in (select paciente_id from v_pacientes_duplicados  where v_pacientes_duplicados.paciente_id=wof_pacientes.paciente_id)
+
+
+exames 
+insert into  clinik.wof_exames (exame_id, nome, honorarios, empresa_id) SELECT exame_id, nome, honorarios, 1 FROM laboratorio.wof_exames 
+
+convenios
+insert into  clinik.wof_convenios (convenio_id, nome, empresa_id) SELECT convenio_id, nome, 1 FROM laboratorio.wof_convenios w;
+
+exame convenios
+insert into clinik. wof_exame_convenio  SELECT * FROM laboratorio.wof_exame_convenio w;
+
+
+Medicos
+insert into clinik.wof_usuarios (usuario_id,nome, status, medico) SELECT medico_id, nome, 1,1 FROM laboratorio.wof_medicos
+
+insert into  clinik.wof_medicos (medico_id,nome, equipe, solicitante) SELECT usuario_id,nome, 1, 0 FROM wof_usuarios where medico=1
+
+
+
+insert into wof_exames_medicos (exame_id, medico_id) SELECT exame_id, medico_id FROM laboratorio.wof_exames_medicos
+
+colocando os medicos com o perfil de medicos
+update wof_usuarios set role_id=4, empresa_id=1
+
+
+
+importando os atendimentos 
+
+insert into  wof_atendimento (data_lancamento,falta_guia, paciente_id,   valor,   convenio_id,  exame_id ,   medico_id ,   solicitante_id ,   deletado, empresa_id,estado_workflow_id, tipo_atendimento_id) SELECT data_lancamento,falta_guia, paciente_id,   valor,   convenio_id,  exame_id ,   medico_id ,   solicitante_id ,   deletado, 1,1,1  FROM laboratorio.wof_atendimento a join  clinik.wof_pacientes p on a.paciente=p.nome; 
+
+
+cadastrando o root
+insert into wof_usuarios (nome, login, senha, medico, status, empresa_id, role_id) values ('root', 'root', md5('123456'), 0, 1, 1, 1)
+
+
+definindo quem é medico e quem é solicitante
+update wof_medicos set equipe =0, solicitante=1 where medico_id not in(SELECT medico_id FROM wof_atendimento group by medico_id)
+update wof_medicos set equipe =1, solicitante=0 where medico_id in(SELECT medico_id FROM wof_atendimento group by medico_id)
+
+update wof_pacientes set empresa_id=1;

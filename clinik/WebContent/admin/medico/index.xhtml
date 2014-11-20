@@ -18,8 +18,8 @@
 
 	<ui:define name="conteudo">
 		<h:form id="formPrincipal">
-			<div class="box-element">
-				<div class="box-content">
+			<div class="box-element" style="min-height: 100px;">
+				<div class="box-content" >
 					<ul class="actions">
 
 						<h:panelGroup>
@@ -122,6 +122,16 @@
 					<div class="clearfix"></div>
 				</div>
 			</div>
+			
+			
+			<div class="box-element">
+				<div class="box-head">
+					<span></span>
+					<h3>
+						<i class="forms-16"></i> #{msg['system.titulo.pagina.medicos']}
+					</h3>
+				</div>
+				<div class="box-content">
 
 			<p:dataTable id="listaDados" value="#{medicoController.lista}"
 				var="medico" rows="10" paginator="true"
@@ -187,6 +197,8 @@
 				
 
 			</p:dataTable>
+</div>
+</div>
 
 		</h:form>
 	</ui:define>
