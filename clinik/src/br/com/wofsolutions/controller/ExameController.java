@@ -11,6 +11,7 @@ import org.hibernate.Hibernate;
 import br.com.wofsolutions.dao.ExameDAOImpl;
 import br.com.wofsolutions.dao.MedicoDAOImpl;
 import br.com.wofsolutions.helper.BaseControllerHelper;
+import br.com.wofsolutions.util.HibernateUtil;
 import br.com.wofsolutions.vo.Convenio;
 import br.com.wofsolutions.vo.Exame;
 import br.com.wofsolutions.vo.ExameConvenio;
@@ -30,6 +31,12 @@ public class ExameController extends BaseControllerHelper<Exame, ExameDAOImpl> {
 	private MedicoDAOImpl medicoDAOImpl = new MedicoDAOImpl();
 	
 	
+	@Override
+	public void salvar() {
+		
+		super.salvar();
+	}
+	
 	public String novo() {
 		novoObjeto();
 		// FacesUtil.redirect(GO_CADASTRO + "0/");
@@ -45,19 +52,22 @@ public class ExameController extends BaseControllerHelper<Exame, ExameDAOImpl> {
 	@Override
 	public void init() {
 		super.init();
+//		
+//		for (int i = 0; i < obj.getExameConvenios().size(); i++) {  
+//            Hibernate.initialize(obj.getExameConvenios().get(i));  
+//        }  
+//		
+//        
+//        for (int i = 0; i < obj.getMedicos().size(); i++) {  
+//            Hibernate.initialize(obj.getMedicos().get(i));  
+//        }  
+		
 		
 		medicos = medicoDAOImpl.getTotosMedicosEquipe(getUsuarioOnline().getEmpresa());
 		
 		
 		 
-         for (int i = 0; i < obj.getExameConvenios().size(); i++) {  
-             Hibernate.initialize(obj.getExameConvenios().get(i));  
-         }  
-		
          
-         for (int i = 0; i < obj.getMedicos().size(); i++) {  
-             Hibernate.initialize(obj.getMedicos().get(i));  
-         }  
          
 		if(obj.getExameId()==null){
 			convenios = dao.findAll3(getUsuarioOnline().getEmpresa());
@@ -67,7 +77,7 @@ public class ExameController extends BaseControllerHelper<Exame, ExameDAOImpl> {
 						new ExameConvenio(new ExameConvenioPK(obj, convenio), 0.0));
 			}
 		}else{
-			System.out.println("ddd");
+			
 //			for (Convenio convenio : convenios) {
 //				if(!obj.getExameConvenios().contains(new ExameConvenio( new ExameConvenioPK(obj, convenio)))){
 //				

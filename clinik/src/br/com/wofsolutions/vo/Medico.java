@@ -33,38 +33,49 @@ public class Medico extends Usuario implements Serializable, ObjectBase {
 	private static final long serialVersionUID = 4705344552926234032L;
 	public static final int EQUIPE = 0;
 	public static final int SOLICITANTE = 1;
-//	@Id
-//	@GeneratedValue
-//	@Column(name = "medico_id")
-//	private Integer usuarioId;
+	// @Id
+	// @GeneratedValue
+	// @Column(name = "medico_id")
+	// private Integer usuarioId;
 	@Column(length = 80)
 	@OrderBy(value = "ASC")
 	private String nome;
 	private boolean equipe = true;
 	private boolean solicitante;
 
-//	@ManyToMany(fetch=FetchType.EAGER)
-//	//@Cascade(CascadeType.ALL)
-//	@JoinTable(name = "wof_exames_medicos", joinColumns = @JoinColumn(name = "medico_id"), inverseJoinColumns = @JoinColumn(name = "exame_id"))
-//	private List<Exame> exames = new ArrayList<Exame>();
+	// @ManyToMany(fetch=FetchType.EAGER)
+	// //@Cascade(CascadeType.ALL)
+	// @JoinTable(name = "wof_exames_medicos", joinColumns = @JoinColumn(name =
+	// "medico_id"), inverseJoinColumns = @JoinColumn(name = "exame_id"))
+	// private List<Exame> exames = new ArrayList<Exame>();
 
-//	@OneToMany(targetEntity = Atendimento.class)
-//	//@Cascade(CascadeType.ALL)
-//	@JoinColumn(name = "medico_id", referencedColumnName = "medico_id")
-//	private List<Atendimento> atendimentos = new ArrayList<Atendimento>();
+	// @OneToMany(targetEntity = Atendimento.class)
+	// //@Cascade(CascadeType.ALL)
+	// @JoinColumn(name = "medico_id", referencedColumnName = "medico_id")
+	// private List<Atendimento> atendimentos = new ArrayList<Atendimento>();
 
-//	@OneToMany(targetEntity = Atendimento.class)
-//	//@Cascade(CascadeType.ALL)
-//	@JoinColumn(name = "solicitante_id", referencedColumnName = "medico_id")
-//	private List<Atendimento> atendimentosSolicitante = new ArrayList<Atendimento>();
+	// @OneToMany(targetEntity = Atendimento.class)
+	// //@Cascade(CascadeType.ALL)
+	// @JoinColumn(name = "solicitante_id", referencedColumnName = "medico_id")
+	// private List<Atendimento> atendimentosSolicitante = new
+	// ArrayList<Atendimento>();
 
-//	@ManyToOne
-//	@JoinColumn(name = "empresa_id", referencedColumnName = "empresa_id")
-//	private Empresa empresa = new Empresa();
+	// @ManyToOne
+	// @JoinColumn(name = "empresa_id", referencedColumnName = "empresa_id")
+	// private Empresa empresa = new Empresa();
 
 	public Medico(String nome) {
 		super();
 		this.nome = nome;
+	}
+
+	public Medico(Integer usuarioId, String nome, boolean equipe,
+			boolean solicitante) {
+		super();
+		this.nome = nome;
+		this.equipe = equipe;
+		this.solicitante = solicitante;
+		this.usuarioId = usuarioId;
 	}
 
 	public Medico() {
@@ -103,21 +114,21 @@ public class Medico extends Usuario implements Serializable, ObjectBase {
 		this.solicitante = solicitante;
 	}
 
-//	public List<Exame> getExames() {
-//		return exames;
-//	}
-//
-//	public void setExames(List<Exame> exames) {
-//		this.exames = exames;
-//	}
+	// public List<Exame> getExames() {
+	// return exames;
+	// }
+	//
+	// public void setExames(List<Exame> exames) {
+	// this.exames = exames;
+	// }
 
-//	public Empresa getEmpresa() {
-//		return empresa;
-//	}
-//
-//	public void setEmpresa(Empresa empresa) {
-//		this.empresa = empresa;
-//	}
+	// public Empresa getEmpresa() {
+	// return empresa;
+	// }
+	//
+	// public void setEmpresa(Empresa empresa) {
+	// this.empresa = empresa;
+	// }
 
 	@Override
 	public int hashCode() {
@@ -147,25 +158,25 @@ public class Medico extends Usuario implements Serializable, ObjectBase {
 
 	@Override
 	public String toString() {
-		return "Medico [usuarioId=" + usuarioId + "]";
+		return  String.valueOf(usuarioId);
 	}
 
-//	public List<Atendimento> getAtendimentos() {
-//		return atendimentos;
-//	}
-//
-//	public void setAtendimentos(List<Atendimento> atendimentos) {
-//		this.atendimentos = atendimentos;
-//	}
-//
-//	public List<Atendimento> getAtendimentosSolicitante() {
-//		return atendimentosSolicitante;
-//	}
-//
-//	public void setAtendimentosSolicitante(
-//			List<Atendimento> atendimentosSolicitante) {
-//		this.atendimentosSolicitante = atendimentosSolicitante;
-//	}
+	// public List<Atendimento> getAtendimentos() {
+	// return atendimentos;
+	// }
+	//
+	// public void setAtendimentos(List<Atendimento> atendimentos) {
+	// this.atendimentos = atendimentos;
+	// }
+	//
+	// public List<Atendimento> getAtendimentosSolicitante() {
+	// return atendimentosSolicitante;
+	// }
+	//
+	// public void setAtendimentosSolicitante(
+	// List<Atendimento> atendimentosSolicitante) {
+	// this.atendimentosSolicitante = atendimentosSolicitante;
+	// }
 
 	@Override
 	public void setId(Integer id) {

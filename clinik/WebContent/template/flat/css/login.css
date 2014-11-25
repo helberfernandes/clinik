@@ -8,10 +8,11 @@ body {
 
 body.login {
 	
-	background: url('/clinik/template/flat/css/imagens/banner-bg5.jpg') no-repeat fixed center center / cover #1FB3A3;
+	background: url('/clinik/template/flat/css/imagens/banner-bg5.png') no-repeat fixed center center / cover rgb(107,57,108);
 	
 	min-width: 0;
 }
+
 
 a{
 	text-decoration: none;
@@ -49,9 +50,9 @@ border-radius:50%;
 	font-weight: normal;
 	background: white;
 	border: 1px solid #E5E5E5;
-	-moz-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	-webkit-box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
-	box-shadow: rgba(200, 200, 200, 0.7) 0 4px 10px -1px;
+	-moz-box-shadow: rgb(107,57,108) 0 4px 10px -1px;
+	-webkit-box-shadow: rgb(107,57,108) 0 4px 10px -1px;
+	box-shadow: rgb(107,57,108) 0 4px 10px -1px;
 	border-image: initial;
 }
 

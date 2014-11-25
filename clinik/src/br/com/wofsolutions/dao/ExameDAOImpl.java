@@ -1,6 +1,8 @@
 package br.com.wofsolutions.dao;
 
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,16 +15,57 @@ import br.com.wofsolutions.vo.Convenio;
 import br.com.wofsolutions.vo.Empresa;
 import br.com.wofsolutions.vo.Exame;
 import br.com.wofsolutions.vo.ExameConvenio;
+import br.com.wofsolutions.vo.Medico;
 
 public class ExameDAOImpl extends
-		HibernateDAOImpl<Exame, ExameConvenio, Convenio> implements Serializable {
-
+HibernateDAOImpl<Exame, ExameConvenio, Convenio> implements Serializable {
+private ConexaoUtil conexaoUtil = new ConexaoUtil();
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	@Override
+	public boolean salvar(Exame obj) {
+		//if(obj.getExameId()==null){
+			return super.salvar(obj);
+//		}else{
+//			return salvarExame(obj);
+//		}
+	}
+	
+	private boolean salvarExame(Exame exame) {
+		try {
+			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("UPDATE wof_exames honorarios=?,nome=?,empresa_id=? WHERE exame_id=?");
+			
+			ps.setDouble(1, exame.getHonorarios());
+			ps.setString(2, exame.getNome());
+			ps.setInt(3, exame.getEmpresa().getEmpresaId());
+			ps.setInt(4, exame.getExameId());
+			ps.execute();
+			
+			
+			
+			ps = conexaoUtil.getCon().prepareStatement("INSERT INTO wof_exames_medicos (exame_id,medico_id ) VALUES (?,?)");
+			
+			for(Medico medico:exame.getMedicos()){				
+				ps.setInt(1, exame.getExameId());
+				ps.setInt(2, medico.getMedicoId());
+				ps.execute();
+			}
+			
+			return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+
+	}
+	
 	
 	
 	public Exame getExamePeloNome(Exame exame) {

@@ -12,6 +12,7 @@ import br.com.wofsolutions.interfaces.ObjectBase;
 import br.com.wofsolutions.mensagens.FacesMessages;
 import br.com.wofsolutions.model.ObjDataModel;
 import br.com.wofsolutions.util.FacesUtil;
+import br.com.wofsolutions.util.HibernateUtil;
 import br.com.wofsolutions.vo.Modulo;
 import br.com.wofsolutions.vo.Usuario;
 /**
@@ -40,7 +41,7 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
 	@Override
 	@PostConstruct
 	public void init() {
-		
+		HibernateUtil.getCurrentSession();
 			init(FINDALL_COM_EMPRESA);	
 		
 			
@@ -92,6 +93,7 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
 		obj.setEmpresa(getUsuarioOnline().getEmpresa());
 		
 		boolean resp = dao.salvar(obj);
+		
 		novoObjeto();
 		FacesMessages.setMessageSuccessOrFailure(resp);
 		lista=dao.findAll(getUsuarioOnline().getEmpresa());

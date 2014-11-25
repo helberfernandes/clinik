@@ -75,7 +75,7 @@
 
 					<p:tab title="#{msg['system.label.medico']}">
 						<h:outputText value="#{msg['system.label.medico']}" />
-						<p:selectManyCheckbox id="medicos"
+						<p:selectManyCheckbox id="medicos"  collectionType="java.util.ArrayList"
 							value="#{exameController.obj.medicos}" converter="#{medicoConverter}">
 							<f:selectItems value="#{exameController.medicos}" var="medico"
 								itemLabel="#{medico.nome}" itemValue="#{medico}" />

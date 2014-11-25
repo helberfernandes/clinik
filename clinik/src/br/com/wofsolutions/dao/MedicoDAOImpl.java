@@ -1,24 +1,41 @@
 package br.com.wofsolutions.dao;
 
 import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
+import br.com.wofsolutions.util.ConexaoUtil;
+import br.com.wofsolutions.util.HibernateUtil;
 import br.com.wofsolutions.vo.Empresa;
 import br.com.wofsolutions.vo.Medico;
 
 public class MedicoDAOImpl extends HibernateDAOImpl<Medico, Object, Object>
 		implements Serializable {
-
+	ConexaoUtil conexaoUtil = new ConexaoUtil();
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
+	
+	public Medico getMedico(Integer medicoId){
+		HibernateUtil.doBeginTransaction();
+		Medico medico=getObjetoPelaChave(medicoId);
+		HibernateUtil.doCommit();
+		return medico;
+	}
+	
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -182,9 +199,12 @@ public class MedicoDAOImpl extends HibernateDAOImpl<Medico, Object, Object>
 
 	@SuppressWarnings("unchecked")
 	public List<Medico> getTotosMedicosEquipe(Empresa empresa) {
+		Transaction tr=getSession().beginTransaction();
 		Criteria criteria = getSession().createCriteria(Medico.class);
 		criteria.add(Restrictions.and(Restrictions.eq("empresa", empresa),Restrictions.eq("equipe", true)));
 		criteria.addOrder(Order.asc("nome"));
-		return criteria.list();
+		List<Medico> medicos=criteria.list();
+		tr.commit();
+		return medicos;
 	}
 }

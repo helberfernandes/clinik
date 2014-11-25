@@ -24,7 +24,7 @@ import br.com.wofsolutions.vo.Paginas;
 import br.com.wofsolutions.vo.Usuario;
 import br.com.wofsolutions.vo.Usuario;
 
-@WebFilter(servletNames={"Faces Servlet"})
+//@WebFilter(servletNames={"Faces Servlet"})
 public class HibernateSessionInViewFilter implements Filter {
 
 	private static final String PAGINA_INICIAL    = Messages.getString("system.pagina.home"); //$NON-NLS-1$
@@ -204,7 +204,16 @@ public class HibernateSessionInViewFilter implements Filter {
 			}
 		}
 */
+		
+		
+		
+		
+		
 		filterChain.doFilter(request, response);
+		
+		
+		
+		
 		HibernateUtil.getCurrentSession().clear();
 		HibernateUtil.getCurrentSession().flush();
 

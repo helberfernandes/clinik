@@ -8,6 +8,7 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
 import br.com.wofsolutions.dao.MedicoDAOImpl;
+import br.com.wofsolutions.util.HibernateUtil;
 import br.com.wofsolutions.vo.Medico;
 @ManagedBean(name = "medicoConverter")
 @RequestScoped
@@ -20,10 +21,9 @@ public class MedicoConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("Medico \\[usuarioId\\=", "");
-		value=value.replaceAll("\\]", "");
+	
 		
-		return medicoDAO.getObjetoPelaChave(Integer.parseInt(String.valueOf(value)));
+		return medicoDAO.getMedico(Integer.parseInt(String.valueOf(value)));
 	}
 
 	@Override

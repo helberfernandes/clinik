@@ -5,7 +5,7 @@
 	<session-factory name="clinik">
 		<property name="hibernate.connection.driver_class">org.gjt.mm.mysql.Driver</property>
 		<property name="hibernate.connection.password">st1215</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost/clinik?autoReconnect=true</property>
+		<property name="hibernate.connection.url">jdbc:mysql://192.168.0.34/clinik?autoReconnect=true</property>
 		<property name="hibernate.connection.username">root</property>
 
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>

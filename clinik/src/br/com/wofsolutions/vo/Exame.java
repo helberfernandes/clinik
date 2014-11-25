@@ -20,7 +20,6 @@ import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.Subselect;
 
 import br.com.wofsolutions.interfaces.ObjectBase;
 
@@ -39,7 +38,7 @@ public class Exame implements Serializable, ObjectBase {
 	private String nome;	
 	private double honorarios;	
 	
-	@ManyToMany(fetch=FetchType.EAGER)	
+	@ManyToMany(fetch=FetchType.EAGER, cascade= {javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE})
 	@Fetch(FetchMode.SUBSELECT)
 	@JoinTable(name="wof_exames_medicos",
 	joinColumns=@JoinColumn(name="exame_id"),
