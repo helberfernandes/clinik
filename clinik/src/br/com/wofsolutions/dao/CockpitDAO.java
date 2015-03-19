@@ -130,7 +130,40 @@ public class CockpitDAO implements Serializable {
 		return 0;
 	}
 	
+public int getQtdProcedimentosMedicos(int medicoId){
+		
+		try {
+			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("SELECT   count(*) qtd FROM wof_atendimento where medico_id= "+medicoId);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				return rs.getInt("qtd");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
+	
+public int getQtdProcedimentosFaltaGuia(){
+		
+		try {
+			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("SELECT   count(*) qtd FROM wof_atendimento where falta_guia=true ");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				return rs.getInt("qtd");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
+	}
 	
 
 	

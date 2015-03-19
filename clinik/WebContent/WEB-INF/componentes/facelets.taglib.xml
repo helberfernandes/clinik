@@ -57,6 +57,17 @@
 		<tag-name>dialogRelQtdProcedimentoKalil</tag-name>
 		<source>dialogRelQtdProcedimentoDrKalil.xhtml</source>
 	</tag>
-	
+	<tag>
+		<tag-name>knob</tag-name>
+		<source>knob.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>radar</tag-name>
+		<source>radar.xhtml</source>
+	</tag>
+	<tag>
+		<tag-name>grafLinha</tag-name>
+		<source>grafLinha.xhtml</source>
+	</tag>
 	
 </facelet-taglib>

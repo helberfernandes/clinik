@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+
+	<br />
+	
+	
+	
+
+
+
+			<div class="container-fluid">
+				<div class="row-fluid">
+
+					<ui:repeat var="graf"
+						value="#{value}"
+						varStatus="status">
+
+						<div class="col-md-2 " style="text-align: center;   ">
+
+
+
+
+
+
+							<div class="panel panel-default" >
+								<div class="panel-body" style="text-align: center; " >
+									<input class="knob" data-width="100" data-height="100" data-min="-100"
+										data-max="2000000" data-displayPrevious="false"
+										data-fgColor="#{graf.cor}" value="#{graf.total}" />
+								</div>
+								<div class="panel-footer" style="background-color: #fff!important;border-top: 1px solid #{graf.cor};">#{graf.nome}</div>
+							</div>
+
+
+						
+				</div>
+				</ui:repeat>
+		
+
+
+		<script>
+            $(function($) {
+
+                $(".knob").knob({
+                    change : function (value) {
+                        //console.log("change : " + value);
+                    },
+                    release : function (value) {
+                        //console.log(this.$.attr('value'));
+                        console.log("release : " + value);
+                    },
+                    cancel : function () {
+                        console.log("cancel : ", this);
+                    },
+                    /*format : function (value) {
+                        return value + '%';
+                    },*/
+                    draw : function () {
+
+                        // "tron" case
+                        if(this.$.data('skin') == 'tron') {
+
+                            this.cursorExt = 0.3;
+
+                            var a = this.arc(this.cv)  // Arc
+                                , pa                   // Previous arc
+                                , r = 1;
+
+                            this.g.lineWidth = this.lineWidth;
+
+                            if (this.o.displayPrevious) {
+                                pa = this.arc(this.v);
+                                this.g.beginPath();
+                                this.g.strokeStyle = this.pColor;
+                                this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                                this.g.stroke();
+                            }
+
+                            this.g.beginPath();
+                            this.g.strokeStyle = r ? this.o.fgColor : this.fgColor ;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                            this.g.stroke();
+
+                            this.g.lineWidth = 2;
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.o.fgColor;
+                            this.g.arc( this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                            this.g.stroke();
+
+                            return false;
+                        }
+                    }
+                });
+                // Example of infinite knob, iPod click wheel
+                var v, up=0,down=0,i=0
+                    ,$idir = $("div.idir")
+                    ,$ival = $("div.ival")
+                    ,incr = function() { i++; $idir.show().html("+").fadeOut(); $ival.html(i); }
+                    ,decr = function() { i--; $idir.show().html("-").fadeOut(); $ival.html(i); };
+                $("input.infinite").knob(
+                                    {
+                                    min : 0
+                                    , max : 20
+                                    , stopper : false
+                                    , change : function () {
+                                                    if(v > this.cv){
+                                                        if(up){
+                                                            decr();
+                                                            up=0;
+                                                        }else{up=1;down=0;}
+                                                    } else {
+                                                        if(v &lt; this.cv){
+                                                            if(down){
+                                                                incr();
+                                                                down=0;
+                                                            }else{down=1;up=0;}
+                                                        }
+                                                    }
+                                                    v = this.cv;
+                                                }
+                                    });
+            });
+        </script>
+
+
+
+		<div class="clearfix"></div>
+	</div>
+	</div>
+
+
+
+
+
+
+
+</ui:component>
+</html>

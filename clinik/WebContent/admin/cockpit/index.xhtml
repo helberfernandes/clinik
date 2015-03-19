@@ -4,7 +4,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	xmlns:maia="http://supermaia.com.br"
+	xmlns:wof="http://wofsolutions.com.br"
 	template="./../../template/sistema/subtemplate.xhtml">
 
 	<ui:param name="mostrarBarraEsquerda" value="true" />
@@ -23,48 +23,12 @@
 			<div class="container-fluid">
 				<div class="row">
 					<div class="row">
-						<div class="col-xs-6 col-md-4">
-							<p:pieChart value="#{cockpitController.pieModel1}"
-								showDataLabels="true" legendPosition="es"
-								title="Percentural de solicitacoes"
-								style="border:none !important;font-size: 13px;vertical-align: top !important; width:540px; height: 320px;"  
-								 
-								 seriesColors="B0C4DE,4682B4,708090,778899"
-								 />
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<p:pieChart value="#{cockpitController.pieModel2}"
-								showDataLabels="true" legendPosition="ne"
-								title="Percentural de Convenios" 
-								style="border:none !important;font-size: 13px;vertical-align: top !important; width:540px; height: 320px;"
-								/>
-						</div>
-						<div class="col-xs-6 col-md-4">
-						
-						<p:meterGaugeChart  value="#{cockpitController.totalDeProcedimentos}" 
-												seriesColors="cc6666, FF8C00,FFD700, E7E658 ,93b75f,66cc66"
-												style="width:400px;height:250px" title="Quantidade de Procedimentos" label="qtd"/>
-						</div>
+						<wof:knob value="#{cockpitController.knobModels}"/>
 					</div>
 
 
 					<div class="row">
-						<div class="col-xs-12 col-md-8">
-							<p:barChart value="#{cockpitController.barModel}"
-								legendPosition="ne" legendCols="5" animate="true" zoom="true"
-								seriesColors="006400,FFFF00,483D8B,CD3333"
-								title="Total De Procedimentos Realizados Por Mes" minY="0"
-								maxY="200" style="height:300px;margin-top:20px" />
-
-						</div>
-						<div class="col-xs-6 col-md-4">
-							<p:barChart value="#{cockpitController.barModel2}"
-								legendPosition="ne" legendCols="5" animate="true" zoom="true"
-								seriesColors="006400,FFFF00,483D8B,CD3333"
-								title="Total De Procedimentos Realizados Por Exame" minY="0"
-								maxY="200" style="height:300px;margin-top:20px" />
-
-						</div>
+						
 					</div>
 				</div>
 			</div>

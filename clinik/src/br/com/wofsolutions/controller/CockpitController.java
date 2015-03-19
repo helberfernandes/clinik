@@ -14,6 +14,7 @@ import org.primefaces.model.chart.MeterGaugeChartModel;
 import org.primefaces.model.chart.PieChartModel;
 
 import br.com.wofsolutions.dao.CockpitDAO;
+import br.com.wofsolutions.model.KnobModel;
 import br.com.wofsolutions.model.cockpit.QTDCategoriaValor;
 import br.com.wofsolutions.model.cockpit.QtdMes;
 
@@ -28,15 +29,24 @@ public class CockpitController implements Serializable {
 	private PieChartModel pieModel2;
 	private MeterGaugeChartModel totalDeProcedimentos;
 	
+	private List<KnobModel> knobModels = new ArrayList<KnobModel>();
 
 	@PostConstruct
 	public void init() {
 
-		barModel = initBarModel();
-		barModel2 = initBarModel2();
-		createPieModel1();
-		createPieModel2();
-		createMeterGaugeModel();
+//		barModel = initBarModel();
+//		barModel2 = initBarModel2();
+//		createPieModel1();
+//		createPieModel2();
+//		createMeterGaugeModel();
+		
+		knobModels.add(new KnobModel("Procedimentos", "#C57A75", cockpitDAO.getQtdProcedimentos()));
+		knobModels.add(new KnobModel("Procedimentos Falta Guia", "#6994A2", cockpitDAO.getQtdProcedimentosFaltaGuia()));
+		knobModels.add(new KnobModel("Wagner", "#B7D5AF", cockpitDAO.getQtdProcedimentosMedicos(1)));
+		knobModels.add(new KnobModel("Juan", "#11A1D0", cockpitDAO.getQtdProcedimentosMedicos(10)));
+		knobModels.add(new KnobModel("Kalil", "#FF6600", cockpitDAO.getQtdProcedimentosMedicos(37)));
+		knobModels.add(new KnobModel("Bertone", "#FFD401", cockpitDAO.getQtdProcedimentosMedicos(4)));
+		
 	}
 
 	private CartesianChartModel initBarModel() {
@@ -109,77 +119,20 @@ public class CockpitController implements Serializable {
 			pieModel2.set(mes.getNome(), mes.getQtd());
 		}
 	}
-	
-	
-	private void createMeterGaugeModel() {
 
-		List<Number> intervals = new ArrayList<Number>() {
-			{
-				add(5);
-				add(200);
-				add(500);
-				add(8000);
-				add(30000);
-				add(90090);
-			}
-		};
-		
-		
+	public List<KnobModel> getKnobModels() {
+		return knobModels;
+	}
 
-
-		totalDeProcedimentos = new MeterGaugeChartModel( cockpitDAO.getQtdProcedimentos(),
-				intervals);
+	public void setKnobModels(List<KnobModel> knobModels) {
+		this.knobModels = knobModels;
 	}
 	
+	
+	
+	
 
-	public List<QtdMes> getList() {
-		return list;
-	}
 
-	public void setList(List<QtdMes> list) {
-		this.list = list;
-	}
-
-	public CartesianChartModel getBarModel() {
-
-		return barModel;
-	}
-
-	public void setBarModel(CartesianChartModel barModel) {
-		this.barModel = barModel;
-	}
-
-	public CartesianChartModel getBarModel2() {
-		return barModel2;
-	}
-
-	public void setBarModel2(CartesianChartModel barModel2) {
-		this.barModel2 = barModel2;
-	}
-
-	public PieChartModel getPieModel1() {
-		return pieModel1;
-	}
-
-	public void setPieModel1(PieChartModel pieModel1) {
-		this.pieModel1 = pieModel1;
-	}
-
-	public PieChartModel getPieModel2() {
-		return pieModel2;
-	}
-
-	public void setPieModel2(PieChartModel pieModel2) {
-		this.pieModel2 = pieModel2;
-	}
-
-	public MeterGaugeChartModel getTotalDeProcedimentos() {
-		return totalDeProcedimentos;
-	}
-
-	public void setTotalDeProcedimentos(MeterGaugeChartModel totalDeProcedimentos) {
-		this.totalDeProcedimentos = totalDeProcedimentos;
-	}
 
 	
 	

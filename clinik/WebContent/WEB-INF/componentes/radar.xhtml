@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+<ui:component>
+
+	
+	<style>
+	.circle {
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 50%; 
+    -webkit-border-radius: 50%; 
+    border-radius: 50%;
+   background: rgba(220,220,220,0.2);
+  position:absolute;
+	top:0;
+	left:0;
+}
+	</style>
+	<div class=" col-xs-1 col-md-3" style="text-align: center; vertical-align: text-top; padding:5px;  ">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">#{titulo}</h3>
+			</div>
+			<div class="panel-body" style=" text-align: center; padding:0px">
+			<div class="form-group">
+			<div class="circle" style="background: rgba(220,220,220,1);"></div>#{value.dataDe} #{value.dataAte}
+			</div>
+			<br/>
+			<div class="circle" style="background: rgba(151,187,205,1);"></div>#{value.dataAntDe} #{value.dataAntAte}
+				<canvas id="#{id}" height="250" width="250" ></canvas>
+			</div>
+		</div>
+	</div>
+	<script>
+			
+					var radarChartData#{num} = {
+							labels : [ #{value.labels}],
+							datasets : [
+									{
+										label : "My First dataset 2014",
+										fillColor : "rgba(220,220,220,0.2)",
+										strokeColor : "rgba(220,220,220,1)",
+										pointColor : "rgba(220,220,220,1)",
+										pointStrokeColor : "#fff",
+										pointHighlightFill : "#fff",
+										pointHighlightStroke : "rgba(220,220,220,1)",
+										data : [#{value.data1} ]
+									},
+									{
+										label : "My Second dataset 2015",
+										fillColor : "rgba(151,187,205,0.2)",
+										strokeColor : "rgba(151,187,205,1)",
+										pointColor : "rgba(151,187,205,1)",
+										pointStrokeColor : "#fff",
+										pointHighlightFill : "#fff",
+										pointHighlightStroke : "rgba(151,187,205,1)",
+										data : [#{value.data2} ]
+									} ]
+						};
+
+						
+							window.myRadar#{num} = new Chart(document
+									.getElementById("#{id}").getContext("2d")).Radar(
+									radarChartData#{num}, {
+										responsive : true
+									});
+						
+				
+			</script>
+
+
+
+
+
+
+
+
+
+
+</ui:component>
+</html>
