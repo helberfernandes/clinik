@@ -57,7 +57,7 @@
             <name>value</name>
             <required>true</required>
             <rtexprvalue>false</rtexprvalue>
-            <type>br.com.wofsolutions.model.RadarModel</type>
+            <type>br.com.wofsolutions.model.LinhaModel</type>
             <description>
                 Valor associado ao inputText do componente
             </description>

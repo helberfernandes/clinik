@@ -4,10 +4,20 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core" 
 	xmlns:f="http://java.sun.com/jsf/core">
 <ui:component>
 
-	
+	 <style type="text/css">
+           .bola {
+    border-radius: 50%;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
+    
+}
+        </style>
 	
 	<div class=" col-xs-1 col-md-6"  >
 		<div class="panel panel-default">
@@ -15,37 +25,52 @@
 				<h3 class="panel-title">#{titulo}</h3>
 			</div>
 			<div class="panel-body" >
-			<div style="width:75%">
+			<div class="  col-md-9"  >
+			<div style="width:100%; ">
 				<canvas id="#{id}" height="600" width="900" style="padding: 5px;"></canvas>
 				</div>
 			</div>
+			<div class="col-md-3"  >	
+				<ul class="list-unstyled" >
+  
+  <ui:repeat var="graf"
+	value="#{value.dataSets}"
+	varStatus="status">  
+	
+	<li><div class="bola" style="background-color: #{graf.cor},1)"></div>#{graf.label}</li>
+	</ui:repeat>
+</ul>
+</div>
+				
+			</div>
 		</div>
 	</div>
+	
 	<script>
-			
+	
+
 	var lineChartData = {
 			labels : [#{value.labels}],
 			datasets : [
-				{
-					label: "My First dataset",
-					fillColor : "rgba(220,220,220,0.2)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
+
+<ui:repeat var="graf"
+	value="#{value.dataSets}"
+	varStatus="status">   
+	
+	
+
+			            {
+					label: "My First dataset ",
+					fillColor : "#{graf.cor},0.2)",
+					strokeColor : "#{graf.cor},1)",
+					pointColor : "#{graf.cor},1)",
 					pointStrokeColor : "#fff",
 					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(220,220,220,1)",
-					data : [#{value.data2}]
-				},
-				{
-					label: "My Second dataset",
-					fillColor : "rgba(151,187,205,0.2)",
-					strokeColor : "rgba(151,187,205,1)",
-					pointColor : "rgba(151,187,205,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(151,187,205,1)",
-					data : [#{value.data1}]
+					pointHighlightStroke : "#{graf.cor},1)",
+					data : [#{graf.data1}]
 				}
+			            <c:if test="#{!status.last}">,</c:if>			            
+			            </ui:repeat>            
 			]
 
 		}

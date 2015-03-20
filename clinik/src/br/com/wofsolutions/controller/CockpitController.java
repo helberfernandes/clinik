@@ -15,6 +15,8 @@ import org.primefaces.model.chart.PieChartModel;
 
 import br.com.wofsolutions.dao.CockpitDAO;
 import br.com.wofsolutions.model.KnobModel;
+import br.com.wofsolutions.model.LinhaModel;
+import br.com.wofsolutions.model.RadarModel;
 import br.com.wofsolutions.model.cockpit.QTDCategoriaValor;
 import br.com.wofsolutions.model.cockpit.QtdMes;
 
@@ -30,7 +32,9 @@ public class CockpitController implements Serializable {
 	private MeterGaugeChartModel totalDeProcedimentos;
 	
 	private List<KnobModel> knobModels = new ArrayList<KnobModel>();
-
+	private RadarModel radarModel;
+	private RadarModel radarModelMedico;
+	private LinhaModel linhaModel;
 	@PostConstruct
 	public void init() {
 
@@ -46,36 +50,13 @@ public class CockpitController implements Serializable {
 		knobModels.add(new KnobModel("Juan", "#11A1D0", cockpitDAO.getQtdProcedimentosMedicos(10)));
 		knobModels.add(new KnobModel("Kalil", "#FF6600", cockpitDAO.getQtdProcedimentosMedicos(37)));
 		knobModels.add(new KnobModel("Bertone", "#FFD401", cockpitDAO.getQtdProcedimentosMedicos(4)));
+		radarModel=cockpitDAO.getQtdProcedimentosExame();
 		
+		radarModelMedico=cockpitDAO.getQtdProcedimentosMedico();
+		linhaModel=cockpitDAO.getTotalProcedimentosRealizadosPorMes();
 	}
 
-	private CartesianChartModel initBarModel() {
-		barModel = new CartesianChartModel();
 
-		List<QtdMes> list = cockpitDAO.getTotalProcedimentosRealizadosPorMes();
-
-		ChartSeries boys;
-		for (QtdMes mes : list) {
-			boys = new ChartSeries();
-			boys.setLabel(mes.getNome());
-			boys.set("Janeiro", mes.getJaneiro());
-			boys.set("Fevereiro", mes.getFevereiro());
-			boys.set("Marco", mes.getMarco());
-			boys.set("Abril", mes.getAbril());
-			boys.set("Maio", mes.getMaio());
-			boys.set("Junho", mes.getJunho());
-			boys.set("Julho", mes.getJulho());
-			boys.set("Agosto", mes.getAgosto());
-			boys.set("Setembro", mes.getSetembro());
-			boys.set("Outubro", mes.getOutubro());
-			boys.set("Novembro", mes.getNovembro());
-			boys.set("Dezembro", mes.getDezembro());
-			barModel.addSeries(boys);
-			
-		}
-
-		return barModel;
-	}
 
 	private CartesianChartModel initBarModel2() {
 		barModel2 = new CartesianChartModel();
@@ -127,14 +108,33 @@ public class CockpitController implements Serializable {
 	public void setKnobModels(List<KnobModel> knobModels) {
 		this.knobModels = knobModels;
 	}
-	
-	
-	
-	
+
+	public RadarModel getRadarModel() {
+		return radarModel;
+	}
+
+	public void setRadarModel(RadarModel radarModel) {
+		this.radarModel = radarModel;
+	}
+
+	public RadarModel getRadarModelMedico() {
+		return radarModelMedico;
+	}
+
+	public void setRadarModelMedico(RadarModel radarModelMedico) {
+		this.radarModelMedico = radarModelMedico;
+	}
 
 
 
-	
+	public LinhaModel getLinhaModel() {
+		return linhaModel;
+	}
+
+
+
+	public void setLinhaModel(LinhaModel linhaModel) {
+		this.linhaModel = linhaModel;
+	}
 	
 }
-

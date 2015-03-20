@@ -1,58 +1,67 @@
 package br.com.wofsolutions.model;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
-public class RadarModel {
-	private String categorias;
+public class LinhaModel {
+	
 	private String labels;
-	private String data1;
-	private String data2;
+	private List<LinhaDataSet> dataSets = new ArrayList<LinhaDataSet>();
 	private String dataDe;
 	private String dataAte;
 	private String dataAntDe;
 	private String dataAntAte;
-
-	public RadarModel() {
+	
+	public LinhaModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public RadarModel(String labels, String data1, String data2) {
+	
+	
+	
+	
+
+	public LinhaModel(String labels) {
 		super();
 		this.labels = labels;
-		this.data1 = data1;
-		this.data2 = data2;
 	}
 
-	
-	
-	public RadarModel(String labels, String data1, String data2, String dataDe,
-			String dataAte, String dataAntDe, String dataAntAte) {
+
+
+
+
+
+	public LinhaModel(String labels, String dataDe, String dataAte,
+			String dataAntDe, String dataAntAte) {
 		super();
 		this.labels = labels;
-		this.data1 = data1;
-		this.data2 = data2;
 		this.dataDe = dataDe;
 		this.dataAte = dataAte;
 		this.dataAntDe = dataAntDe;
 		this.dataAntAte = dataAntAte;
 	}
-	
-	
 
-	public RadarModel(String categorias, String labels, String data1,
-			String data2, String dataDe, String dataAte, String dataAntDe,
-			String dataAntAte) {
+
+
+
+
+
+	public LinhaModel(String labels, List<LinhaDataSet> dataSets,
+			String dataDe, String dataAte, String dataAntDe, String dataAntAte) {
 		super();
-		this.categorias = categorias;
 		this.labels = labels;
-		this.data1 = data1;
-		this.data2 = data2;
+		this.dataSets = dataSets;
 		this.dataDe = dataDe;
 		this.dataAte = dataAte;
 		this.dataAntDe = dataAntDe;
 		this.dataAntAte = dataAntAte;
 	}
+
+
+
+
+
 
 	public String getLabels() {
 		return labels;
@@ -62,21 +71,7 @@ public class RadarModel {
 		this.labels = labels;
 	}
 
-	public String getData1() {
-		return data1;
-	}
 
-	public void setData1(String data1) {
-		this.data1 = data1;
-	}
-
-	public String getData2() {
-		return data2;
-	}
-
-	public void setData2(String data2) {
-		this.data2 = data2;
-	}
 
 	public String getDataDe() {
 		return dataDe;
@@ -110,13 +105,25 @@ public class RadarModel {
 		this.dataAntAte = dataAntAte;
 	}
 
-	public String getCategorias() {
-		return categorias;
+
+
+
+
+
+	public List<LinhaDataSet> getDataSets() {
+		return dataSets;
 	}
 
-	public void setCategorias(String categorias) {
-		this.categorias = categorias;
+
+
+
+
+
+	public void setDataSets(List<LinhaDataSet> dataSets) {
+		this.dataSets = dataSets;
 	}
+
+	
 	
 	
 }
