@@ -3,44 +3,52 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"	
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	template="./../../template/sistema/subtemplate.xhtml">
 
-	
-	
 
 
-	
+
+
+
 
 
 	<ui:define name="conteudo">
 
+		<p:ajaxStatus onstart="statusDialog.show();"
+			onsuccess="statusDialog.hide();" />
+
+		<p:dialog modal="true" widgetVar="statusDialog" header="Aguarde..."
+			draggable="false" closable="false">
+			<p:graphicImage value="#{pastaImagens}ajaxloadingbar.gif" />
+		</p:dialog>
 		<style type="text/css">
+		.ui-widget-header {
+			background: none !important;
+			border: 1px solid #dfdfdf;
+		}
 
+		.global .fc-event-skin {
+			background: #006600 !important;
+		}
+
+		.pessoal .fc-event-skin {
+			background: #003399 !important;
+		}
+
+		.fc-event {
 		
-html,body {
-	margin: 0px;
-	padding: 0px;
-	font-family: arial;
-	font-size: 8pt;
-	background: #f5f5f5;
-}
+		}
 
-#conteudo {
-	padding: 20px;
-	height: 350px;
-}
+		.faltaguia {
+			background: #727cb6 !important;
+			border: #727cb6 !important;
+		}
 
-.global .fc-event-skin {
-	background: #006600 !important;
-}
-
-.pessoal .fc-event-skin {
-	background: #003399 !important;
-}
-
-	
-
+		.ui-widget .ui-state-highlight {
+			background: #FFFFFF !important;
+			border: 1px solid #dfdfdf !important;
+		}
 </style>
 		<script type="text/javascript">
 			PrimeFaces.locales['pt'] = {
@@ -78,150 +86,108 @@ html,body {
 		</script>
 		<h:form id="formPrincipal">
 
-
-
-
-
-
-
-
-
-
-
 			<p:messages id="messages" />
 
+			<div class="container-fluid" style="margin-top: 15px;">
+				<div class="row">
+					<div class="col-md-3">
 
+						<div class="box-element">
+							<div class="box-head">
+								<span class="forms-16"></span>
+								<h3>#{msg['system.titulo.medicos']}</h3>
+							</div>
+							<div class="box-content">
+								<p:tree id="treeSingle" value="#{atendimentoController.root}"
+									var="node" selectionMode="single"
+									selection="#{atendimentoController.selectedNode}">
 
+									<p:ajax event="select"
+										update=":formPrincipal:agendaTitulo,:formPrincipal:agenda, :formDialog:agendar"
+										listener="#{atendimentoController.onNodeSelect}" />
 
-
-			<h:panelGrid columns="2" width="100%" cellspacing="0" cellpadding="5"
-				columnClasses="colunaLeft, colunaRight">
-
-
-				<h:column>
-					<div class="box-element">
-						<div class="box-head">
-							<span class="forms-16"></span>
-							<h3>#{msg['system.titulo.medicos']}</h3>
-						</div>
-						<div class="box-content">
-							<p:tree id="treeSingle" value="#{atendimentoController.root}"
-								var="node" selectionMode="single"
-								selection="#{atendimentoController.selectedNode}">
-
-								<p:ajax event="select"
-									update=":formPrincipal:agendaTitulo,:formPrincipal:agenda, :formDialog:agendar"
-									listener="#{atendimentoController.onNodeSelect}" />
-
-								<p:treeNode type="medico" icon="ui-icon-document">
-									<h:outputText value="#{fn:substring(node.nome,0,10)}" />
-								</p:treeNode>
-							</p:tree>
-
-						</div>
-					</div>
-				</h:column>
-
-
-				<h:column id="agendaColumn">
-					<div class="box-element">
-						<div class="box-head-agenda">
-							
-							<div >
-							<div >
-							<a href="" class="pull-left">
-								<h:graphicImage value="#{atendimentoController.medico.foto}" styleClass="foto" width="65"/>
-							</a>
-							<div class="media-body innerTB innerR">
-								<div class="innerT half pull-right">
-								<a href="#type" class=" btn btn-default bg-white btn-sm" data-toggle="collapse">
-									<i class="fa fa-pencil"></i>#{msg['system.titulo.agenda']}
-									<br/>
-									<h4 id="nomePlantao" class="text-white pull-left innerAll strong display-block margin-none">
-									<h:outputText id="agendaTitulo"
-									value="#{atendimentoController.medico.nome}" />
-									
-									</h4>
-								</a>
-								</div>                                                                                                                
-								<h4  class="text-white pull-left innerAll strong display-block margin-none"></h4>
-								
+									<p:treeNode type="medico" icon="ui-icon-document">
+										<h:outputText value="#{fn:substring(node.nome,0,10)}" />
+									</p:treeNode>
+								</p:tree>
 
 							</div>
+						</div>
 
+					</div>
+					<div class="col-md-9">
+
+						<div class="box-element">
+							<div class="box-head-agenda">
+
+								<div class="content-fluid" style="margin-top: 5px;">
+									<div class="row-fluid">
+										<div class="col-sm-1">
+											<h:graphicImage value="#{atendimentoController.medico.foto}"
+												styleClass="img-circle" width="65" />
+										</div>
+										<div class="col-sm-11">
+											<div style="margin-left: 5px;">
+												<h3>#{msg['system.titulo.agenda']}</h3>
+												<h4 id="nomePlantao">
+													<h:outputText id="agendaTitulo"
+														value="Dr. #{atendimentoController.medico.nome}" />
+												</h4>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="box-content">
+								<h:panelGroup id="agendaGrup">
+									<p:schedule id="agenda"
+										value="#{atendimentoController.eventModel}" widgetVar="agenda"
+										locale="pt" timeZone="#{configuracaoController.timeZone}"
+										maxTime="#{atendimentoController.usuarioOnline.empresa.horarioMaximo+1}pm"
+										minTime="#{atendimentoController.usuarioOnline.empresa.horarioMinimo}am"
+										showWeekends="#{atendimentoController.usuarioOnline.empresa.mostrarFimDeSemana}"
+										showHeader="#{atendimentoController.usuarioOnline.empresa.mostrarCabecalho}"
+										resizable="false" draggable="false" allDaySlot="false"
+										timeFormat="dd/MM hh:mm"
+										slotMinutes="#{atendimentoController.usuarioOnline.empresa.tempoMedioProcedimento}"
+										view="#{atendimentoController.usuarioOnline.empresa.viewPadrao}"
+									
+										>
+										<p:ajax event="dateSelect"
+											listener="#{atendimentoController.onDateSelect}"
+											update=":formPrincipal:agenda, :formDialog:agendar"
+											 />
+										<p:ajax event="eventSelect"
+											listener="#{atendimentoController.onEventSelect}"
+											update=":formPrincipal:agenda, :formDialog:agendar"
+											oncomplete="PF('eventDialog').show()" />
+										<p:ajax event="eventMove"
+											listener="#{atendimentoController.onEventMove}"
+											update="messages" />
+										<p:ajax event="eventResize"
+											listener="#{atendimentoController.onEventResize}"
+											update="messages" />
+
+
+									</p:schedule>
+
+								</h:panelGroup>
+							</div>
 						</div>
 					</div>
-							
-						</div>
-						<div class="box-content">
-							<h:panelGroup id="agendaGrup">
-								<p:schedule id="agenda"
-									value="#{atendimentoController.eventModel}" widgetVar="agenda"
-									locale="pt" timeZone="#{configuracaoController.timeZone}"
-									maxTime="#{atendimentoController.usuarioOnline.empresa.horarioMaximo+1}pm"
-									minTime="#{atendimentoController.usuarioOnline.empresa.horarioMinimo}am"
-									showWeekends="#{atendimentoController.usuarioOnline.empresa.mostrarFimDeSemana}"
-									showHeader="#{atendimentoController.usuarioOnline.empresa.mostrarCabecalho}"
-									resizable="false" draggable="false"
-									allDaySlot="false"
-									timeFormat="dd/MM hh:mm"
-									slotMinutes="#{atendimentoController.usuarioOnline.empresa.tempoMedioProcedimento}"
-									view="#{atendimentoController.usuarioOnline.empresa.viewPadrao}"
-									
-									
-									
-									>
-									<p:ajax event="dateSelect"
-										listener="#{atendimentoController.onDateSelect}"
-										update=":formPrincipal:agenda, :formDialog:agendar"
-										oncomplete="PF('eventDialog').show()" />
-									<p:ajax event="eventSelect"
-									
-										listener="#{atendimentoController.onEventSelect}"
-										update=":formPrincipal:agenda, :formDialog:agendar"
-										oncomplete="PF('eventDialog').show()" />
-									<p:ajax event="eventMove"
-										listener="#{atendimentoController.onEventMove}"
-										update="messages" />
-									<p:ajax event="eventResize"
-										listener="#{atendimentoController.onEventResize}"
-										update="messages" />
-
-
-
-
-	
-
-
-								</p:schedule>
-
-							</h:panelGroup>
-						</div>
-					</div>
-				</h:column>
-
-
-
-
-
-
-			</h:panelGrid>
+				</div>
+			</div>
 
 		</h:form>
 	</ui:define>
 
 
-
-
-
-
 	<ui:define name="dialog">
 		<h:form id="formDialog">
 			<p:dialog id="agendar" widgetVar="eventDialog"
-				header="#{msg['system.label.agendamento']}" 
-				 modal="true"  >
-
-
+				header="#{msg['system.label.agendamento']}" modal="true">
 
 				<div class="box-element" style="min-height: 100px;">
 					<div class="box-content">
@@ -233,7 +199,8 @@ html,body {
 										<p:commandLink
 											actionListener="#{atendimentoController.salvar}"
 											update="growl, :formPrincipal:agendaGrup"
-											styleClass="btn_salvar" disabled="#{atendimentoController.disabilita}">
+											styleClass="btn_salvar"
+											disabled="#{atendimentoController.disabilita}">
 
 											<h:outputText value="#{msg['system.label.salvar']}" />
 
@@ -249,7 +216,8 @@ html,body {
 								<li><div>
 
 										<p:commandLink onclick="PF('paciente').show()"
-											immediate="true" styleClass="btn_paciente" disabled="#{atendimentoController.disabilita}">
+											immediate="true" styleClass="btn_paciente"
+											disabled="#{atendimentoController.disabilita}">
 
 											<h:outputText value="#{msg['system.label.paciente']}" />
 
@@ -268,7 +236,8 @@ html,body {
 								<li><div>
 
 										<p:commandLink onclick="PF('convenio').show()"
-											immediate="true" styleClass="btn_convenio" disabled="#{atendimentoController.disabilita}">
+											immediate="true" styleClass="btn_convenio"
+											disabled="#{atendimentoController.disabilita}">
 
 											<h:outputText value="#{msg['system.label.convenio']}" />
 
@@ -286,7 +255,8 @@ html,body {
 								<li><div>
 
 										<p:commandLink onclick="PF('exame').show()" immediate="true"
-											styleClass="btn_exame" disabled="#{atendimentoController.disabilita}">
+											styleClass="btn_exame"
+											disabled="#{atendimentoController.disabilita}">
 
 											<h:outputText value="#{msg['system.label.exame']}" />
 
@@ -303,7 +273,8 @@ html,body {
 								<li><div>
 
 										<p:commandLink onclick="PF('solicitante').show()"
-											immediate="true" styleClass="btn_solicitante" disabled="#{atendimentoController.disabilita}">
+											immediate="true" styleClass="btn_solicitante"
+											disabled="#{atendimentoController.disabilita}">
 
 											<h:outputText value="#{msg['system.label.solicitante']}" />
 
@@ -323,23 +294,21 @@ html,body {
 				<p:messages id="growl" />
 
 
-				<h:panelGrid id="eventDetails" columns="2" cellpadding="0" cellspacing="0">
+				<h:panelGrid id="eventDetails" columns="2" cellpadding="0"
+					cellspacing="0">
 					<h:outputText value="#{msg['system.label.data']}" />
 					<p:calendar id="data"
-						value="#{atendimentoController.obj.dataAtendimento}" disabled="#{atendimentoController.disabilita}"
+						value="#{atendimentoController.obj.dataAtendimento}"
+						disabled="#{atendimentoController.disabilita}"
 						pattern="dd/MM/yyyy HH:mm" required="true" showButtonPanel="true"
-						showOn="button"
-						mindate="#{configuracaoController.hoje}"
+						showOn="button" mindate="#{configuracaoController.hoje}"
 						maxHour="#{atendimentoController.usuarioOnline.empresa.horarioMaximo}"
 						minHour="#{atendimentoController.usuarioOnline.empresa.horarioMinimo}"
-						minMinute="0"
-						timeZone="#{configuracaoController.timeZone}"
-						
-						 />
-						 
-		
+						minMinute="0" timeZone="#{configuracaoController.timeZone}" />
+
+
 					<h:outputText value="#{msg['system.label.paciente']}" />
-					<h:inputText id="paciente" size="80" 
+					<h:inputText id="paciente" size="80"
 						value="#{atendimentoController.obj.paciente.nome}" required="true"
 						disabled="true" />
 					<h:outputText value="#{msg['system.label.convenio']}" />
@@ -347,56 +316,58 @@ html,body {
 						value="#{atendimentoController.obj.convenio.nome}" required="true"
 						disabled="true" />
 					<h:outputText value="#{msg['system.label.exame']}" />
-					<h:inputText id="exame" size="80" 
+					<h:inputText id="exame" size="80"
 						value="#{atendimentoController.obj.exame.nome}" required="true"
 						disabled="true" />
 					<h:outputText value="#{msg['system.label.solicitante']}" />
-					<h:inputText id="solicitante" size="80" 
+					<h:inputText id="solicitante" size="80"
 						value="#{atendimentoController.obj.solicitante.nome}"
 						required="true" disabled="true" />
 					<h:outputText value="#{msg['system.label.medico']}" />
-					<h:inputText id="medico" size="80" 
+					<h:inputText id="medico" size="80"
 						value="#{atendimentoController.obj.medico.nome}" disabled="true"
 						required="true" />
-				
-				
-				<h:outputText value="#{msg['system.label.tipo.atendimento']}" />
-					<h:selectOneListbox value="#{atendimentoController.obj.tipoAtendimento}"
-						converter="#{tipoAtendimentoConverter}" size="1" disabled="#{atendimentoController.disabilita}"
-						>
+
+
+					<h:outputText value="#{msg['system.label.tipo.atendimento']}" />
+					<h:selectOneListbox
+						value="#{atendimentoController.obj.tipoAtendimento}"
+						converter="#{tipoAtendimentoConverter}" size="1"
+						disabled="#{atendimentoController.disabilita}">
 						<f:selectItems value="#{tipoAtendimentoController.lista}"
-							var="tipoAtendimento" itemLabel="#{tipoAtendimento.descricao}" itemValue="#{tipoAtendimento}" />
+							var="tipoAtendimento" itemLabel="#{tipoAtendimento.descricao}"
+							itemValue="#{tipoAtendimento}" />
 					</h:selectOneListbox>
-				
-				
+
+
 					<h:outputText value="#{msg['system.label.valor']}" />
 					<h:inputText id="valor" size="10"
 						value="#{atendimentoController.obj.valor}" required="true"
 						disabled="true" />
 					<h:outputText value="#{msg['system.label.falta.guia']}" />
 					<p:selectBooleanCheckbox
-						value="#{atendimentoController.obj.faltaGuia}" disabled="#{atendimentoController.disabilita}" />
-<h:outputText value="#{msg['system.label.status']}"  />		
-						
-							<h:selectOneListbox id="status"
-									value="#{atendimentoController.obj.status}"
-									styleClass="campo" size="1"
-									converter="#{estadoWorkflowConverter}" disabled="#{atendimentoController.disabilita}">
+						value="#{atendimentoController.obj.faltaGuia}"
+						disabled="#{atendimentoController.disabilita}" />
+					<h:outputText value="#{msg['system.label.status']}" />
+
+					<h:selectOneListbox id="status"
+						value="#{atendimentoController.obj.status}" styleClass="campo"
+						size="1" converter="#{estadoWorkflowConverter}"
+						disabled="#{atendimentoController.disabilita}">
 
 
 
-									<f:selectItems
-										value="#{atendimentoController.estadoWorkflows}"
-										var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
-										itemValue="#{estadoWorkflow}" />
+						<f:selectItems value="#{atendimentoController.estadoWorkflows}"
+							var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
+							itemValue="#{estadoWorkflow}" />
 
 
-<f:selectItems
-										value="#{atendimentoController.obj.status.estadoWorkflows}"
-										var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
-										itemValue="#{estadoWorkflow}"  />
+						<f:selectItems
+							value="#{atendimentoController.obj.status.estadoWorkflows}"
+							var="estadoWorkflow" itemLabel="#{estadoWorkflow.descricao}"
+							itemValue="#{estadoWorkflow}" />
 
-								</h:selectOneListbox>	
+					</h:selectOneListbox>
 
 				</h:panelGrid>
 			</p:dialog>

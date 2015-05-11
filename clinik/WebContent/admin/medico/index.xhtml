@@ -136,7 +136,8 @@
 			<p:dataTable id="listaDados" value="#{medicoController.lista}"
 				var="medico" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+				currentPageReportTemplate=" Exibindo de {startRecord} a {endRecord} no total de {totalRecords} paginas"
+				rowsPerPageTemplate="10,20,25,50" 
 				emptyMessage="#{msg['system.msg.nenhum.registro.encontrado']}"
 				rowIndexVar="index" rowKey="#{medico.medicoId}">
 

@@ -281,7 +281,6 @@ input[type="text"],input[type="password"],textarea {
 	-webkit-box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
 	box-shadow: inset 1px 1px 2px rgba(200, 200, 200, 0.2);
 	color: #555;
-	margin: 5px 5px 5px 5px;
 }
 
 input[type="text"]:HOVER,input[type="password"]:HOVER,textarea:HOVER {
@@ -893,7 +892,7 @@ footer {
 }
 
 .box-element .box-content ul.actions li {
-	width: 8%;
+	width: 10%;
 	float: left;
 	text-align: center;
 	list-style: none;

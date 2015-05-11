@@ -1,0 +1,183 @@
+
+
+
+/* ---- reset 0.3 ---- */
+* {font-family:inherit;font-size:100%;margin:0;outline:0;padding:0;}
+body {background:#fff;line-height:1;}
+table {border-collapse:collapse;border-spacing:0;}
+legend,hr {display:none;}
+li {list-style:none;}
+a {text-decoration:none;}
+caption,th {text-align:left;}
+blockquote:before,blockquote:after,q:before,q:after {content:"";content:none;}
+blockquote,q {quotes:"" "";}
+abbr,acronym,img,fieldset {border:0;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select {font-family:inherit;font-size:inherit;font-weight:inherit;}
+
+/* ---- fonts 0.3 ---- */
+body {font:x-small arial,helvetica,freesans,sans-serif;*font-size:1.25ex;
+ background:url(./imagens/404chamados.png) no-repeat  !important;
+}
+#glb-doc {font-size:1.2em;}
+select, input, textarea {font:0.99em arial,helvetica,clean,sans-serif;}
+
+
+.paginas-erro {
+    margin:10.83em auto;
+    min-width:485px;
+    text-align:left;
+}
+
+.conteudo-erro h1 {
+    
+    display:block;
+    margin:0 auto 1.25em auto;
+    height:15.00em;
+    overflow:hidden;
+    text-indent:-9999px;
+    width:27.00em;
+}
+.conteudo-transbordo h1 {
+    background:none/*url(/er/i/bg-transbordo.gif) no-repeat center center*/;
+    display:block;
+    color:#D6D6D6;
+    font-size:20em;
+    font-weight:bold;
+    margin:0.33em auto;
+    height:0.75em;
+    overflow:hidden;
+    line-height:0.78em;
+    text-indent:0/*-9999px*/;
+    text-align:center;
+    width:auto;
+}
+.conteudo-erro h2 {
+    background:url(/er/i/titulo_404.gif) no-repeat center center;
+    display:block;
+    margin:0 auto 0.67em auto;
+    height:2.67em;
+    overflow:hidden;
+    text-indent:-9999px;
+    width:27.42em;
+}
+.paginas-erro p {
+    font-size:15px;
+    color:#858585;
+    letter-spacing:-15%;
+    line-height:18px;
+    margin-bottom:0.1em;
+    text-align:center;
+}
+.paginas-erro p.endereco-404 {
+    font-weight:bold;
+    margin-bottom:5.42em;
+}
+
+.paginas-erro form {
+    margin-bottom:6.67em;
+    margin:0 auto;
+    width:35.5em;
+}
+.paginas-erro form label {
+    color:#999;
+    font-size:1.165em;
+    font-weight:bold;
+    margin-right:0.42em;
+    text-align:center;
+}
+.paginas-erro form input[type=text] {
+    background:url(/er/i/bg-input-busca-404.gif) no-repeat center left;
+    border:none;
+    color:#333;
+    font-size:2.25em;
+    float:left;
+    letter-spacing:-15%;
+    line-height:2em;
+    margin-top:0.03em;
+    padding:0.2em 0.5em 0.2em 1.5em;
+    overflow:hidden;
+    width:10em;
+}
+.paginas-erro form input[type=submit] {
+    background:url(/er/i/botao-busca-404.gif) no-repeat center right;
+    border:none;
+    font-size:1.5em;
+    float:left;
+    color:#FFF;
+    display:block;
+    font-weight:bold;
+    padding:0.5em 0 0.7em 0;
+    overflow:hidden;
+    width:5.2em;
+}
+.paginas-erro form input[type=submit]:hover {
+    cursor:pointer;
+}
+
+.paginas-erro .rodape-link {
+    font-size:4.335em;
+    letter-spacing:-0.08em;
+    *letter-spacing:-0.4em;
+}
+.paginas-erro .rodape-link a {
+    color:#06D;
+    text-decoration:none;
+}
+.paginas-erro .rodape-link a:hover {
+    text-decoration:underline;
+}
+.paginas-erro .rodape-link a span {
+    font-weight:normal;
+}
+
+.conteudo-transbordo {
+    border-top:18px solid #F3F3F3;
+    margin-top:0;
+}
+
+.conteudo-transbordo .info-secundaria {
+    border-top:1px solid #DDD;
+    padding:3.33em 0 2.50em 0;
+}
+.conteudo-transbordo .info-secundaria strong {
+    color:#0878e7;
+    display:block;
+    font-size:2.50em;
+    letter-spacing:-0.03em;
+    line-height:1em;
+    text-align:center;
+}
+.conteudo-transbordo .info-secundaria span {
+    color:#999;
+    display:block;
+    font-size:1.83em;
+    font-weight:bold;
+    line-height:1em;
+    text-align:center;
+}
+.conteudo-transbordo .info-secundaria a {
+    background:url(/er/i/logo-pagina-erro.gif) no-repeat center left;
+    display:block;
+    margin:2.50em auto 0 auto;
+    text-align:center;
+    height:40px;
+    width:72px;
+    text-indent:-9999px;
+    overflow:hidden;
+}
+
+#glb-rodape {background:#E2E2E2;overflow: hidden; color: #8a8a8a;} /*font size: 10px; offset height: 61px*/
+#glb-rodape .glb-conteudo {background: #E2E2E2; padding-top: 2.4em; height: 3.2em;}
+#glb-rodape span {float: left; display: inline;font-size: 0.91em;}
+#glb-rodape ul {float:right; display: inline;font-size: 0.91em;}
+#glb-rodape ul li {display: inline;}
+#glb-rodape ul li a {border-right: 1px solid #8a8a8a; padding: 0 3px 0 1px; color: #999;} /* provavelmente as bordas serao substituidas por imagens; herda a cor do pai */
+#glb-rodape a,
+#glb-rodape ul li a:link,
+#glb-rodape ul li a:hover,
+#glb-rodape ul li a:visited {color: #8A8A8A;}
+#glb-rodape a:hover{text-decoration:underline;}
+#glb-rodape ul li a:hover {text-decoration: underline;}
+#glb-rodape ul li.ultimo a {border-right: none;}

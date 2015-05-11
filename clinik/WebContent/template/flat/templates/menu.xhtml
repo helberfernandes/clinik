@@ -3,109 +3,113 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-	>
-	
-	<div id='cssmenu'>
-		<ul>
-		<li class='has-sub'><a href='#' onclick="bar.show()"
-					class="#{status.last?'last':''}"><span>
-		<h:graphicImage value="#{pastaImagens}logo.png" />
-		</span></a>
-		</li>
-		
-		
-		
-			<ui:repeat var="modulo" value="#{moduloController.lista}"
-				varStatus="status">
-
-				<h:panelGroup rendered="#{modulo.permissao}">
-					<li class='has-sub'><a href='#{modulo.link}'
-						class="#{status.last?'last':''}"><span>#{modulo.descricao}</span></a>
-						<ul>
-							<ui:repeat var="pagina" value="#{modulo.paginas}"
-								varStatus="status">
-								<h:panelGroup rendered="#{pagina.permissao}">
-								
-									
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
 
-									<li>
-									
-									<h:outputLink value="#{server}/#{siteName}#{pagina.link}" title="#{pagina.descricao}" rendered="#{pagina.onClik==null}">
-									<span>#{pagina.descricao}</span></h:outputLink> 
-									
-									<p:commandLink onclick="#{pagina.onClik}" rendered="#{pagina.onClik!=null}">
-									<span>#{pagina.descricao}</span></p:commandLink> 
-									
-									
-									
-									</li>
-								</h:panelGroup>
-							</ui:repeat>
-						</ul></li>
-					
-					
-					
-				</h:panelGroup>
-			</ui:repeat>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<a href="#" class="brand">#{msg['system.nome.sistema']}</a>
+			<ul class="nav">
+				<ui:repeat var="modulo" value="#{moduloController.lista}"
+					varStatus="status">
+					<li class="#{fn:length(modulo.paginas)>0?'dropdown':''}"><a
+						href=""
+						class="#{fn:length(modulo.paginas)>0?'dropdown-toggle':''}"
+						data-toggle="dropdown"> #{modulo.descricao} 
+						<h:panelGroup rendered="#{fn:length(modulo.paginas)>0?true:false}">
+						<b class="caret"></b>
+						</h:panelGroup>
+					</a> <h:panelGroup rendered="#{fn:length(modulo.paginas)>0}">
+							<ul class="dropdown-menu ">
 
-		</ul>
-		<ul style="position: absolute; right: 15px;">
-			
-			
-			
-			
-			
-			
-			
-			
-		
-				<li class='has-sub'><a href='#' onclick="bar.show()"
-					class="#{status.last?'last':''}"><span>
-		<h:outputText value="#{msg['system.versao.sistema']}" style="fonte-size:24px; " /> 
-		</span></a>
-		</li>
-			
-			
-			<li class='has-sub'><h:form id="formMinhaConta">
-			 
-					<p:commandLink action="#{usuarioController.editar}"
-						styleClass="profile-16 tt-top-center">
+								<ui:repeat var="pagina" value="#{modulo.paginas}"
+									varStatus="status">
 
-						<h:graphicImage value="#{fotoUserTumb}" />
-					#{userName}
-													<f:param name="usuarioId" value="#{userId}" />
-					</p:commandLink>
-				</h:form>
-				<ul>
-					<li  class='has-sub ' style="background-color: red;">
-				
-			
-				
-				 <h:outputLink 
-							
-							value="/chamados/config/" rel="/config/" 
-						immediate="true" 
-							
-							>
-							 <h:outputText value="#{msg['system.label.configuracoes']}"/>
-						</h:outputLink>	
-				</li>
-					<li><h:form id="formSair">
-							<p:commandLink id="logout" value="Sair"
-								actionListener="#{loginController.logout}" />
-						</h:form></li>
-				</ul></li>
-				
-				
-				
-		</ul>
+
+									<h:panelGroup rendered="#{pagina.grupoMenu==null}">
+
+
+
+										<li><h:outputLink
+												value="#{server}/#{siteName}#{pagina.link}"
+												title="#{pagina.descricao}"
+												rendered="#{pagina.onClik==null}">
+												<span>#{pagina.descricao}</span>
+											</h:outputLink> <p:commandLink onclick="#{pagina.onClik}"
+												rendered="#{pagina.onClik!=null}">
+												<span>#{pagina.descricao}</span>
+											</p:commandLink></li>
+										<li class="divider"></li>
+									</h:panelGroup>
+
+
+								</ui:repeat>
+
+
+								<ui:repeat var="grupo" value="#{modulo.grupos}"
+									varStatus="status">
+									<li class="dropdown-submenu"><a tabindex="-1" href="#">#{grupo.nome}</a>
+												<ul class="dropdown-menu">
+									<ui:repeat var="pagina" value="#{grupo.paginas}"
+										varStatus="status">
+										
+											
+													<li><h:outputLink
+															value="#{server}/#{siteName}#{pagina.link}"
+															title="#{pagina.descricao}"
+															rendered="#{pagina.onClik==null}">
+															<span>#{pagina.descricao}</span>
+														</h:outputLink> <p:commandLink onclick="#{pagina.onClik}"
+															rendered="#{pagina.onClik!=null}">
+															<span>#{pagina.descricao}</span>
+														</p:commandLink></li>
+													<li class="divider"></li>
+												
+										
+									</ui:repeat>
+									</ul></li>
+								</ui:repeat>
+
+							</ul>
+						</h:panelGroup></li>
+
+				</ui:repeat>
+
+			</ul>
+
+
+			<ul class="nav pull-right">
+				<li class="dropdown"><a href="" class="dropdown-toggle"
+					data-toggle="dropdown"> <h:graphicImage value="#{fotoUserTumb}"
+							styleClass="img-circle" /> #{userName} <b class="caret"></b>
+				</a>
+					<ul class="dropdown-menu ">
+
+						<li><a href=""> <h:outputText
+									value="#{msg['system.versao.sistema']}"
+									style="fonte-size:24px; " />
+						</a></li>
+						<li class="divider"></li>
+						<li><h:outputLink value="/chamados/config/" rel="/config/"
+								immediate="true">
+								<h:outputText value="#{msg['system.label.configuracoes']}" />
+							</h:outputLink></li>
+
+						<li class="divider"></li>
+						<li><p:commandLink id="logout" value="Sair"
+								actionListener="#{loginController.logout}" /></li>
+					</ul></li>
+			</ul>
+
+
+		</div>
 	</div>
 
 
 
-	
-	
-	
+
+
+
+
+
 </ui:composition>

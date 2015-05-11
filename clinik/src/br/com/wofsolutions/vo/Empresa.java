@@ -45,6 +45,9 @@ public class Empresa implements Serializable , ObjectBase {
 	@Column(length=255)
 	private String logo;
 	
+	@Column(name="foto_perfil", length=900000)
+    private byte[] logoMarca;
+	
 	private String cnpj;
 	
 	@OneToMany(fetch=FetchType.EAGER)
@@ -58,16 +61,16 @@ public class Empresa implements Serializable , ObjectBase {
 	private Date dataCadastro = new Date();
 	
 	@Column(name="horario_minimo", length=2)
-	private Integer horarioMinimo;
+	private Integer horarioMinimo=8;
 
 	@Column(name="horario_maximo", length=2)
-	private Integer horarioMaximo;
+	private Integer horarioMaximo=17;
 	
 	@Column(name="mostrar_final_de_semana")
-	private Boolean mostrarFimDeSemana;
+	private Boolean mostrarFimDeSemana=false;
 	
 	@Column(name="mostrar_cabecalho")
-	private Boolean mostrarCabecalho;
+	private Boolean mostrarCabecalho=true;
 
 	@Column(name="view_padao")
 	private String viewPadrao="agendaWeek";
@@ -182,6 +185,16 @@ public class Empresa implements Serializable , ObjectBase {
 
 	public void setTempoMedioProcedimento(Integer tempoMedioProcedimento) {
 		this.tempoMedioProcedimento = tempoMedioProcedimento;
+	}
+
+	
+	
+	public byte[] getLogoMarca() {
+		return logoMarca;
+	}
+
+	public void setLogoMarca(byte[] logoMarca) {
+		this.logoMarca = logoMarca;
 	}
 
 	@Override

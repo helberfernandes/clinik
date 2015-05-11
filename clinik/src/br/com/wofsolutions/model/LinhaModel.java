@@ -1,9 +1,10 @@
 package br.com.wofsolutions.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LinhaModel {
+public class LinhaModel implements Serializable {
 	
 	private String labels;
 	private List<LinhaDataSet> dataSets = new ArrayList<LinhaDataSet>();

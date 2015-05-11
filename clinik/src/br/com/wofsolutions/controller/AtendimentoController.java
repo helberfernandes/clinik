@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.component.schedule.Schedule;
+import org.primefaces.context.RequestContext;
 import org.primefaces.event.NodeSelectEvent;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
@@ -49,6 +52,8 @@ public class AtendimentoController extends
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private static String CSS_FALTA_GUIA="faltaguia";
+	private static String CSS_DEFAULT="faltaguia";
 	private ScheduleModel eventModel;
 	private ScheduleModel eventModelAtendidos;
 	private ScheduleEvent event = new DefaultScheduleEvent();
@@ -69,7 +74,7 @@ public class AtendimentoController extends
 	@Override
 	public void init() {
 		super.init(BaseControllerHelper.NAO_EXECUTA_FIND_ALL);
-
+		log.info("Iniciando a data para a agenda...");
 		try {
 			obj.setDataAtendimento(MaiaUtil.StringToDate(MaiaUtil
 					.DateToStringDataSomente(new Date())
@@ -81,25 +86,35 @@ public class AtendimentoController extends
 		}
 
 		if (usuarioOnline.isMedico()) {
+			log.info("Pegando o medico celecionado....");
 			medico = medicoDAOImpl.getObjetoPelaChave(usuarioOnline
 					.getUsuarioId());
+			log.info("Medico carrregado...");
+			log.info("Carregando agenda dos atendidos...");			
 			atualizaAgendaAtendidos();
+			log.info("Agenda carregada dos atendidos...");
 		} else {
+			log.info("Carregando os medicos...");
 			carregaMedicos();
+			log.info("Medicos carregados....");
 			if (selectedNode != null) {
 				medico = (Medico) selectedNode.getData();
 			}
-			obj.setMedico(medico);
+		 	obj.setMedico(medico);
 		}
-
+		log.info("Carregando agendas...");
 		atualizaAgenda();
+		log.info("Agenda carregada...");
+		log.info("Obtendo os medicos solicitantes...");
 		solicitantes = daoImpl.getTotosMedicosSolicitante(usuarioOnline
 				.getEmpresa());
-
+		log.info("Medicos solicitantes carregados");
 		// if(obj.getStatus().getEstadoWorkflowId()!=null){
 
+		log.info("Carregando os status...");
 		estadoWorkflows.add(workflowDAOImpl.getStatusInicial(moduloDAOImpl
-				.getObjetoPelaChave(Modulo.CLIENTE_AMIGO)));
+				.getObjetoPelaChave(Modulo.AGENDA)));
+		log.info("Status carregados.");
 		// }
 		
 	}
@@ -109,24 +124,27 @@ public class AtendimentoController extends
 		System.out.println("Teste  "+obj);
 		super.salvar();
 		atualizaAgenda();
+		
 	}
 
 	private void atualizaAgenda() {
 		if (medico != null) {
 			lista = dao.getTotosAtendimentos(medico);
 			eventModel = new DefaultScheduleModel();
+		
 			for (Atendimento atendimento : lista) {
+				
 				DefaultScheduleEvent event = new DefaultScheduleEvent(
-						"Paciente " + atendimento.getPaciente().getNome()
-								+ "\n Exame: "
+						  atendimento.getPaciente().getNome()
+								+ "\n  "
 								+ atendimento.getExame().getNome(),
 						atendimento.getDataAtendimento(),
 						atendimento.getDataAtendimento(), atendimento);
 
 				if (atendimento.isFaltaGuia()) {
-					event.setStyleClass("faltaguia");
+					event.setStyleClass(CSS_DEFAULT);
 				} else {
-					event.setStyleClass("status");
+					event.setStyleClass(CSS_FALTA_GUIA);
 				}
 
 				eventModel.addEvent(event);
@@ -138,14 +156,14 @@ public class AtendimentoController extends
 		lista = dao.getTotosAtendimentos(medico);
 		eventModelAtendidos = new DefaultScheduleModel();
 		for (Atendimento atendimento : lista) {
-			DefaultScheduleEvent event = new DefaultScheduleEvent("Paciente "
-					+ atendimento.getPaciente().getNome() + "\n Exame: "
+			DefaultScheduleEvent event = new DefaultScheduleEvent(
+					atendimento.getPaciente().getNome() + "\n  "
 					+ atendimento.getExame().getNome(),
 					atendimento.getDataAtendimento(),
 					atendimento.getDataAtendimento(), atendimento);
 
 			if (atendimento.isFaltaGuia()) {
-				event.setStyleClass("faltaguia");
+				event.setStyleClass(CSS_DEFAULT);
 			}
 			eventModelAtendidos.addEvent(event);
 		}
@@ -194,7 +212,12 @@ public class AtendimentoController extends
 		
 		obj.setDataAtendimento((Date) selectEvent.getObject());
 		
-		System.out.println(MaiaUtil.DateToStringHoraSomente((Date) selectEvent.getObject()));
+		if(MaiaUtil.diferencaEmHoras((Date) selectEvent.getObject(), new Date())<=0){
+		
+			RequestContext.getCurrentInstance().execute("PF('eventDialog').show()");
+		}else{
+			System.out.println("Não pode marcar");
+		}
 		
 		
 	

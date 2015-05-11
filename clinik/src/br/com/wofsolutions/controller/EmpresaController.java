@@ -1,13 +1,18 @@
 package br.com.wofsolutions.controller;
 
+import java.io.File;
 import java.util.Date;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.FileUploadEvent;
+
 import br.com.wofsolutions.annotation.Parammeter;
 import br.com.wofsolutions.dao.EmpresaDAOImpl;
 import br.com.wofsolutions.helper.BaseControllerHelper;
+import br.com.wofsolutions.util.FacesUtil;
+import br.com.wofsolutions.util.RandomIntGenerator;
 import br.com.wofsolutions.vo.Empresa;
 
 @ViewScoped
@@ -20,6 +25,7 @@ public class EmpresaController extends
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String GO_PAGE = "/clinik/empresa/";
+	private static final String PASTA_IMAGENS = "/midia/imagens/";
 
 	@Override
 	public void salvar() {
@@ -43,5 +49,22 @@ public class EmpresaController extends
 	
 	public void editar() {
 		super.editar(GO_PAGE);
+	}
+	
+	
+	public void uploadLogo(FileUploadEvent event) {
+
+		RandomIntGenerator r1 = new RandomIntGenerator(1, 10);
+
+		String logo = FacesUtil.getCaminho(PASTA_IMAGENS) + File.separator
+				+ event.getFile().getFileName();
+		obj.setLogo(PASTA_IMAGENS+event.getFile().getFileName());
+		
+
+				log.info("Criando o arquivo... " + logo);
+		facesUtil.criaArquivo(event.getFile().getContents(), new File(
+				logo));
+		
+		FacesUtil.redimensiona(logo, 260, 120, logo);
 	}
 }

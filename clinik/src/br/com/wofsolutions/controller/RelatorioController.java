@@ -69,7 +69,8 @@ public class RelatorioController implements Serializable {
 
 		parametros.put("medicoId",
 				mostrarMedico == true ? medicoEquipe.getMedicoId() : 0);
-		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
+		//parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
+		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath(usuarioOnline.getEmpresa().getLogo()));
 		parametros.put("usuario", usuarioOnline.getNome());
 
 		parametros.put("dataDe", getDataDe());

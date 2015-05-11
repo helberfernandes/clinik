@@ -20,64 +20,181 @@
 
 	<style>
 #cssmenu {
-height:49px;
-border-radius:5px 5px 0 0;
--moz-border-radius:5px 5px 0 0;
--webkit-border-radius:5px 5px 0 0;
-background:##{cor};
+	height: 49px;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+	background: ##{cor};
 }
-
 .ui-notificationbar {
-position:fixed;
-width:100%;
-height:100px;
-display:none;
-z-index:10;
-background-color:#141414;
-padding:10px;
+	position: fixed;
+	width: 100%;
+	height: 100px;
+	display: none;
+	z-index: 10;
+	background-color: #141414;
+	padding: 10px;
 }
 
 .left_content {
-margin-left:#{leftMargin};
-padding:0;
+	margin-left: #{leftMargin};
+    padding:0;
 }
-
 #container {
-width:#{larguraDoSite};
+	width: #{larguraDoSite};
 }
-
 #left-menu ul li.active {
-border-top:1px solid #444;
-border-bottom:1px solid #222;
-background:##{cor};
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #222;
+	background: ##{cor};
 }
-
 div.bredcrumbs ul {
--webkit-box-shadow:0 1px 0 rgba(255,255,255,0.2) inset, 0 1px 3px rgba(0,0,0,0.4);
--moz-box-shadow:0 1px 0 rgba(255,255,255,0.2) inset, 0 1px 3px rgba(0,0,0,0.4);
-box-shadow:0 1px 0 rgba(255,255,255,0.2) inset, 0 1px 3px rgba(0,0,0,0.4);
-border:1px solid #444;
-border-bottom:1px solid #222;
-overflow:auto;
-background:##{cor};
-margin:0;
-padding:0;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	border: 1px solid #444;
+	border-bottom: 1px solid #222;
+	overflow: auto;
+	background: ##{cor};
+    margin:0;
+    padding:0;
 }
-
 #cssmenu a {
-background:##{cor};
+	background: ##{cor};
 }
-
 #janelaChamado .ui-widget-header {
-border:none!important;
-background:##{cor};
+	border: none !important;
+	background: ##{cor};
+    color:#FFF;
+    font-weight:bold;
+    text-shadow:0px 1px 0 px rgba (255,255,255,0.7);
+}
+.left_content {
+	padding: 0px;
+	margin-left: #{leftMargin};
+}
+#container {
+	width: #{larguraDoSite}px;
+}
+#left-menu ul li.active {
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #222;
+	background: ##{cor};
+    -webkit-box-shadow:0px 1px 0px rgba(255,255,255,0.2) inset,01px 3px rgba(0,0,0,0.4);
+	
+-moz-box-shadow
+:
+01px
+ 
+0
+rgba
+(255
+,
+255,255,0
+.2
+)
+
+	
+inset
+,
+01
+px
+ 
+3
+px
+ 
+rgba
+(0
+,
+0,0,0
+.4
+);
+
+	
+box-shadow
+:
+01px
+ 
+0
+rgba
+(255
+,
+255,255,0
+.2
+)
+
+	
+inset
+,
+01
+px
+ 
+3
+px
+ 
+rgba
+ 
+(0,0,0,0
+.4
+);
+
+	
+-webkit-border-radius
+:
+ 
+3
+px
+;
+
+	
+-moz-border-radius
+:
+3px;
+
+	
+border-radius
+:
+3px;
+
+
+}
+div.bredcrumbs ul {
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 3px
+		rgba(0, 0, 0, 0.4);
+	border: 1px solid #444;
+	border-bottom: 1px solid #222;
+	margin: 0;
+	padding: 0;
+	overflow: auto;
+	background: ##{cor
 }
 
-.box-element {
-border-top:2px solid ##{cor};
+;
+-webkit-border-radius
+:
+3px;
+
+	
+-moz-border-radius
+:
+3px;
+
+	
+border-radius
+:
+3px;
+
+
 }
-.box-element .ui-panel .ui-widget .ui-widget-content .ui-corner-all{
-border-top:2px solid ##{cor};
+.box-element {
+	border-top: 2px solid##{cor};
 }
 
 </style>

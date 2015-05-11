@@ -14,6 +14,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import br.com.wofsolutions.vo.Usuario;
 
@@ -228,6 +229,21 @@ public class MaiaUtil {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	
+	
+	
+	public static Date ultimoDiaDoMesDate(){
+		simpleDateFormat = new SimpleDateFormat("MM/yyyy");
+		Calendar c = new GregorianCalendar();
+		try {
+			return simpleDateFormatData.parse(c.getActualMaximum(Calendar.DAY_OF_MONTH)+"/"+simpleDateFormat.format(new Date()));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static Date primeirodiaDoMesDate(){

@@ -28,13 +28,28 @@ public class MedicoController extends
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String GO_PAGE = "/clinik/medico/";
-	
+	private String senhaTemp;
 	
 	
 	
 	@Override
+	public void init() {
+		// TODO Auto-generated method stub
+		super.init();
+		senhaTemp=obj.getSenha();
+		log.info("Senha "+senhaTemp);
+	}
+
+
+	@Override
 	public void salvar() {
-		obj.setSenha(MaiaUtil.md5(obj.getSenha()));
+		
+		if(!obj.getSenha().trim().isEmpty() && obj.getSenha()!=null){
+			
+			obj.setSenha(MaiaUtil.md5(obj.getSenha()));
+		}else{
+			obj.setSenha(senhaTemp);
+		}
 		obj.setMedico(true);
 		super.salvar();
 	}

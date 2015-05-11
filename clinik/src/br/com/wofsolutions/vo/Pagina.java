@@ -49,6 +49,7 @@ public class Pagina implements Serializable {
 	private String onClik;
 
 	private boolean permissao = false;
+	
 
 	@ManyToOne
 	@JoinColumn(name = "modulo_id", referencedColumnName = "modulo_id")
@@ -59,6 +60,11 @@ public class Pagina implements Serializable {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<PermissaoPaginaRole> paginaRoles = new ArrayList<PermissaoPaginaRole>();
 
+	
+	@ManyToOne
+	@JoinColumn(name = "grupo_menu_id", referencedColumnName = "grupo_menu_id")
+	private GrupoMenu grupoMenu = new GrupoMenu();
+	
 	public Pagina() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -141,6 +147,22 @@ public class Pagina implements Serializable {
 
 	public void setPermissao(boolean permissao) {
 		this.permissao = permissao;
+	}
+	
+	
+
+
+
+	public GrupoMenu getGrupoMenu() {
+		return grupoMenu;
+	}
+
+	public void setGrupoMenu(GrupoMenu grupoMenu) {
+		this.grupoMenu = grupoMenu;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	@Override

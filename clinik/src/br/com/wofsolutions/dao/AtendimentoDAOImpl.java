@@ -1,7 +1,9 @@
 package br.com.wofsolutions.dao;
 
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -51,13 +53,14 @@ public class AtendimentoDAOImpl extends
 
 	@SuppressWarnings("unchecked")
 	public List<Atendimento> getTotosAtendimentos(Medico medico) {
-
+		
+System.out.println("Data ultima "+MaiaUtil.ultimoDiaDoMesDate());
 		Criteria criteria = getSession().createCriteria(Atendimento.class)
 				.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
 		criteria.createAlias("status", "s");
 		
 		criteria.add(Restrictions.and(
-				Restrictions.and(Restrictions.ge("dataAtendimento",  MaiaUtil.primeirodiaDoMesDate()),Restrictions.and(Restrictions.ne("s.nome", EstadoWorkflow.STATUS_CANCELADO),Restrictions.eq("empresa", medico.getEmpresa()))),
+				Restrictions.and(Restrictions.between("dataAtendimento",  MaiaUtil.primeirodiaDoMesDate(), MaiaUtil.ultimoDiaDoMesDate()),Restrictions.and(Restrictions.ne("s.nome", EstadoWorkflow.STATUS_CANCELADO),Restrictions.eq("empresa", medico.getEmpresa()))),
 				Restrictions.and(Restrictions.eq("deletado", false), Restrictions.eq("medico", medico))));
 		criteria.addOrder(Order.asc("paciente"));
 		

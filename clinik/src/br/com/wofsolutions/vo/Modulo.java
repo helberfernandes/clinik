@@ -23,7 +23,7 @@ import br.com.wofsolutions.interfaces.ObjectBaseAdapter;
 @Entity
 @Table(name="wof_modulo")
 public class Modulo extends ObjectBaseAdapter implements Serializable {    
-    public static int CLIENTE_AMIGO=2;
+    public static int AGENDA=2;
 	
 	
 	/**
@@ -54,6 +54,11 @@ public class Modulo extends ObjectBaseAdapter implements Serializable {
 	@Fetch(value = FetchMode.SUBSELECT)
 	private List<Pagina> paginas  = new ArrayList<Pagina>();
 	
+	
+	@OneToMany(fetch=FetchType.EAGER, cascade= {CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinColumn(name="modulo_id", referencedColumnName="modulo_id")
+	@Fetch(value = FetchMode.SUBSELECT)
+	private List<GrupoMenu> grupos  = new ArrayList<GrupoMenu>();
 	
 	
 	public Modulo(Integer moduloId) {
@@ -118,6 +123,16 @@ public class Modulo extends ObjectBaseAdapter implements Serializable {
 
 	public void setPermissao(boolean permissao) {
 		this.permissao = permissao;
+	}
+	
+	
+
+	public List<GrupoMenu> getGrupos() {
+		return grupos;
+	}
+
+	public void setGrupos(List<GrupoMenu> grupos) {
+		this.grupos = grupos;
 	}
 
 	@Override

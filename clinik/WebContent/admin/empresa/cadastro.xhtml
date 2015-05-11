@@ -55,8 +55,9 @@
 			<p:messages id="growl"/>
 <div class="box-element">
 				<div class="box-content">
-					
-			<h:panelGrid id="form" columns="3" style="margin-top: 15px;">
+					<div class="row-fluid">
+						<div class="span6" >
+						<h:panelGrid id="form" columns="3" style="margin-top: 15px;">
 
 
 			<h:outputLabel for="name" value="#{msg['system.label.nome']}" />
@@ -65,7 +66,7 @@
 						onkeydown="mascara(this, maiusculo)" />
 <h:column/>
 <h:outputLabel for="cnpj" value="#{msg['system.label.cnpj']}" />
-					<p:inputText id="cnpj" label="cnpj" size="50"
+					<p:inputMask id="cnpj" label="cnpj" size="50" mask="999.999.999/9999-99"
 						value="#{empresaController.obj.cnpj}" required="true"
 						onkeydown="mascara(this, maiusculo)" />
 				
@@ -132,11 +133,17 @@
 				<h:message for="horarioMinimo" errorClass="error" />		
 					
 					
+					
+					<h:outputText
+					value="#{msg['system.label.tempo.medio.de.consulta']}:"
+					 />
+					
+					
 						<h:panelGroup>
 
 					<h:outputText id="tempoMedioProcedimento2"
 						value="#{empresaController.obj.tempoMedioProcedimento}" />
-					<h:outputText value=" H" />
+					<h:outputText value=" mim" />
 					
 					<h:inputHidden id="tempoMedioProcedimento"
 						value="#{empresaController.obj.tempoMedioProcedimento}" />
@@ -147,10 +154,23 @@
 					
 					
 				<h:column />
+				 <p:fileUpload fileUploadListener="#{empresaController.uploadLogo}" mode="advanced"
+                     update="growl logo" auto="true" sizeLimit="100000" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
 				<h:outputText value="* #{msg['system.label.campo.obrigatorio']}"
 					style="color: #D8000C;" />
 			</h:panelGrid>
+						</div>
+						
+						<div class="span6" style="text-align: left;">
+						 <p:graphicImage id="logo" value="#{empresaController.obj.logo}" />   
+						</div>
+					</div>
+			
 				<div class="clearfix"></div>
+				
+				
+                     
+                 
 				</div>
 			</div>
 		</h:form>

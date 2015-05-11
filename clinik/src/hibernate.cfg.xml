@@ -44,8 +44,11 @@
 		<mapping class="br.com.wofsolutions.vo.PermissaoPaginaRole" />
 		<mapping class="br.com.wofsolutions.vo.PermissaoPaginaRolePk" />
 		<mapping class="br.com.wofsolutions.vo.HistoricoAcesso" />
+		
+		
+		
+		<mapping class="br.com.wofsolutions.vo.GrupoMenu" />
 		<mapping class="br.com.wofsolutions.vo.Pagina" />
-
 		<mapping class="br.com.wofsolutions.vo.Modulo" />
 		<!-- fim controle de usuarios -->
 

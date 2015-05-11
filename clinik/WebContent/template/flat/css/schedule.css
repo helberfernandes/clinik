@@ -1,12 +1,21 @@
 @CHARSET "ISO-8859-1";
 .fc-event {
-height: 45px !important;
-
+	height: 45px !important;
+	width: 100px !important;
 }	
 
 .fc-event-title{
-font-size: 10px !important;	
+	font-size: 10px !important;	
+	padding: 0px !important;;
 }
 .fc-event-time{
-font-size: 10px !important;	
+	font-size: 10px !important;	
 }
+.fc-event-bg {
+	opacity:none !important;	
+	background:none;
+}	
+.fc-agenda-slots tr{
+height:45px;
+}
+

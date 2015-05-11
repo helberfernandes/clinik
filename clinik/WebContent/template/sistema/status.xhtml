@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<div>
+		<p:ajaxStatus
+							style="width:16px;height:16px;padding: 15px;"
+							id="ajaxStatusPanel">
+							<f:facet name="start">
+								<h:graphicImage
+									value="#{pastaImagens}/png/25x25/connect_active.gif" />
+							</f:facet>
+
+							<f:facet name="complete">
+								<h:graphicImage
+									value="#{pastaImagens}/png/25x25/connect_idle.gif" />
+							</f:facet>
+						</p:ajaxStatus>
+	</div>
+
+
+
+
+</ui:composition>

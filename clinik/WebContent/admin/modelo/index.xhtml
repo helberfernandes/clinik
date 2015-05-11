@@ -123,10 +123,18 @@
 				</div>
 			</div>
 
+	<div class="box-element">
+				<div class="box-head">
+					<span></span>
+					<h3>
+						<i class="forms-16"></i> #{msg['system.titulo.pagina.medicos']}
+					</h3>
+				</div>
+				<div class="box-content">
 			<p:dataTable id="listaDados" value="#{modeloController.lista}"
 				var="modelo" rows="10" paginator="true"
 				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-				rowsPerPageTemplate="10,20,25,50" paginatorPosition="bottom"
+				rowsPerPageTemplate="10,20,25,50" currentPageReportTemplate=" Exibindo de {startRecord} a {endRecord} no total de {totalRecords} paginas"
 				emptyMessage="#{msg['system.msg.nenhum.registro.encontrado']}"
 				rowIndexVar="index" rowKey="#{modelo.modeloId}">
 
@@ -156,7 +164,8 @@
 				
 
 			</p:dataTable>
-
+</div>
+</div>
 		</h:form>
 	</ui:define>
 

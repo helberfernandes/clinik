@@ -52,11 +52,9 @@ public class CockpitController implements Serializable {
 		knobModels.add(new KnobModel("Bertone", "#FFD401", cockpitDAO.getQtdProcedimentosMedicos(4)));
 		radarModel=cockpitDAO.getQtdProcedimentosExame();
 		
-		radarModelMedico=cockpitDAO.getQtdProcedimentosMedico();
-		linhaModel=cockpitDAO.getTotalProcedimentosRealizadosPorMes();
+		radarModelMedico = cockpitDAO.getQtdProcedimentosMedico();
+		linhaModel       = cockpitDAO.getTotalProcedimentosRealizadosPorMes();
 	}
-
-
 
 	private CartesianChartModel initBarModel2() {
 		barModel2 = new CartesianChartModel();

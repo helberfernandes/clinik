@@ -52,11 +52,12 @@ public class CockpitDAO implements Serializable {
 						rs.getInt("outubro")+"," + rs.getInt("novembro")+"," + rs.getInt("dezembro"), cores.get(i)));
 				i++;
 			}
-			
+			conexaoUtil.getCon().close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return model;
 	}
 	
@@ -123,9 +124,9 @@ public class CockpitDAO implements Serializable {
 				label+=",\""+rs.getString("exame")+"\"";
 				data1+=","+rs.getInt("qtd_atual");
 				data2+=","+rs.getInt("qtd_ant");
-				
-				
 			}
+			
+			conexaoUtil.getCon().close();
 			
 			return new RadarModel(label.substring(1), data1.substring(1), data2.substring(1));
 			
@@ -140,7 +141,7 @@ public RadarModel getQtdProcedimentosMedico(){
 		try {
 			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("SELECT  s1.medico, s1.qtd_atual, s2.qtd_ant from ( SELECT m.nome medico,   count(*) qtd_atual FROM wof_atendimento w  join wof_medicos m on w.medico_id=m.medico_id where  (( w.medico_id=0) or (0=0)) and deletado=false and data_lancamento between '2013-02-20' and '2013-03-20' group by medico ) s1 join( SELECT m.nome medico,   count(*) qtd_ant FROM wof_atendimento w  join wof_medicos m on w.medico_id=m.medico_id where  (( w.medico_id=0) or (0=0)) and deletado=false and data_lancamento between '2013-02-20' and '2013-03-20' group by medico )s2 on s1.medico=s2.medico group by s1.medico");
 			ResultSet rs = ps.executeQuery();
-			String label="";
+			String label ="";
 			String data1 ="";
 			String data2 ="";
 			
@@ -149,10 +150,9 @@ public RadarModel getQtdProcedimentosMedico(){
 				label+=",\""+rs.getString("medico")+"\"";
 				data1+=","+rs.getInt("qtd_atual");
 				data2+=","+rs.getInt("qtd_ant");
-				
-				
 			}
 			
+			conexaoUtil.getCon().close();
 			return new RadarModel(label.substring(1), data1.substring(1), data2.substring(1));
 			
 		} catch (SQLException e) {			
@@ -211,38 +211,39 @@ public RadarModel getQtdProcedimentosMedico(){
 	}
 	
 public int getQtdProcedimentosMedicos(int medicoId){
-		
+	int total = 0;
 		try {
 			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("SELECT   count(*) qtd FROM wof_atendimento where medico_id= "+medicoId);
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return rs.getInt("qtd");
+				total =rs.getInt("qtd");
 			}
-			
+			conexaoUtil.getCon().close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return total;
 	}
 	
 	
 public int getQtdProcedimentosFaltaGuia(){
-		
+		int total = 0;
 		try {
 			PreparedStatement ps = conexaoUtil.getCon().prepareStatement("SELECT   count(*) qtd FROM wof_atendimento where falta_guia=true ");
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				return rs.getInt("qtd");
+				total= rs.getInt("qtd");
 			}
+			conexaoUtil.getCon().close();
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return 0;
+		return total;
 	}
 	
 
