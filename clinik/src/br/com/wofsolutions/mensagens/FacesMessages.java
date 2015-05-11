@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import javax.faces.application.FacesMessage;
 import javax.faces.event.ActionEvent;
 
+import org.primefaces.context.RequestContext;
+
 import br.com.wofsolutions.util.FacesUtil;
 
 import com.sun.istack.internal.NotNull;
@@ -92,6 +94,15 @@ public class FacesMessages implements Serializable {
 						idMessage.toString()),messages.getResourceBundle().getString(
 								idMessage.toString())));
 	}
+	
+	
+	public static  void showMessageInDialog(MensagensKey idMessage) {
+		 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,messages.getResourceBundle().getString(
+					idMessage.toString()),messages.getResourceBundle().getString(
+							idMessage.toString()));         
+	     RequestContext.getCurrentInstance().showMessageInDialog(message);
+	}
+	
 	
 
 	public static void addMessageWarning(@NotNull MensagensKey idMessage, @NotNull String [] param) {

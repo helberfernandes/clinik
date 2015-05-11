@@ -4,9 +4,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -35,6 +33,8 @@ import br.com.wofsolutions.dao.ModuloDAOImpl;
 import br.com.wofsolutions.dao.PacienteDAOImpl;
 import br.com.wofsolutions.dao.WorkflowDAOImpl;
 import br.com.wofsolutions.helper.BaseControllerHelper;
+import br.com.wofsolutions.mensagens.FacesMessages;
+import br.com.wofsolutions.mensagens.MensagensKey;
 import br.com.wofsolutions.util.FacesUtil;
 import br.com.wofsolutions.util.MaiaUtil;
 import br.com.wofsolutions.vo.Atendimento;
@@ -212,16 +212,11 @@ public class AtendimentoController extends
 		
 		obj.setDataAtendimento((Date) selectEvent.getObject());
 		
-		if(MaiaUtil.diferencaEmHoras((Date) selectEvent.getObject(), new Date())<=0){
-		
+		if(MaiaUtil.diferencaEmHoras((Date) selectEvent.getObject(), new Date())<=0){		
 			RequestContext.getCurrentInstance().execute("PF('eventDialog').show()");
 		}else{
-			System.out.println("Não pode marcar");
-		}
-		
-		
-	
-		
+				FacesMessages.showMessageInDialog(MensagensKey.SYSTEM_MSG_NAO_PERMITIDO_AGENDAMENTO);
+		}	
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {

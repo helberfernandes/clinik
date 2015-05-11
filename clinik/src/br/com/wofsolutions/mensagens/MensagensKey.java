@@ -159,6 +159,12 @@ public enum MensagensKey implements Serializable {
 			return "system.msg.email.enviado.com.sucesso";
 		}
 	},
+	SYSTEM_MSG_NAO_PERMITIDO_AGENDAMENTO {
+		@Override
+		public String toString() {
+			return "system.msg.nao.permitido.agendamento";
+		}
+	},
 	
 	
 }

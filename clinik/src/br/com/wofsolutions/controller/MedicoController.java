@@ -56,8 +56,7 @@ public class MedicoController extends
 	
 	
 	public String novo() {
-		novoObjeto();
-		// FacesUtil.redirect(GO_CADASTRO + "0/");
+		novoObjeto();		
 		return "pretty:medicoCadastro";
 	}
 
