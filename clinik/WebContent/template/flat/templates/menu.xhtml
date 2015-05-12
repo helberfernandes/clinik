@@ -12,14 +12,24 @@
 			<ul class="nav">
 				<ui:repeat var="modulo" value="#{moduloController.lista}"
 					varStatus="status">
-					<li class="#{fn:length(modulo.paginas)>0?'dropdown':''}"><a
-						href=""
+					<li class="#{fn:length(modulo.paginas)>0?'dropdown':''}">
+					
+					<a
+						href="#{server}#{modulo.link}"
 						class="#{fn:length(modulo.paginas)>0?'dropdown-toggle':''}"
-						data-toggle="dropdown"> #{modulo.descricao} 
+						data-toggle="#{modulo.link!=null? '':'dropdown'}"> 
+						
+						#{modulo.descricao}
+						
+						
+					
 						<h:panelGroup rendered="#{fn:length(modulo.paginas)>0?true:false}">
 						<b class="caret"></b>
 						</h:panelGroup>
-					</a> <h:panelGroup rendered="#{fn:length(modulo.paginas)>0}">
+					</a>
+					
+					
+					 <h:panelGroup rendered="#{fn:length(modulo.paginas)>0}">
 							<ul class="dropdown-menu ">
 
 								<ui:repeat var="pagina" value="#{modulo.paginas}"

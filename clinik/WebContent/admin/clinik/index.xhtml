@@ -187,7 +187,7 @@
 	<ui:define name="dialog">
 		<h:form id="formDialog">
 			<p:dialog id="agendar" widgetVar="eventDialog"
-				header="#{msg['system.label.agendamento']}" modal="true">
+				header="#{msg['system.label.agendamento']}" modal="true" minHeight="600" minWidth="800" height="600" width="800" >
 
 				<div class="box-element" style="min-height: 100px;">
 					<div class="box-content">
@@ -343,7 +343,7 @@
 					<h:outputText value="#{msg['system.label.valor']}" />
 					<h:inputText id="valor" size="10"
 						value="#{atendimentoController.obj.valor}" required="true"
-						disabled="true" />
+						 />
 					<h:outputText value="#{msg['system.label.falta.guia']}" />
 					<p:selectBooleanCheckbox
 						value="#{atendimentoController.obj.faltaGuia}"
