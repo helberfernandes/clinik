@@ -23,16 +23,20 @@ public class FacesMessages implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	public static final String SUCESSO = "sucesso";
-	public static final String FALHOU = "falhou";
-	public static final String PAGE_REQUIRED = "javax.faces.component.UIInput.REQUIRED";
-	public static final String PAGE_MAXIMUN = "javax.faces.validator.LengthValidator.MAXIMUM";
-	public static final String PAGE_MINIMUN = "javax.faces.validator.LengthValidator.MINIMUM";
-	public static final String PAGE_PAGINACAO = "app.page.dataScrolling.outputFormat.text";
-	public static final String PAGE_SUCESSO = "page.sucesso.msg";
-	public static final String PAGE_FALHA = "page.falha.msg";
+	private static final long serialVersionUID   = 1L;
+	public static final String SUCESSO           = "sucesso";
+	public static final String FALHOU            = "falhou";
+	public static final String PAGE_REQUIRED     = "javax.faces.component.UIInput.REQUIRED";
+	public static final String PAGE_MAXIMUN      = "javax.faces.validator.LengthValidator.MAXIMUM";
+	public static final String PAGE_MINIMUN      = "javax.faces.validator.LengthValidator.MINIMUM";
+	public static final String PAGE_PAGINACAO    = "app.page.dataScrolling.outputFormat.text";
+	public static final String PAGE_SUCESSO      = "page.sucesso.msg";
+	public static final String PAGE_FALHA        = "page.falha.msg";
 	public static final String PAGE_EXCLUIR_ROOT = "page.excluir.root.msg";
+	private static final String LOCALE           = "pt_br";
+	private static final String BASE_NAME        = "br.com.wofsolutions.mensagens.mensagem_pt_BR";
+	
+	
 
 	private static Properties props = new Properties();
 	private static Properties propsEn = new Properties();
@@ -46,12 +50,12 @@ public class FacesMessages implements Serializable {
 
 	public void setResourceBundle(Locale locale) {
 		resourceBundle = ResourceBundle.getBundle(
-				"br.com.wofsolutions.mensagens.mensagem_pt_BR", locale);
+				BASE_NAME, locale);
 	}
 
 	public ResourceBundle getResourceBundle() {
 		if (resourceBundle == null) {
-			setResourceBundle(new Locale("pt_br"));
+			setResourceBundle(new Locale(LOCALE));
 		}
 		return resourceBundle;
 	}
@@ -129,10 +133,6 @@ public class FacesMessages implements Serializable {
 						idMessage.toString()),messages.getResourceBundle().getString(
 								idMessage.toString())));
 	}
-
-	
-	
-	
 
 	
 	public static void addMessage(String severity, String idMessage) {

@@ -343,7 +343,7 @@ public class FacesUtil implements Serializable {
 			fundo = ImageIO.read(new File(caminho));
 
 			BufferedImage novaImagem = new BufferedImage(w, h,
-					BufferedImage.TYPE_INT_RGB);
+					BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g = novaImagem.createGraphics();
 			g.drawImage(fundo, 0, 0, w, h, null);
 

@@ -58,13 +58,21 @@ public class EmpresaController extends
 
 		String logo = FacesUtil.getCaminho(PASTA_IMAGENS) + File.separator
 				+ event.getFile().getFileName();
+		String logoRel = FacesUtil.getCaminho(PASTA_IMAGENS) + File.separator
+				+ "rel_"+event.getFile().getFileName();
+		
 		obj.setLogo(PASTA_IMAGENS+event.getFile().getFileName());
 		
-
+		obj.setRelLogo(PASTA_IMAGENS+"rel_"+event.getFile().getFileName());
 				log.info("Criando o arquivo... " + logo);
 		facesUtil.criaArquivo(event.getFile().getContents(), new File(
 				logo));
 		
+		facesUtil.criaArquivo(event.getFile().getContents(), new File(
+				logoRel));// cria uma copia para os relatorios
+		
 		FacesUtil.redimensiona(logo, 260, 120, logo);
+		
+		FacesUtil.redimensiona(logoRel, 80, 36, logoRel);
 	}
 }

@@ -43,7 +43,10 @@
 
 									<h:commandLink styleClass="btn_exportar_excel">
 										<p:dataExporter type="xls" target=":formPrincipal:listaDados"
-											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											fileName="convenios" 
+											
+											postProcessor="#{convenioController.postProcessXLS}"
+											 />
 
 										<h:outputText value="Excel" />
 
@@ -60,7 +63,7 @@
 
 									<h:commandLink styleClass="btn_exportar_pdf">
 										<p:dataExporter type="pdf" target=":formPrincipal:listaDados"
-											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											fileName="convenios" pageOnly="true" excludeColumns="0,7,8,9" />
 
 										<h:outputText value="PDF" />
 
@@ -84,7 +87,7 @@
 
 									<h:commandLink styleClass="btn_exportar_xml">
 										<p:dataExporter type="xml" target=":formPrincipal:listaDados"
-											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											fileName="convenios" pageOnly="true" excludeColumns="0,7,8,9" />
 
 										<h:outputText value="XML" />
 

@@ -1,19 +1,33 @@
 package br.com.wofsolutions.helper;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
-import java.lang.reflect.Method;
 
 import javax.annotation.PostConstruct;
 
-import br.com.wofsolutions.annotation.Parammeter;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.ClientAnchor;
+import org.apache.poi.ss.usermodel.CreationHelper;
+import org.apache.poi.ss.usermodel.Drawing;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.Picture;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.IOUtils;
+
 import br.com.wofsolutions.controller.BaseController;
 import br.com.wofsolutions.interfaces.HibernateDAO;
 import br.com.wofsolutions.interfaces.ObjectBase;
 import br.com.wofsolutions.mensagens.FacesMessages;
-import br.com.wofsolutions.model.ObjDataModel;
 import br.com.wofsolutions.util.FacesUtil;
 import br.com.wofsolutions.util.HibernateUtil;
-import br.com.wofsolutions.vo.Modulo;
 import br.com.wofsolutions.vo.Usuario;
 
 /**
@@ -41,6 +55,12 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
 	protected static final int NAO_EXECUTA_FIND_ALL = 2;
 	protected FacesUtil facesUtil                   = new FacesUtil();
 	private int tipo;
+	//-------------------------------------------------------------------//
+	//                           Excel                                   //
+	//-------------------------------------------------------------------//
+	protected HSSFWorkbook wb;// planilha
+	protected HSSFSheet sheet;// aba da planilha
+	protected  HSSFRow header ;// pegando a primeira linha
 
 	@Override
 	@PostConstruct
@@ -135,4 +155,84 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
 	public static void setPARAMMETER_KEY(String pARAMMETER_KEY) {
 		PARAMMETER_KEY = pARAMMETER_KEY;
 	}
+	
+	
+	
+	public void initProcessXLS(Object document) {
+		     wb = (HSSFWorkbook) document;// Criando a planilha
+	         sheet = wb.getSheetAt(0);// aba da planilha
+	         header = sheet.getRow(0);// pegando a primeira linha
+	         
+	}
+	
+	
+	/**
+	 *  Este medoto exporta uma dataTable para excel
+	 *  Os cabeçalhos devem ser implementados por cada 
+	 * @param document
+	 */
+	public void postProcessXLS(Object document) {
+       
+       
+        
+        
+        HSSFCellStyle cellStyle = wb.createCellStyle();
+        cellStyle.setBorderBottom(HSSFCellStyle.BORDER_MEDIUM);
+        cellStyle.setBottomBorderColor(HSSFColor.BLACK.index); 
+        Font font = wb.createFont();
+        font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+        cellStyle.setFont(font);
+        
+        //add logo da empresa
+        
+      //FileInputStream obtains input bytes from the image file
+        InputStream inputStream;
+		try {
+			
+			String logo = FacesUtil.getCaminho(getUsuarioOnline().getEmpresa().getRelLogo()); 
+			inputStream = new FileInputStream(logo);
+			 //Get the contents of an InputStream as a byte[].
+	        byte[] bytes = IOUtils.toByteArray(inputStream);
+	        //Adds a picture to the workbook
+	        int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+	        //close the input stream
+	        inputStream.close();
+	        //Creates the top-level drawing patriarch.
+	        Drawing drawing = sheet.createDrawingPatriarch();
+	        
+	        //Returns an object that handles instantiating concrete classes
+	        CreationHelper helper = wb.getCreationHelper();
+	        
+	        //Create an anchor that is attached to the worksheet
+	        ClientAnchor anchor = helper.createClientAnchor();
+	        
+	        //set top-left corner for the image
+	        anchor.setCol1(2);
+	        anchor.setRow1(0);
+	        
+	        Picture pict = drawing.createPicture(anchor, pictureIdx);
+	        //Reset the image to the original size	        
+	        pict.resize();
+	        
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+		 
+        
+        
+         
+        for(int i=0; i < header.getPhysicalNumberOfCells();i++) {
+            HSSFCell cell = header.getCell(i);
+             
+            cell.setCellStyle(cellStyle);
+            sheet.autoSizeColumn(i); //ajustando a largura das colunas automaticamente
+        }
+        
+        
+    }
 }

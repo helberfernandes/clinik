@@ -6,6 +6,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+
 import br.com.wofsolutions.annotation.Parammeter;
 import br.com.wofsolutions.dao.PacienteDAOImpl;
 import br.com.wofsolutions.helper.BaseControllerHelper;
@@ -185,4 +187,25 @@ public class PacienteController extends
 		this.diagnostico = diagnostico;
 	}
 	
+	
+	@Override
+	public void postProcessXLS(Object document) {
+
+		super.initProcessXLS(document);
+		wb.setSheetName(0, "Pacientes");
+		header.setHeightInPoints(45);
+		HSSFCell titleCell = header.createCell(0);
+		titleCell.setCellValue("Nº");
+		titleCell = header.createCell(1);
+		titleCell.setCellValue("Nome");
+		titleCell = header.createCell(2);
+		titleCell.setCellValue("CPF");
+		titleCell = header.createCell(3);
+		titleCell.setCellValue("Telefone");
+		titleCell = header.createCell(4);
+
+		super.postProcessXLS(document);
+		//
+
+	}
 }

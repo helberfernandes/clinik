@@ -6,6 +6,7 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.hibernate.Hibernate;
 
 import br.com.wofsolutions.dao.ExameDAOImpl;
@@ -91,7 +92,23 @@ public class ExameController extends BaseControllerHelper<Exame, ExameDAOImpl> {
 
 	}
 	
-	
+	@Override
+	public void postProcessXLS(Object document) {
+
+		super.initProcessXLS(document);
+		wb.setSheetName(0, "Exames");
+		header.setHeightInPoints(45);
+		HSSFCell titleCell = header.createCell(0);
+		titleCell.setCellValue("Nº");
+		titleCell = header.createCell(1);
+		titleCell.setCellValue("Nome");
+		titleCell = header.createCell(2);
+		
+
+		super.postProcessXLS(document);
+		//
+
+	}
 	
 	public List<Medico> getMedicos() {
 		return medicos;

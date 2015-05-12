@@ -45,6 +45,9 @@ public class Empresa implements Serializable , ObjectBase {
 	@Column(length=255)
 	private String logo;
 	
+	@Column(length=255)
+	private String relLogo;
+	
 	@Column(name="foto_perfil", length=900000)
     private byte[] logoMarca;
 	
@@ -168,6 +171,14 @@ public class Empresa implements Serializable , ObjectBase {
 	}
 	
 	
+
+	public String getRelLogo() {
+		return relLogo;
+	}
+
+	public void setRelLogo(String relLogo) {
+		this.relLogo = relLogo;
+	}
 
 	public String getViewPadrao() {
 		return viewPadrao;

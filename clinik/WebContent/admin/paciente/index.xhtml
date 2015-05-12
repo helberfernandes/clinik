@@ -43,7 +43,7 @@
 
 									<h:commandLink styleClass="btn_exportar_excel">
 										<p:dataExporter type="xls" target=":formPrincipal:listaDados"
-											fileName="usuarios" pageOnly="true" excludeColumns="0,7,8,9" />
+											fileName="pacientes" postProcessor="#{pacienteController.postProcessXLS}" />
 
 										<h:outputText value="Excel" />
 

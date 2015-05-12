@@ -3,6 +3,8 @@ package br.com.wofsolutions.controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+
 import br.com.wofsolutions.dao.ConvenioDAOImpl;
 import br.com.wofsolutions.helper.BaseControllerHelper;
 import br.com.wofsolutions.vo.Convenio;
@@ -31,5 +33,23 @@ public class ConvenioController extends
 	
 	public void editar() {
 		super.editar(GO_PAGE);
+	}
+	
+	@Override
+	public void postProcessXLS(Object document) {
+
+		super.initProcessXLS(document);
+		wb.setSheetName(0, "Convenio");
+		header.setHeightInPoints(45);
+		HSSFCell titleCell = header.createCell(0);
+		titleCell.setCellValue("Nº");
+		titleCell = header.createCell(1);
+		titleCell.setCellValue("Nome");
+		titleCell = header.createCell(2);
+		
+
+		super.postProcessXLS(document);
+		//
+
 	}
 }
