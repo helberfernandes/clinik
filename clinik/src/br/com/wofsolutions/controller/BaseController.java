@@ -31,7 +31,6 @@ public abstract class BaseController<C, D> implements Serializable,
 	private static final long serialVersionUID = 8024798118018529944L;
 
 	protected List<C> lista = new ArrayList<C>();
-	
 	protected C obj;
 	protected D dao;
 	protected static final Logger log = Logger.getLogger(BaseController.class);

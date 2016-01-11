@@ -103,7 +103,7 @@ public class TipoAtendimento implements Serializable, ObjectBase  {
 	
 	@Override
 	public String toString() {
-		return "TipoAtendimento [tipoAtendimentoId=" + tipoAtendimentoId + "]";
+		return  String.valueOf(tipoAtendimentoId) ;
 	}
 
 	@Override

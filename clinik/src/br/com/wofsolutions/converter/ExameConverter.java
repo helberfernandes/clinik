@@ -20,8 +20,7 @@ public class ExameConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("Exame \\[exameId\\=", "");
-		value=value.replaceAll("\\]", "");
+		
 		
 		return exameDAO.getObjetoPelaChave(Integer.parseInt(String.valueOf(value)));
 	}

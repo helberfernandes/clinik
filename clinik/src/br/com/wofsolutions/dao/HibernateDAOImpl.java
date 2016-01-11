@@ -9,6 +9,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.wofsolutions.interfaces.HibernateDAO;
@@ -23,6 +24,7 @@ public abstract class HibernateDAOImpl<E , H, I> implements HibernateDAO<E, H, I
 	public static final int OP_EQUAL=0;
 	public static final int OP_OR=1;
 	public static final int OP_LIKE=2;
+	public static final String ORDER_DEFAULT="none";
 	@SuppressWarnings("unused")
 	private static  Session session=null;
 	@SuppressWarnings("rawtypes")
@@ -181,16 +183,24 @@ public abstract class HibernateDAOImpl<E , H, I> implements HibernateDAO<E, H, I
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<E> findAll() {
-	//	getSession().beginTransaction();
-		Criteria criteria = getSession().createCriteria(classe).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);;
-		//criteria.addOrder(Order.asc("nome"));
-		List<E> list=criteria.list();
-		
-		getSession().flush();
-		getSession().clear();
-	//	getSession().close();
-		return list;
+		return findAll(ORDER_DEFAULT);
 	}
+	
+	@Override
+	public List<E> findAll(String order) {
+		//	getSession().beginTransaction();
+			Criteria criteria = getSession().createCriteria(classe).setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);;
+			if(!order.equals(ORDER_DEFAULT)){
+			  criteria.addOrder(Order.asc(order));
+			}
+			
+			List<E> list=criteria.list();
+			
+			getSession().flush();
+			getSession().clear();
+		//	getSession().close();
+			return list;
+		}
 	
 	
 	/* (non-Javadoc)

@@ -50,6 +50,13 @@ public class RelatorioController implements Serializable {
 	private Convenio convenio = new Convenio();
 	private List<Convenio> convenios = new ArrayList<Convenio>();
 	private boolean mostrarConvenio = false;
+	
+	private static final String EXAME_ID    = "exameId";
+	private static final String MEDICO_ID   = "medicoId";
+	private static final String CONVENIO_ID = "convenioId";
+	
+	private static String DATA_DE= "dataDe";
+	
 	@PostConstruct
 	public void init() {
 		medicosEquipe = medicoDAOImpl.getTotosMedicosEquipe(usuarioOnline
@@ -67,13 +74,13 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("medicoId",
+		parametros.put(MEDICO_ID,
 				mostrarMedico == true ? medicoEquipe.getMedicoId() : 0);
 		//parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath(usuarioOnline.getEmpresa().getLogo()));
 		parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		parametros.put("faltaGuia", faltaGuia);
 
@@ -84,14 +91,14 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("exameId", mostrarExame == true ? exame.getExameId()
+		parametros.put(EXAME_ID, mostrarExame == true ? exame.getExameId()
 				: 0);
 		
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 
 		parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		parametros.put("faltaGuia", faltaGuia);
 
@@ -102,13 +109,13 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("exameId", mostrarExame == true ? exame.getExameId()
+		parametros.put(EXAME_ID, mostrarExame == true ? exame.getExameId()
 				: 0);
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 
 		//parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 
@@ -122,17 +129,17 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("exameId", mostrarExame == true ? exame.getExameId()
+		parametros.put(EXAME_ID, mostrarExame == true ? exame.getExameId()
 				: 0);
 
-		parametros.put("convenioId", mostrarConvenio == true ? convenio.getConvenioId()
+		parametros.put(CONVENIO_ID, mostrarConvenio == true ? convenio.getConvenioId()
 				: 0);
 		
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 		
 		//parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 	 
 
@@ -145,13 +152,13 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("exameId", mostrarExame == true ? exame.getExameId()
+		parametros.put(EXAME_ID, mostrarExame == true ? exame.getExameId()
 				: 0);
 
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 		//parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 
@@ -162,12 +169,12 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("medicoId", mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
+		parametros.put(MEDICO_ID, mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
 				: 0);
 
 		//parametros.put("usuario", usuarioOnline.getNome());
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 
@@ -181,15 +188,15 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("exameId", mostrarExame == true ? exame.getExameId()
+		parametros.put(EXAME_ID, mostrarExame == true ? exame.getExameId()
 				: 0);
-		parametros.put("medicoId", mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
+		parametros.put(MEDICO_ID, mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
 				: 0);
 
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 		//parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 
@@ -199,14 +206,14 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("medicoId", mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
+		parametros.put(MEDICO_ID, mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
 				: 0);
 
 		
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
 		//parametros.put("usuario", usuarioOnline.getNome());
 
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 
@@ -219,12 +226,12 @@ public class RelatorioController implements Serializable {
 
 		HashMap<String, Object> parametros = new HashMap<String, Object>();
 
-		parametros.put("medicoId", mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
+		parametros.put(MEDICO_ID, mostrarSolicitante == true ? medicoSolicitante.getMedicoId()
 				: 0);
 
 		//parametros.put("usuario", usuarioOnline.getNome());
 		parametros.put("logoEmpresa",FacesUtil.getExternalContext().getRealPath("midia/imagens/"+usuarioOnline.getEmpresa().getLogo()));
-		parametros.put("dataDe", getDataDe());
+		parametros.put(DATA_DE, getDataDe());
 		parametros.put("dataAte", getDataAte());
 		
 

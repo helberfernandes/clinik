@@ -20,8 +20,7 @@ public class ConvenioConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("Convenio \\[convenioId\\=", "");
-		value=value.replaceAll("\\]", "");
+		
 		
 		return convenioDAO.getObjetoPelaChave(Integer.parseInt(String.valueOf(value)));
 	}

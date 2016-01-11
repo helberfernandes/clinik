@@ -20,8 +20,7 @@ public class MarcadorConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("Marcador \\[marcadorId\\=", "");
-		value=value.replaceAll("\\]", "");
+		
 		
 		return paginaDAO.getMarcadorPelaChave(Integer.parseInt(String.valueOf(value)));
 	}

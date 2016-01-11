@@ -73,7 +73,10 @@ public class AtendimentoController extends
 	
 	@Override
 	public void init() {
-		super.init(BaseControllerHelper.NAO_EXECUTA_FIND_ALL);
+		super.init(NAO_EXECUTA_FIND_ALL);
+		
+		
+		
 		log.info("Iniciando a data para a agenda...");
 		try {
 			obj.setDataAtendimento(MaiaUtil.StringToDate(MaiaUtil

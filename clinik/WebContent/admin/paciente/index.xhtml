@@ -164,7 +164,7 @@
 					styleClass="colunaDefault">
 
 					<p:commandLink action="#{pacienteController.editar}"
-						update=":formPrincipal">
+						update=":formPrincipal" >
 						<f:param name="objectId" value="#{paciente.pacienteId}" />
 						<h:outputText value="#{paciente.cpf}" />
 					</p:commandLink>

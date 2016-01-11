@@ -108,7 +108,7 @@ public class Convenio implements Serializable, ObjectBase {
 	}
 	@Override
 	public String toString() {
-		return "Convenio [convenioId=" + convenioId + "]";
+		return "" + convenioId ;
 	}
 	
 }

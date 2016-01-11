@@ -163,7 +163,7 @@ public class Marcador implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Marcador [marcadorId=" + marcadorId + "]";
+		return "" + marcadorId ;
 	}
 	
 }

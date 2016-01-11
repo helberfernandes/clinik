@@ -20,18 +20,17 @@ public class ModuloController extends
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final String ORDER_DEFAULT="descricao";
 	
-
 	@PostConstruct
 	public void init() {
-		lista= dao.findAll();		
+		super.init(ModuloController.NAO_EXECUTA_FIND_ALL);
+		lista= dao.findAll(ORDER_DEFAULT);		
 	}
-
 	public String novo() {
 		novoObjeto();
 		return "pretty:moduloCadastro";
 	}
-
 	public String cancelar() {
 		novoObjeto();
 		return "pretty:moduloList";

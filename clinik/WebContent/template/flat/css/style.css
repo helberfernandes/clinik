@@ -1,21 +1,35 @@
 /* =============================================================================
    HTML5 display definitions
    ========================================================================== */
-article,aside,details,figcaption,figure,footer,header,hgroup,nav,section
-	{
+article, aside, details, figcaption, figure, footer, header, hgroup, nav,
+	section {
 	display: block;
 }
 
-audio,canvas,video {
+audio, canvas, video {
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
 }
 
-audio:not ([controls] ) {
-	display: none;
-}
+audio
+:not
+ 
+(
+[
+controls
+]
+ 
+)
+{
+display
+:
+ 
+none
+;
 
+
+}
 [hidden] {
 	display: none;
 }
@@ -61,12 +75,12 @@ a:focus {
 	outline: none;
 }
 
-input[type="text"]:focus,input[type="password"]:focus,textarea:focus {
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
 	outline: none;
 }
 
 /* Improve readability when focused and hovered in all browsers: h5bp.com/h */
-a:hover,a:active {
+a:hover, a:active {
 	outline: 0;
 }
 
@@ -77,7 +91,7 @@ abbr[title] {
 	border-bottom: 1px dotted;
 }
 
-b,strong {
+b, strong {
 	font-weight: bold;
 }
 
@@ -112,7 +126,7 @@ mark {
 }
 
 /* Redeclare monospace font family: h5bp.com/j */
-pre,code,kbd,samp {
+pre, code, kbd, samp {
 	font-family: monospace, monospace;
 	_font-family: 'courier new', monospace;
 	font-size: 1em;
@@ -129,7 +143,7 @@ q {
 	quotes: none;
 }
 
-q:before,q:after {
+q:before, q:after {
 	content: "";
 	content: none;
 }
@@ -139,7 +153,7 @@ small {
 }
 
 /* Position subscript and superscript content without affecting line-height: h5bp.com/k */
-sub,sup {
+sub, sup {
 	font-size: 75%;
 	line-height: 0;
 	position: relative;
@@ -157,7 +171,7 @@ sub {
 /* =============================================================================
    Lists
    ========================================================================== */
-ul,ol {
+ul, ol {
 	margin: 1em 0;
 	padding: 0 0 0 40px;
 }
@@ -166,7 +180,7 @@ dd {
 	margin: 0 0 0 40px;
 }
 
-nav ul,nav ol {
+nav ul, nav ol {
 	list-style: none;
 	list-style-image: none;
 	margin: 0;
@@ -190,8 +204,21 @@ img {
 /*
  * Correct overflow not hidden in IE9 
  */
-svg:not (:root ) {
-	overflow: hidden;
+svg
+:not
+ 
+(
+:root
+ 
+)
+{
+overflow
+:
+ 
+hidden
+;
+
+
 }
 
 /* =============================================================================
@@ -231,32 +258,28 @@ legend {
 
 .form-horizontal .controls {
 	margin-left: 180px;
-	 padding-top: 5px;
-}	
-
+	padding-top: 5px;
+}
 
 .form-horizontal .control-group:after {
-    clear: both;
+	clear: both;
 }
-.form-horizontal .control-group:before, .form-horizontal .control-group:after {
-    display: table;
-    line-height: 0;
-    content: "";
+
+.form-horizontal .control-group:before, .form-horizontal .control-group:after
+	{
+	display: table;
+	line-height: 0;
+	content: "";
 }
 
 .form-horizontal .control-label {
-    float: left;
-    width: 160px;
-    padding-top: 5px;
-    text-align: right;
-    padding-left: 0px;
-    margin-left: 0px;
+	float: left;
+	width: 160px;
+	padding-top: 5px;
+	text-align: right;
+	padding-left: 0px;
+	margin-left: 0px;
 }
-
-
-
-
-
 
 /* =============================================================================
    Tables
@@ -314,7 +337,7 @@ header #main-navigation ul li a {
 	display: block;
 }
 
-header #main-navigation ul li a.active,header #main-navigation ul li a:hover
+header #main-navigation ul li a.active, header #main-navigation ul li a:hover
 	{
 	display: block;
 	-webkit-border-radius: 3px;
@@ -359,7 +382,7 @@ header #main-navigation ul li a span {
 	text-decoration: none;
 }
 
-header #main-navigation ul li span:hover,header #main-navigation ul li a.active span
+header #main-navigation ul li span:hover, header #main-navigation ul li a.active span
 	{
 	border: 1px solid #ddd;
 	border-bottom: 1px solid #ccc;
@@ -1016,7 +1039,7 @@ fieldset section.fullw label {
 	padding-bottom: 10px;
 }
 
-fieldset section.fullw label,fieldset section.fullw div {
+fieldset section.fullw label, fieldset section.fullw div {
 	float: none;
 	clear: both;
 }
@@ -1027,11 +1050,11 @@ fieldset section>div span {
 	font-size: 11px;
 }
 
-fieldset section>div input[type="text"],fieldset section>div textarea {
+fieldset section>div input[type="text"], fieldset section>div textarea {
 	width: 342px;
 }
 
-fieldset section:hover>div input[type="text"],fieldset section:hover>div textarea
+fieldset section:hover>div input[type="text"], fieldset section:hover>div textarea
 	{
 	border: 1px solid #eee;
 	background-color: #fff;
@@ -1119,7 +1142,7 @@ fieldset section:hover>div input[type="text"],fieldset section:hover>div textare
 }
 
 /*  BREADCRUMBS WIDGET */
-div.bredcrumbs,div.bredcrumbs-light {
+div.bredcrumbs, div.bredcrumbs-light {
 	padding-bottom: 20px;
 }
 
@@ -1346,7 +1369,7 @@ section.orders .orders-icon {
 }
 
 /* BUTTONS */
-.icon16,.button,.icon16-button {
+.icon16, .button, .icon16-button {
 	margin: 5px;
 	padding: 7px 15px;
 	color: #777;
@@ -1365,7 +1388,7 @@ section.orders .orders-icon {
 	color: #777;
 }
 
-.icon16:hover,.button:hover,.icon16-button:hover {
+.icon16:hover, .button:hover, .icon16-button:hover {
 	color: #555;
 	background-color: #F9F9F9;
 	-webkit-box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 3px rgba(0, 0, 0, 0.2);
@@ -1818,15 +1841,15 @@ select.i-select {
 	border: 1px solid #c8c8c8;
 }
 
-.ui-slider-horizontal,.ui-slider-horizontal .ui-slider-range {
+.ui-slider-horizontal, .ui-slider-horizontal .ui-slider-range {
 	height: 6px;
 }
 
-.ui-slider-vertical,.ui-slider-vertical .ui-slider-range {
+.ui-slider-vertical, .ui-slider-vertical .ui-slider-range {
 	width: 6px;
 }
 
-.ui-slider-horizontal .ui-slider-range,.ui-slider-vertical .ui-slider-range
+.ui-slider-horizontal .ui-slider-range, .ui-slider-vertical .ui-slider-range
 	{
 	background-color: #C73333;
 }
@@ -1888,7 +1911,7 @@ select.i-select {
 	left: 0;
 }
 
-#styler .container-light,#styler .container-responsive {
+#styler .container-light, #styler .container-responsive {
 	display: none;
 }
 
@@ -1968,7 +1991,7 @@ select.i-select {
 	margin-bottom: 10px;
 }
 
-#styler .bg-changer,#styler .versions {
+#styler .bg-changer, #styler .versions {
 	width: 24px;
 	border-top: 2px solid #222;
 	border-right: 2px solid #222;
@@ -2077,7 +2100,7 @@ select.i-select {
 }
 
 /* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard */
-.visuallyhidden.focusable:active,.visuallyhidden.focusable:focus {
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
 	clip: auto;
 	height: auto;
 	margin: 0;
@@ -2092,7 +2115,7 @@ select.i-select {
 }
 
 /* Contain floats */
-.clearfix:before,.clearfix:after {
+.clearfix:before, .clearfix:after {
 	content: "";
 	display: table;
 }
@@ -2116,7 +2139,7 @@ select.i-select {
 		filter: none !important;
 		-ms-filter: none !important;
 	} /* Black prints faster: h5bp.com/s */
-	a,a:visited {
+	a, a:visited {
 		text-decoration: underline;
 	}
 	a[href]:after {
@@ -2125,17 +2148,17 @@ select.i-select {
 	abbr[title]:after {
 		content: " (" attr(title) ")";
 	}
-	.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after {
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
 		content: "";
 	} /* Don't show links for images, or javascript/internal links */
-	pre,blockquote {
+	pre, blockquote {
 		border: 1px solid #999;
 		page-break-inside: avoid;
 	}
 	thead {
 		display: table-header-group;
 	} /* h5bp.com/t */
-	tr,img {
+	tr, img {
 		page-break-inside: avoid;
 	}
 	img {
@@ -2144,11 +2167,11 @@ select.i-select {
 	@page {
 		margin: 0.5cm;
 	}
-	p,h2,h3 {
+	p, h2, h3 {
 		orphans: 3;
 		widows: 3;
 	}
-	h2,h3 {
+	h2, h3 {
 		page-break-after: avoid;
 	}
 }
@@ -2175,8 +2198,8 @@ select.i-select {
 	width: 100%;
 }
 
-.img-responsive,.thumbnail>img,.thumbnail a>img,.carousel-inner>.item>img,.carousel-inner>.item>a>img
-	{
+.img-responsive, .thumbnail>img, .thumbnail a>img, .carousel-inner>.item>img,
+	.carousel-inner>.item>a>img {
 	display: block;
 	max-width: 100%;
 	height: auto;
@@ -2215,7 +2238,7 @@ ul.list-unstyled {
 	list-style: none outside none;
 }
 
-ul,ol {
+ul, ol {
 	margin-top: 0px;
 	margin-bottom: 10px;
 }
@@ -2248,8 +2271,8 @@ ul,ol {
 	line-height: 1;
 }
 
-.col-lg-1,.col-lg-2,.col-lg-3,.col-lg-4,.col-lg-5,.col-lg-6,.col-lg-7,.col-lg-8,.col-lg-9,.col-lg-10,.col-lg-11,.col-lg-12
-	{
+.col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6,
+	.col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12 {
 	float: left;
 }
 
@@ -2257,12 +2280,19 @@ ul,ol {
 	width: 66.6667%;
 }
 
-.col-md-1,.col-md-2,.col-md-3,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-md-8,.col-md-9,.col-md-10,.col-md-11,.col-md-12
-	{
+.col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6,
+	.col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
 	float: left;
 }
 
-.col-xs-1,.col-sm-1,.col-md-1,.col-lg-1,.col-xs-2,.col-sm-2,.col-md-2,.col-lg-2,.col-xs-3,.col-sm-3,.col-md-3,.col-lg-3,.col-xs-4,.col-sm-4,.col-md-4,.col-lg-4,.col-xs-5,.col-sm-5,.col-md-5,.col-lg-5,.col-xs-6,.col-sm-6,.col-md-6,.col-lg-6,.col-xs-7,.col-sm-7,.col-md-7,.col-lg-7,.col-xs-8,.col-sm-8,.col-md-8,.col-lg-8,.col-xs-9,.col-sm-9,.col-md-9,.col-lg-9,.col-xs-10,.col-sm-10,.col-md-10,.col-lg-10,.col-xs-11,.col-sm-11,.col-md-11,.col-lg-11,.col-xs-12,.col-sm-12,.col-md-12,.col-lg-12
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2,
+	.col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3,
+	.col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5,
+	.col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6,
+	.col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8,
+	.col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9,
+	.col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11,
+	.col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12
 	{
 	position: relative;
 	min-height: 1px;
@@ -2348,16 +2378,16 @@ img {
 	margin: 0px !important;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
 	color: #4D4D4D;
 }
 
-h1,.h1,h2,.h2,h3,.h3 {
+h1, .h1, h2, .h2, h3, .h3 {
 	margin-top: 20px;
 	margin-bottom: 10px;
 }
 
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: inherit;
 	font-weight: 500;
 	line-height: 1.1;
@@ -2409,25 +2439,22 @@ p {
 	margin: 0px 0px 10px;
 }
 
-
-
 #menu-right {
-    background: none repeat scroll 0% 0% #fff;
-    display: none;
+	background: none repeat scroll 0% 0% #fff;
+	display: none;
 }
 
 .sidr.right {
-    position: fixed;
-    top: 0px;
-    right: -250px;
-    height: 100%;
-    z-index: 999999;
-    width: 250px;
-    overflow: hidden;
-    display: none;
+	position: fixed;
+	top: 0px;
+	right: -250px;
+	height: 100%;
+	z-index: 999999;
+	width: 250px;
+	overflow: hidden;
+	display: none;
 }
-.sidr.right  li{
+
+.sidr.right  li {
 	list-style: none;
 }
-
-

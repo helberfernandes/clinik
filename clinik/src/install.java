@@ -40,10 +40,9 @@ public class install {
 		};
 		daoImpl.salvar(usuario);
 		
-//		Modulo modulo = new Modulo();
-//		
-//		modulo.setDescricao("Clinik basico");
-//		modulo.setNome("Clinik basico");
+		Modulo modulo = new Modulo();//		
+		modulo.setDescricao("Clinik basico");
+		modulo.setNome("Clinik basico");
 //		
 //		
 //		Pagina pagina = new Pagina();
@@ -78,5 +77,7 @@ public class install {
 //		paginaRole.setAutorizado(true);
 //		paginaRole.setPermissaoPaginaRolePk( new PermissaoPaginaRolePk(pagina, role));
 		
+		
+	
 	}
 }

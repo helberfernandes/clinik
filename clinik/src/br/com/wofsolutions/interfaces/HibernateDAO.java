@@ -34,7 +34,8 @@ public interface HibernateDAO<E, H, I> {
 
 	@SuppressWarnings("unchecked")
 	public abstract List<E> findAll();
-
+	
+	public abstract List<E> findAll(String order);
 	
 	@SuppressWarnings("unchecked")
 	public abstract List<E> findAll(Empresa empresa);

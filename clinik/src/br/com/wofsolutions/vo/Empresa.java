@@ -75,6 +75,12 @@ public class Empresa implements Serializable , ObjectBase {
 	@Column(name="mostrar_cabecalho")
 	private Boolean mostrarCabecalho=true;
 
+	
+	/** 
+	 *  valores possiveis
+	 *  "week", "basicWeek", "basicDay", "agendaWeek", "agendaDay" 
+	 */
+	
 	@Column(name="view_padao")
 	private String viewPadrao="agendaWeek";
 	

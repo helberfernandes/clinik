@@ -20,8 +20,7 @@ public class TipoAtendimentoConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("TipoAtendimento \\[tipoAtendimentoId\\=", "");
-		value=value.replaceAll("\\]", "");
+	
 		
 		return tipoAtendimentoDAO.getObjetoPelaChave(Integer.parseInt(String.valueOf(value)));
 	}

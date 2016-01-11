@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFShape;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
@@ -157,7 +158,10 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
 	}
 	
 	
-	
+	/**
+	 * Inicia o processo para a exportacao em excel
+	 * @param document
+	 */
 	public void initProcessXLS(Object document) {
 		     wb = (HSSFWorkbook) document;// Criando a planilha
 	         sheet = wb.getSheetAt(0);// aba da planilha
@@ -227,10 +231,14 @@ public class BaseControllerHelper<A extends ObjectBase, B extends HibernateDAO<A
         
          
         for(int i=0; i < header.getPhysicalNumberOfCells();i++) {
-            HSSFCell cell = header.getCell(i);
-             
+            HSSFCell cell = header.getCell(i);             
             cell.setCellStyle(cellStyle);
             sheet.autoSizeColumn(i); //ajustando a largura das colunas automaticamente
+            sheet.getWorkbook().getNumCellStyles();
+            
+            for(HSSFShape shape:sheet.createDrawingPatriarch().getChildren()){
+            	shape.getLineStyle();
+            }
         }
         
         

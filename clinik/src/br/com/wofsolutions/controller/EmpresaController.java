@@ -23,10 +23,13 @@ public class EmpresaController extends
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-	private static final String GO_PAGE = "/clinik/empresa/";
+	private static final long serialVersionUID = 2369909483479777113L;
+	private static final String GO_PAGE       = "/clinik/empresa/";
 	private static final String PASTA_IMAGENS = "/midia/imagens/";
-
+	private static final int LOGO_WIDTH       = 260;
+	private static final int LOGO_HEIGTH      = 120;
+	private static final int REL_LOGO_WIDTH   = 80;
+	private static final int REL_LOGO_HEIGTH  = 36;
 	@Override
 	public void salvar() {
 		obj.setDataCadastro(new Date());
@@ -54,8 +57,6 @@ public class EmpresaController extends
 	
 	public void uploadLogo(FileUploadEvent event) {
 
-		RandomIntGenerator r1 = new RandomIntGenerator(1, 10);
-
 		String logo = FacesUtil.getCaminho(PASTA_IMAGENS) + File.separator
 				+ event.getFile().getFileName();
 		String logoRel = FacesUtil.getCaminho(PASTA_IMAGENS) + File.separator
@@ -71,8 +72,7 @@ public class EmpresaController extends
 		facesUtil.criaArquivo(event.getFile().getContents(), new File(
 				logoRel));// cria uma copia para os relatorios
 		
-		FacesUtil.redimensiona(logo, 260, 120, logo);
-		
-		FacesUtil.redimensiona(logoRel, 80, 36, logoRel);
+		FacesUtil.redimensiona(logo, LOGO_WIDTH, LOGO_HEIGTH, logo);		
+		FacesUtil.redimensiona(logoRel,REL_LOGO_WIDTH, REL_LOGO_HEIGTH, logoRel);
 	}
 }

@@ -236,7 +236,7 @@ public class EstadoWorkflow implements Serializable {
 
 	@Override
 	public String toString() {
-		return "EstadoWorkflow [estadoWorkflowId=" + estadoWorkflowId + "]";
+		return "" + estadoWorkflowId;
 	}
 
 

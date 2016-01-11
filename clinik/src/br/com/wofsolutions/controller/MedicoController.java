@@ -48,7 +48,6 @@ public class MedicoController extends
 		senhaTemp = obj.getSenha();
 		log.info("Senha " + senhaTemp);
 	}
-
 	@Override
 	public void salvar() {
 

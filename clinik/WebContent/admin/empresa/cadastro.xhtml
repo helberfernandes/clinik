@@ -89,10 +89,16 @@
 					value="#{empresaController.obj.mostrarCabecalho}" />
 				<h:message for="mostrarCabecalho"
 					errorClass="error" />
-					
-					
-					
-					
+			
+					<h:outputText value="Tipos de Agenda"/>
+					<h:selectOneListbox value="#{empresaController.obj.viewPadrao}"  size="1">
+						<f:selectItem itemValue="week"       itemLabel="Week"/>
+						<f:selectItem itemValue="basicWeek"  itemLabel="BasicWeek"/>
+						<f:selectItem itemValue="basicDay"   itemLabel="BasicDay"/>
+						<f:selectItem itemValue="agendaWeek" itemLabel="AgendaWeek"/>
+						<f:selectItem itemValue="agendaDay"  itemLabel="AgendaDay"/>
+					</h:selectOneListbox>
+					<h:column/>							
 					<h:outputText
 					value="#{msg['system.label.horario.maximo']}:"
 					 />

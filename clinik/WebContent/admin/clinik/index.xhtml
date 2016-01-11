@@ -22,33 +22,35 @@
 			draggable="false" closable="false">
 			<p:graphicImage value="#{pastaImagens}ajaxloadingbar.gif" />
 		</p:dialog>
-		<style type="text/css">
-		.ui-widget-header {
-			background: none !important;
-			border: 1px solid #dfdfdf;
-		}
-
-		.global .fc-event-skin {
-			background: #006600 !important;
-		}
-
-		.pessoal .fc-event-skin {
-			background: #003399 !important;
-		}
-
-		.fc-event {
 		
-		}
+		
+		<style type="text/css">
+.ui-widget-header {
+	background: none !important;
+	border: 1px solid #dfdfdf;
+}
 
-		.faltaguia {
-			background: #727cb6 !important;
-			border: #727cb6 !important;
-		}
+.global .fc-event-skin {
+	background: #006600 !important;
+}
 
-		.ui-widget .ui-state-highlight {
-			background: #FFFFFF !important;
-			border: 1px solid #dfdfdf !important;
-		}
+.pessoal .fc-event-skin {
+	background: #003399 !important;
+}
+
+.fc-event {
+	
+}
+
+.faltaguia {
+	background: #727cb6 !important;
+	border: #727cb6 !important;
+}
+
+.ui-widget .ui-state-highlight {
+	background: #FFFFFF !important;
+	border: 1px solid #dfdfdf !important;
+}
 </style>
 		<script type="text/javascript">
 			PrimeFaces.locales['pt'] = {
@@ -140,6 +142,7 @@
 							</div>
 
 
+
 							<div class="box-content">
 								<h:panelGroup id="agendaGrup">
 									<p:schedule id="agenda"
@@ -152,13 +155,10 @@
 										resizable="false" draggable="false" allDaySlot="false"
 										timeFormat="dd/MM hh:mm"
 										slotMinutes="#{atendimentoController.usuarioOnline.empresa.tempoMedioProcedimento}"
-										view="#{atendimentoController.usuarioOnline.empresa.viewPadrao}"
-									
-										>
+										view="#{atendimentoController.usuarioOnline.empresa.viewPadrao}"> <!-- "week", "basicWeek", "basicDay", "agendaWeek", "agendaDay" -->
 										<p:ajax event="dateSelect"
 											listener="#{atendimentoController.onDateSelect}"
-											update=":formPrincipal:agenda, :formDialog:agendar"
-											 />
+											update=":formPrincipal:agenda, :formDialog:agendar" />
 										<p:ajax event="eventSelect"
 											listener="#{atendimentoController.onEventSelect}"
 											update=":formPrincipal:agenda, :formDialog:agendar"
@@ -172,7 +172,8 @@
 
 
 									</p:schedule>
-
+										
+										
 								</h:panelGroup>
 							</div>
 						</div>
@@ -187,7 +188,8 @@
 	<ui:define name="dialog">
 		<h:form id="formDialog">
 			<p:dialog id="agendar" widgetVar="eventDialog"
-				header="#{msg['system.label.agendamento']}" modal="true" minHeight="600" minWidth="800" height="600" width="800" >
+				header="#{msg['system.label.agendamento']}" modal="true"
+				minHeight="600" minWidth="800" height="600" width="800">
 
 				<div class="box-element" style="min-height: 100px;">
 					<div class="box-content">
@@ -342,8 +344,7 @@
 
 					<h:outputText value="#{msg['system.label.valor']}" />
 					<h:inputText id="valor" size="10"
-						value="#{atendimentoController.obj.valor}" required="true"
-						 />
+						value="#{atendimentoController.obj.valor}" required="true" />
 					<h:outputText value="#{msg['system.label.falta.guia']}" />
 					<p:selectBooleanCheckbox
 						value="#{atendimentoController.obj.faltaGuia}"

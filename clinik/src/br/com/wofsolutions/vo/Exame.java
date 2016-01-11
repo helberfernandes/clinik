@@ -125,6 +125,6 @@ public class Exame implements Serializable, ObjectBase {
 	}
 	@Override
 	public String toString() {
-		return "Exame [exameId=" + exameId + "]";
+		return  ""+exameId ;
 	}	
 }

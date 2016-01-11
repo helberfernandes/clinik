@@ -20,8 +20,6 @@ public class EstadoWorkflowConverter implements Converter {
 		if(value == null)
 			return null;
 		
-		value=value.replaceAll("EstadoWorkflow \\[estadoWorkflowId\\=", "");
-		value=value.replaceAll("\\]", "");
 		
 		return workflowDAO.getEstadoWorkflowPelaChave(Integer.parseInt(String.valueOf(value)));
 	}
